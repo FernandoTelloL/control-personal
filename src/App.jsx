@@ -2,7 +2,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { Layout, ProtectedRoute } from './components'
-import { Login, DashboardPage, GuiaPage } from './pages'
+import { Login, DashboardPage, GuiaPage, RegisterUser } from './pages'
 import { useState } from 'react'
 
 
@@ -17,6 +17,7 @@ function App() {
     setUser({
       id: 1,
       name: 'Fernando',
+      lastName: 'Tello',
       roles: ['admin']
     })
   }
@@ -57,8 +58,10 @@ function App() {
         } />
 
         // colocar !! este simbolo antes de user me dice que si existe user devuelve true de lo contrario false
-        <Route element={<ProtectedRoute isAllowed={!!user && (user.roles.includes('user') || user.role.includes('admin'))} />}>
-          <Route path='/dashboard' element={<DashboardPage user={user} />} />
+        <Route element={<ProtectedRoute isAllowed={!!user && (user.roles.includes('user') || user.roles.includes('admin'))} />}>
+          <Route path='/dashboard' element={<DashboardPage user={user} />} >
+            <Route path='register-user' element={<RegisterUser />} />
+          </Route>
           <Route path='/guia' element={<GuiaPage />} />
         </Route>
 
