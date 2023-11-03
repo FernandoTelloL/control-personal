@@ -92,8 +92,11 @@ export const DashboardPage = ({ user }) => {
                 </NavLink>
                 <div className="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                   <nav className="sb-sidenav-menu-nested nav">
-                    {/* TODO: Verificar este Link ////////////////////////////////////////////////////////*/}
-                    <Link className="nav-link" to='/dashboard/register-user'>Registrar usuario</Link>
+                    {
+                      user.roles.includes('admin')
+                        ? <Link className="nav-link" to='/dashboard/register-user'>Registrar usuario</Link>
+                        : null
+                    }
                     <a className="nav-link" href="layout-sidenav-light.html">Sub Item 2</a>
                   </nav>
                 </div>
