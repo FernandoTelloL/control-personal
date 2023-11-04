@@ -4,39 +4,46 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { Layout, ProtectedRoute } from './components'
 import { Login, DashboardPage, GuiaPage, RegisterUser } from './pages'
 import { useState } from 'react'
+import { UserProvider, useUserContext } from './context/UserProvider'
 
 
 function App() {
 
+  const { user } = useUserContext();
+  console.log(user)
+
   // Esta parte del user lo voy a hacer en contexto despues
-  const [user, setUser] = useState(null)
+  // const [user, setUser] = useState(null)
 
   // aca se deberia hacer la peticion al backend
-  const login = () => {
-    // request done
-    setUser({
-      id: 1,
-      name: 'Fernando',
-      lastName: 'Tello',
-      roles: ['admin']
-    })
-  }
+  // const login = () => {
+  //   // request done
+  //   setUser({
+  //     id: 1,
+  //     name: 'Fernando',
+  //     lastName: 'Tello',
+  //     roles: ['admin']
+  //   })
+  // }
 
   const logout = () => {
-    setUser(null)
+    // setUser(null)
   }
+
 
   return (
 
+
     <BrowserRouter>
 
-      <Navigation />
+
+      {/* <Navigation /> */}
 
       {/* muestro condicionalmente login o logout para probar privilegios */}
-      {
-        user ? (<button onClick={logout}>Logout</button>)
-          : (<button onClick={login}>Login</button>)
-      }
+      {/* {
+          user ? (<button onClick={logout}>Logout</button>)
+            : (<button onClick={login}>Login</button>)
+        } */}
 
 
       <Routes>
@@ -57,9 +64,9 @@ function App() {
           </div>
         } />
 
-        // colocar !! este simbolo antes de user me dice que si existe user devuelve true de lo contrario false
-        <Route element={<ProtectedRoute isAllowed={!!user && (user.roles.includes('user') || user.roles.includes('admin'))} />}>
-          <Route path='/dashboard' element={<DashboardPage user={user} />} >
+          // colocar !! este simbolo antes de user me dice que si existe user devuelve true de lo contrario false
+        <Route element={<ProtectedRoute />}>
+          <Route path='/dashboard' element={<DashboardPage />} >
             <Route path='register-user' element={<RegisterUser />} />
           </Route>
           <Route path='/guia' element={<GuiaPage />} />

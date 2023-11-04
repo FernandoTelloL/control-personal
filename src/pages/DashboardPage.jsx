@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { useLayoutEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { RegisterUser } from "./RegisterUser";
 import { Outlet } from "react-router-dom";
+import { useUserContext } from "../context/UserProvider";
 
 
-export const DashboardPage = ({ user }) => {
+export const DashboardPage = () => {
 
   const [bntSidenav, setBntSidenav] = useState(false)
 
+  const { user } = useUserContext();
+  console.log(user)
 
   const handleClick = (e) => {
     setBntSidenav(bntSidenav => !bntSidenav)
@@ -18,7 +20,7 @@ export const DashboardPage = ({ user }) => {
 
   let toggleClassCheck = bntSidenav ? 'sb-sidenav-toggled' : null;
 
-  console.log(user)
+
   return (
     // <div className="container">
     //   <h1>DashboardPage</h1>
@@ -61,7 +63,7 @@ export const DashboardPage = ({ user }) => {
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fas fa-user fa-fw"></i></a>
             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <li><a className="dropdown-item text-uppercase fw-bold" href="#!">{user.name}</a></li>
+              <li><a className="dropdown-item text-uppercase fw-bold" href="#!">{user.userName}</a></li>
               <li><hr className="dropdown-divider" /></li>
               <li><a className="dropdown-item" href="#!">Configuración</a></li>
               <li><hr className="dropdown-divider" /></li>
@@ -144,7 +146,8 @@ export const DashboardPage = ({ user }) => {
             </div>
             <div className="sb-sidenav-footer">
               <div className="small">Logueado como:</div>
-              <div className=" small text-uppercase">{`${user.name} ${user.lastName}`}</div>
+              {/* revisar estoooo */}
+              {/* <div className=" small text-uppercase">{`${user.name} ${user.lastName}`}</div> */}
             </div>
           </nav>
         </div>
