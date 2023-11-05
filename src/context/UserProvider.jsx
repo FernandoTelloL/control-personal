@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { useReducer } from "react"
 import { createContext } from "react"
+import { users } from "../data/users"
 
 
 const UserContext = createContext()
@@ -24,7 +25,17 @@ const userReducer = (state, action) => {
   console.log(action)
 
   switch (action.type) {
+
     case 'LOGIN_USER': {
+      const url = users
+      console.log(url)
+
+      function getData() {
+        fetch(users)
+          .then = (res) => res.json()
+        console.log(res)
+      }
+
       return {
         ...state,
         user: action.value

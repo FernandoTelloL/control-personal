@@ -84,7 +84,7 @@ export const DashboardPage = () => {
                 <div className="sb-sidenav-menu-heading">Subtitulo 1</div>
                 <a className="nav-link" href="index.html">
                   <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
-                  Dashboard
+                  Dashboardd
                 </a>
                 <div className="sb-sidenav-menu-heading">Subtitulo 2</div>
                 <NavLink className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -147,7 +147,7 @@ export const DashboardPage = () => {
             <div className="sb-sidenav-footer">
               <div className="small">Logueado como:</div>
               {/* revisar estoooo */}
-              {/* <div className=" small text-uppercase">{`${user.name} ${user.lastName}`}</div> */}
+              <div className=" small text-uppercase">{`${user.userName}`}</div>
             </div>
           </nav>
         </div>
@@ -160,9 +160,11 @@ export const DashboardPage = () => {
           <main>
             <div className="container-fluid px-4">
               <h1 className="mt-4">Dashboard</h1>
-              <ol className="breadcrumb mb-4">
+
+              {/* <ol className="breadcrumb mb-4">
                 <li className="breadcrumb-item active">Dashboard</li>
-              </ol>
+              </ol> */}
+
               <Outlet />
 
             </div>

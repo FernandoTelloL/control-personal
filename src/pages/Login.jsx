@@ -6,6 +6,7 @@ import { useUserContext } from "../context/UserProvider";
 import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { users } from "../data/users";
 
 export const Login = () => {
   const navigate = useNavigate()
@@ -36,8 +37,9 @@ export const Login = () => {
     const user = {
       userName,
       password,
-      roles: ['user']
+      roles: ['admin']
     }
+
 
     // uso el dispatch para poder mandar el usuario logueado
     dispatch({
@@ -73,10 +75,7 @@ export const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        {/* <div className="mb-3 form-check">
-          <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-          <label className="form-check-label" htmlFor="exampleCheck1">Recordarme</label>
-        </div> */}
+       
         <button type="submit" className="btn btn-primary mt-4 pt-3 pb-3">Enviar</button>
       </form>
     </div>
