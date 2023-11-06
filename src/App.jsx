@@ -2,9 +2,10 @@
 import './App.css'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { Layout, ProtectedRoute } from './components'
-import { Login, DashboardPage, GuiaPage, RegisterUser } from './pages'
+import { Login, DashboardPage, GuiaPage, RegisterUser, UpdateUser } from './pages'
 import { useState } from 'react'
 import { UserProvider, useUserContext } from './context/UserProvider'
+import { ShowUsers } from './components/ShowUsers'
 
 
 function App() {
@@ -37,15 +38,6 @@ function App() {
     <BrowserRouter>
 
 
-      {/* <Navigation /> */}
-
-      {/* muestro condicionalmente login o logout para probar privilegios */}
-      {/* {
-          user ? (<button onClick={logout}>Logout</button>)
-            : (<button onClick={login}>Login</button>)
-        } */}
-
-
       <Routes>
 
         <Route index element={
@@ -67,7 +59,8 @@ function App() {
           // colocar !! este simbolo antes de user me dice que si existe user devuelve true de lo contrario false
         <Route element={<ProtectedRoute />}>
           <Route path='/dashboard' element={<DashboardPage />} >
-            <Route path='register-user' element={<RegisterUser />} />
+            <Route path='register-user' element={<ShowUsers />} />
+            <Route path='update-user' element={<UpdateUser />} />
           </Route>
           <Route path='/guia' element={<GuiaPage />} />
         </Route>
@@ -78,21 +71,5 @@ function App() {
 }
 
 
-// creo temporalmente aca el nav para navegar entre las rutas
-function Navigation() {
-  return <nav>
-    <ul>
-      <li>
-        <Link to='/login'>Login</Link>
-      </li>
-      <li>
-        <Link to='/dashboard'>Dashboard</Link>
-      </li>
-      <li>
-        <Link to='/guia'>Guia de Usuario</Link>
-      </li>
-    </ul>
-  </nav>
-}
 
 export default App

@@ -1,3 +1,5 @@
+export { UpdateUser } from "./UpdateUser";
+
 export { RegisterUser } from "./RegisterUser";
 
 export { GuiaPage } from "./GuiaPage";

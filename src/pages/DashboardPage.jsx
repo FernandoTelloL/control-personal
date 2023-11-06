@@ -81,27 +81,31 @@ export const DashboardPage = () => {
           <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div className="sb-sidenav-menu">
               <div className="nav">
-                <div className="sb-sidenav-menu-heading">Subtitulo 1</div>
-                <a className="nav-link" href="index.html">
+                <div className="sb-sidenav-menu-heading">Menu Principal</div>
+
+                <Link className="nav-link" to="/dashboard">
                   <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
-                  Dashboardd
-                </a>
-                <div className="sb-sidenav-menu-heading">Subtitulo 2</div>
-                <NavLink className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                  <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
-                  Usuarios
-                  <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                </NavLink>
-                <div className="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                  <nav className="sb-sidenav-menu-nested nav">
-                    {
-                      user.roles.includes('admin')
-                        ? <Link className="nav-link" to='/dashboard/register-user'>Registrar usuario</Link>
-                        : null
-                    }
-                    <a className="nav-link" href="layout-sidenav-light.html">Sub Item 2</a>
-                  </nav>
-                </div>
+                  Dashboard
+                </Link>
+
+                <hr />
+
+                {
+                  user.roles.includes('admin')
+                    ? (
+                      <>
+
+                        <Link className="nav-link" to="/dashboard/register-user">
+                          <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
+                          Usuarios
+                        </Link>
+                        <hr />
+                      </>
+                    )
+                    : null
+                }
+
+
                 <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                   <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
                   Item 3
@@ -133,7 +137,8 @@ export const DashboardPage = () => {
                     </div>
                   </nav>
                 </div>
-                <div className="sb-sidenav-menu-heading">Subtitulo 3</div>
+                <hr />
+                {/* <div className="sb-sidenav-menu-heading">Subtitulo 3</div> */}
                 <a className="nav-link" href="charts.html">
                   <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
                   Item 4
@@ -172,13 +177,15 @@ export const DashboardPage = () => {
           {/* fin contenido principal dashboard */}
 
           {/* inicio footer dashboard */}
-          <footer className="py-4 bg-light mt-auto">
+          {/* <footer className="py-4 mt-auto bg-dark text-light">
             <div className="container-fluid px-4">
               <div className="d-flex align-items-center justify-content-between small">
                 <div className="text-muted">FOOTER</div>
               </div>
             </div>
-          </footer>
+          </footer> */}
+
+
           {/* fin footer dashboard */}
 
         </div>

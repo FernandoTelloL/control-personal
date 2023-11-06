@@ -1,5 +1,5 @@
 
-export const RegisterUser = () => {
+export const UpdateUser = () => {
   return (
 
     <>
@@ -9,10 +9,10 @@ export const RegisterUser = () => {
 
         <ol className="breadcrumb mb-4">
           <li className="breadcrumb-item">Dashboard</li>
-          <li className="breadcrumb-item active">Registrar usuario</li>
+          <li className="breadcrumb-item active">Actualizar usuario</li>
         </ol>
 
-        <h2 class="text-center mb-4">Formulario de Registro de Usuario</h2>
+        <h2 class="text-center mb-4">Formulario de Actualización de Usuario</h2>
         <form>
           <div class="row g-3">
             <div class="col-md-6">
@@ -45,7 +45,7 @@ export const RegisterUser = () => {
             </div>
           </div>
           <div className="d-grid gap-2 mt-5 d-flex flex-column align-items-center" >
-            <button type="submit" className="btn btn-primary w-50 pt-3 pb-3 ">Registrar</button>
+            <button type="submit" className="btn btn-primary w-50 pt-3 pb-3 ">Actualizar</button>
             <button type="submit" className="btn btn-warning w-50 pt-3 pb-3 ">Cancelar</button>
           </div>
         </form>

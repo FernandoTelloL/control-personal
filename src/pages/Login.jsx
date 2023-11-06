@@ -37,7 +37,7 @@ export const Login = () => {
     const user = {
       userName,
       password,
-      roles: ['admin']
+      roles: []
     }
 
 
@@ -75,7 +75,7 @@ export const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-       
+
         <button type="submit" className="btn btn-primary mt-4 pt-3 pb-3">Enviar</button>
       </form>
     </div>
