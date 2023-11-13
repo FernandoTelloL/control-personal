@@ -37,7 +37,7 @@ export const Login = () => {
     const user = {
       userName,
       password,
-      roles: []
+      roles: ['admin']
     }
 
 
