@@ -42,28 +42,28 @@ export const DashboardPage = () => {
 
 
 
-    <div className={`sb-nav-fixed ${toggleClassCheck}`}>
+    <div className={ `sb-nav-fixed ${toggleClassCheck}` }>
       <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        {/* <!-- Navbar Brand--> */}
+        {/* <!-- Navbar Brand--> */ }
         <a className="navbar-brand ps-3" href="index.html">Seguridad Ciudadana</a>
 
-        {/* <!-- Sidebar Toggle--> */}
-        <button onClick={handleClick} className={`btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0`} id="sidebarToggle" href="#!"><i className="fas fa-bars"></i></button>
+        {/* <!-- Sidebar Toggle--> */ }
+        <button onClick={ handleClick } className={ `btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0` } id="sidebarToggle" href="#!"><i className="fas fa-bars"></i></button>
 
-        {/* <!-- Navbar Search--> */}
-        <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        {/* <!-- Navbar Search--> */ }
+        {/* <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
           <div className="input-group">
             <input className="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
             <button className="btn btn-primary" id="btnNavbarSearch" type="button"><i className="fas fa-search"></i></button>
           </div>
-        </form>
+        </form> */}
 
-        {/* <!-- Navbar--> */}
-        <ul className="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        {/* <!-- Navbar--> */ }
+        <ul className="navbar-nav ms-auto me-3 me-lg-4">
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fas fa-user fa-fw"></i></a>
             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <li><a className="dropdown-item text-uppercase fw-bold" href="#!">{user.userName}</a></li>
+              <li><a className="dropdown-item text-uppercase fw-bold" href="#!">{ user.userName }</a></li>
               <li><hr className="dropdown-divider" /></li>
               <li><a className="dropdown-item" href="#!">Configuración</a></li>
               <li><hr className="dropdown-divider" /></li>
@@ -76,7 +76,7 @@ export const DashboardPage = () => {
 
       <div id="layoutSidenav">
 
-        {/* inicio sidebar */}
+        {/* inicio sidebar */ }
         <div id="layoutSidenav_nav">
           <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
             <div className="sb-sidenav-menu">
@@ -138,7 +138,7 @@ export const DashboardPage = () => {
                   </nav>
                 </div>
                 <hr />
-                {/* <div className="sb-sidenav-menu-heading">Subtitulo 3</div> */}
+                {/* <div className="sb-sidenav-menu-heading">Subtitulo 3</div> */ }
                 <a className="nav-link" href="charts.html">
                   <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
                   Item 4
@@ -151,17 +151,17 @@ export const DashboardPage = () => {
             </div>
             <div className="sb-sidenav-footer">
               <div className="small">Logueado como:</div>
-              {/* revisar estoooo */}
-              <div className=" small text-uppercase">{`${user.userName}`}</div>
+              {/* revisar estoooo */ }
+              <div className=" small text-uppercase">{ `${user.userName}` }</div>
             </div>
           </nav>
         </div>
-        {/* fin sidebar */}
+        {/* fin sidebar */ }
 
-        {/* inicio contenido dashboard */}
+        {/* inicio contenido dashboard */ }
         <div id="layoutSidenav_content">
 
-          {/* inicio contenido principal dashboard */}
+          {/* inicio contenido principal dashboard */ }
           <main>
             <div className="container-fluid px-4">
               <h1 className="mt-4">Dashboard</h1>
@@ -174,9 +174,9 @@ export const DashboardPage = () => {
 
             </div>
           </main>
-          {/* fin contenido principal dashboard */}
+          {/* fin contenido principal dashboard */ }
 
-          {/* inicio footer dashboard */}
+          {/* inicio footer dashboard */ }
           {/* <footer className="py-4 mt-auto bg-dark text-light">
             <div className="container-fluid px-4">
               <div className="d-flex align-items-center justify-content-between small">
@@ -186,10 +186,10 @@ export const DashboardPage = () => {
           </footer> */}
 
 
-          {/* fin footer dashboard */}
+          {/* fin footer dashboard */ }
 
         </div>
-        {/* fin contenido dashboard */}
+        {/* fin contenido dashboard */ }
       </div >
 
     </div >
