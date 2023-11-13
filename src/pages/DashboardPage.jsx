@@ -14,7 +14,7 @@ export const DashboardPage = () => {
   const { user } = useUserContext();
   console.log(user)
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     setBntSidenav(bntSidenav => !bntSidenav)
   }
 
@@ -43,9 +43,14 @@ export const DashboardPage = () => {
 
 
     <div className={ `sb-nav-fixed ${toggleClassCheck}` }>
-      <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+      <nav className="sb-topnav navbar navbar-expand bg-white shadow-sm">
         {/* <!-- Navbar Brand--> */ }
-        <a className="navbar-brand ps-3" href="index.html">Seguridad Ciudadana</a>
+        {/* <a className="navbar-brand ps-3" href="index.html">Seguridad Ciudadana</a> */ }
+        <nav className="navbar navbar-light bg-light p-">
+          <a className="navbar-brand bg-white" href="#">
+            <img className="pl-2" width='197px' src="./logo.png" alt="Brand Logo" />
+          </a>
+        </nav>
 
         {/* <!-- Sidebar Toggle--> */ }
         <button onClick={ handleClick } className={ `btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0` } id="sidebarToggle" href="#!"><i className="fas fa-bars"></i></button>
@@ -61,7 +66,7 @@ export const DashboardPage = () => {
         {/* <!-- Navbar--> */ }
         <ul className="navbar-nav ms-auto me-3 me-lg-4">
           <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fas fa-user fa-fw"></i></a>
+            <a className="nav-link dropdown-toggle " id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i className="fas fa-user fa-fw"></i></a>
             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <li><a className="dropdown-item text-uppercase fw-bold" href="#!">{ user.userName }</a></li>
               <li><hr className="dropdown-divider" /></li>
@@ -78,7 +83,7 @@ export const DashboardPage = () => {
 
         {/* inicio sidebar */ }
         <div id="layoutSidenav_nav">
-          <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+          <nav className="sb-sidenav accordion sb-sidenav-dark sidenav-main" id="sidenavAccordion">
             <div className="sb-sidenav-menu">
               <div className="nav">
                 <div className="sb-sidenav-menu-heading">Menu Principal</div>
@@ -149,7 +154,7 @@ export const DashboardPage = () => {
                 </a>
               </div>
             </div>
-            <div className="sb-sidenav-footer">
+            <div className="sb-sidenav-footer sidenav-main-footer">
               <div className="small">Logueado como:</div>
               {/* revisar estoooo */ }
               <div className=" small text-uppercase">{ `${user.userName}` }</div>
