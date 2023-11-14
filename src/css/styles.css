@@ -13231,11 +13231,28 @@ body {
 }
 
 .bg-X {
-  background-color: #FFC107;
+  background-color: green;
 }
 
 .bg-F {
   background-color: #AD0506;
+}
+
+.bg-DESC {
+  background-color: var(--bs-yellow);
+}
+
+.tabs-types-control {
+  font-size: .6rem;
+}
+
+
+button.tab-link-types-control.nav-link {
+  color: rgba(0, 0, 0, 0.8) !important;
+  max-width: 235px;
+  max-height: 27px;
+  overflow: hidden;
+  margin-bottom: .5rem;
 }
 
 /* fin probando codigo */
