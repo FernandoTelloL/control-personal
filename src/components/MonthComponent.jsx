@@ -1,10 +1,36 @@
 // MonthComponent.js
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const MonthComponent = ({ attendanceData, controlTypes }) => {
   const [searchId, setSearchId] = useState('');
   const [filteredData, setFilteredData] = useState({});
   const [selectedTab, setSelectedTab] = useState(controlTypes[0].type);
+
+  console.log(attendanceData)
+
+  // Usamos .map para obtener un array de días con controlType id 1
+  const diasConControlType1 = attendanceData.taskControlList
+    .filter((control) => control.controlType.id === 1)
+    .map((control) => {
+      // Dividir la cadena de fecha y obtener el día (último elemento)
+      const dia = control.controlDate.split('-')[2];
+      return parseInt(dia, 10); // Convertir a número si es necesario
+    });
+
+  console.log(diasConControlType1);
+
+
+  // Usamos .map para obtener un array de meses con controlType id 1
+  const mesesConControlType1 = attendanceData.taskControlList
+    .filter((control) => control.controlType.id === 1)
+    .map((control) => {
+      // Dividir la cadena de fecha y obtener el mes (segundo elemento)
+      const mes = control.controlDate.split('-')[1];
+      return parseInt(mes, 10); // Convertir a número si es necesario
+    });
+
+  console.log(mesesConControlType1);
+
 
   const handleSearchChange = (e) => {
     const inputId = e.target.value.trim();

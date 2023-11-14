@@ -6,7 +6,8 @@ import { RegisterUser } from "./RegisterUser";
 import { Outlet } from "react-router-dom";
 import { useUserContext } from "../context/UserProvider";
 import MonthComponent from "../components/MonthComponent";
-import attendanceData from '../components/asistencia.json';
+// import attendanceData from '../components/asistencia.json';
+import attendanceData from '../data/busquedaUsuario.json';
 import controlTypes from '../data/tiposControl.json';
 
 
