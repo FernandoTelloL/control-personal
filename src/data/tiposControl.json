@@ -1,0 +1,116 @@
+[
+    {
+        "id": 1,
+        "description": "Asistencia",
+        "type": "X",
+        "color": "#ffffff"
+    },
+    {
+        "id": 2,
+        "description": "Descanso",
+        "type": "DESC",
+        "color": "#ffffff"
+    },
+    {
+        "id": 3,
+        "description": "Dias Laborados",
+        "type": "DL",
+        "color": "#ffffff"
+    },
+    {
+        "id": 4,
+        "description": "Inasistencia",
+        "type": "F",
+        "color": "#FF0000"
+    },
+    {
+        "id": 5,
+        "description": "Feriado Laborado",
+        "type": "X",
+        "color": "#FF0000"
+    },
+    {
+        "id": 6,
+        "description": "Feriado No Laborado",
+        "type": " ",
+        "color": "#FF0000"
+    },
+    {
+        "id": 7,
+        "description": "DESCANSO MEDICO PARTICULAR",
+        "type": "DMP",
+        "color": "#D9E1F2"
+    },
+    {
+        "id": 8,
+        "description": "DESCANSO MEDICO, OTORGADO POR ESSALUD\r\n",
+        "type": "DM",
+        "color": "#00B0F0"
+    },
+    {
+        "id": 9,
+        "description": "DESCANSO MEDICO, OTORGADO POR EL CENTRO MEDICO MUNICIPAL",
+        "type": "DM CM",
+        "color": "#21EFEA"
+    },
+    {
+        "id": 10,
+        "description": "ONOMÁSTICO",
+        "type": "OM",
+        "color": "#C9C9C9"
+    },
+    {
+        "id": 11,
+        "description": "LICENCIA SIN GOCE DE HABER",
+        "type": "LSGH",
+        "color": "#FFC000"
+    },
+    {
+        "id": 12,
+        "description": "LICENCIA CON GOCE DE HABER",
+        "type": "LCGH",
+        "color": "#F4B084"
+    },
+    {
+        "id": 13,
+        "description": "A CUENTA DE VACACIONES",
+        "type": "ACV",
+        "color": "#92D050"
+    },
+    {
+        "id": 14,
+        "description": "COMPENSACIÓN",
+        "type": "COMP",
+        "color": "#00B050"
+    },
+    {
+        "id": 15,
+        "description": "PERSONAL NO APTO PARA LABORAR, CON ENFERMEDAD DE RIESGO O MAYOR DE 65 AÑOS, OTORGADO POR EL CENTRO MEDICO MUNICIPAL",
+        "type": "NO APTO PARA LABORAR",
+        "color": "#FFFF00"
+    },
+    {
+        "id": 16,
+        "description": "PERSONAL QUE TRABAJA DE MANERA REMOTA",
+        "type": "TRABAJO REMOTO",
+        "color": "#BF8F00"
+    },
+    {
+        "id": 17,
+        "description": "AISLAMIENTO OTORGADO POR EL CENTRO MEDICO MUNICIPAL.",
+        "type": "AISLAMIENTO",
+        "color": "#FFFF00"
+    },
+    {
+        "id": 18,
+        "description": "DESCANSO FISICO VACACIONAL",
+        "type": "VACACIONES",
+        "color": "#FFC000"
+    },
+    {
+        "id": 19,
+        "description": "DESCANSO FISICO VACACIONAL, QUE SE HAN REPROGRAMADO Y LO ESTAN TOMANDO A LA FECHA PROGRAMADA",
+        "type": "VACACIONES",
+        "color": "#00FFFF"
+    }
+]

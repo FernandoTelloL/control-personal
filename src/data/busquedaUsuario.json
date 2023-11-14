@@ -1,0 +1,51 @@
+{
+    "employee": {
+        "dni": 72661345,
+        "code": 11010101,
+        "firstLastName": "prado",
+        "secondLastName": "rojas",
+        "names": "chulls",
+        "birthdate": "1992-01-21T00:00:00.000+00:00",
+        "phone": 11111,
+        "email": "correo@gmail.com",
+        "address": "direccion general",
+        "bloodType": "O+",
+        "photo": "70111658.png",
+        "supervisor": 100001,
+        "shortSleeveBlouseOrShirt": "L",
+        "boxNeckPolo": "L",
+        "pants": "L",
+        "cap": "L",
+        "longSleeveBlouseOrShirt": "L",
+        "reflectiveJacket": "L",
+        "highNeckSweatshirt": "L",
+        "vest": "L",
+        "reflectiveWaterproofPoncho": "L",
+        "borceguies": "L",
+        "socks": "L",
+        "footwear": "L"
+    },
+    "taskControlList": [
+        {
+            "id": 1,
+            "controlDate": "2023-01-01",
+            "controlType": {
+                "id": 1
+            }
+        },
+        {
+            "id": 2,
+            "controlDate": "2023-01-02",
+            "controlType": {
+                "id": 1
+            }
+        },
+        {
+            "id": 3,
+            "controlDate": "2023-01-03",
+            "controlType": {
+                "id": 2
+            }
+        }
+    ]
+}
