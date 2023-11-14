@@ -7,6 +7,7 @@ import { Outlet } from "react-router-dom";
 import { useUserContext } from "../context/UserProvider";
 import MonthComponent from "../components/MonthComponent";
 import attendanceData from '../components/asistencia.json';
+import controlTypes from '../data/tiposControl.json';
 
 
 export const DashboardPage = () => {
@@ -174,7 +175,7 @@ export const DashboardPage = () => {
               <h1 className="mt-4">Dashboard</h1>
 
               <h1>Asistencia de Trabajador - Mes de Enero</h1>
-              <MonthComponent attendanceData={ attendanceData } />
+              <MonthComponent attendanceData={ attendanceData } controlTypes={ controlTypes } />
 
               {/* <ol className="breadcrumb mb-4">
                 <li className="breadcrumb-item active">Dashboard</li>

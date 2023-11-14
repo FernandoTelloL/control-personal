@@ -32,7 +32,7 @@
     {
         "id": 6,
         "description": "Feriado No Laborado",
-        "type": " ",
+        "type": "FNL ",
         "color": "#FF0000"
     },
     {
@@ -50,7 +50,7 @@
     {
         "id": 9,
         "description": "DESCANSO MEDICO, OTORGADO POR EL CENTRO MEDICO MUNICIPAL",
-        "type": "DM CM",
+        "type": "DMCM",
         "color": "#21EFEA"
     },
     {

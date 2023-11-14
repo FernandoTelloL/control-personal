@@ -1,7 +1,7 @@
 // MonthComponent.js
 import React, { useState } from 'react';
 
-const MonthComponent = ({ attendanceData }) => {
+const MonthComponent = ({ attendanceData, controlTypes }) => {
   const [searchId, setSearchId] = useState('');
   const [filteredData, setFilteredData] = useState({});
 
@@ -28,7 +28,7 @@ const MonthComponent = ({ attendanceData }) => {
       />
       <div className="row">
         { Array.from({ length: 31 }, (_, dayIndex) => (
-          <div key={ dayIndex } className="col-1">
+          <div key={ dayIndex } className="col p-2">
             <span>{ dayIndex + 1 }</span>
             <div className="attendance-info mt-2">
               { Object.keys(filteredData).map((workerId) => {
@@ -36,17 +36,23 @@ const MonthComponent = ({ attendanceData }) => {
                 const isPresent = worker.asistio.includes(dayIndex + 1);
                 const isLate = worker.llegoTarde.includes(dayIndex + 1);
 
-                let colorClass = '';
-                if (isPresent) {
-                  colorClass = 'bg-success'; // Bootstrap class for success (green)
-                } else if (isLate) {
-                  colorClass = 'bg-warning'; // Bootstrap class for warning (yellow)
-                }
+                // Obtener el tipo de control para el día actual
+                const controlType = controlTypes.find((type) => {
+                  return (
+                    (isPresent && type.type === "X") ||
+                    (isLate && type.type === "F") ||
+                    false
+                  );
+                });
+
+                // Determinar el color según el tipo de control
+                const colorClass = controlType ? `bg-${controlType.type}` : '';
 
                 return (
                   <div
                     key={ workerId }
                     className={ `attendance-day ${colorClass}` }
+                    title={ controlType ? controlType.description : '' }
                   />
                 );
               }) }

@@ -13230,4 +13230,12 @@ body {
   border-radius: 50%;
 }
 
+.bg-X {
+  background-color: #FFC107;
+}
+
+.bg-F {
+  background-color: #AD0506;
+}
+
 /* fin probando codigo */
