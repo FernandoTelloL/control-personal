@@ -13254,5 +13254,7 @@ button.tab-link-types-control.nav-link {
   overflow: hidden;
   margin-bottom: .5rem;
 }
-
+.bg-green {
+  background-color: green;
+}
 /* fin probando codigo */
