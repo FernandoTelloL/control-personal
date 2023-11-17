@@ -30,7 +30,8 @@
             "id": 1,
             "controlDate": "2023-01-01",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#008000"
             }
         },
         {

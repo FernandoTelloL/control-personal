@@ -42,19 +42,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
 
   console.log(controlYears);
 
-  // Funcion para que el boton buscar tenga la funcionalidad de buscar por dni 
-  const handleSearchClick = () => {
-    // Asumiendo que attendanceData es el JSON que proporcionaste
-    // const attendanceData = require('./busquedaUsuario.json');
 
-    // Filtrar taskControlList por el mes de enero
-    const januaryAttendance = attendanceData.taskControlList.filter(
-      (data) => new Date(data.controlDate).getMonth() === 0 // 0 es enero en JavaScript
-    );
-
-    // Guardar los resultados en filteredData
-    setFilteredData(januaryAttendance);
-  };
 
 
   // funcion para obtener los dias trabajados con el tipo de control al ingresar el dni
@@ -75,6 +63,21 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   //     setDaysWorked(employeeData ? employeeData.taskControlList.length : 0);
   //   }
   // };
+
+  // Funcion para que el boton buscar tenga la funcionalidad de buscar por dni 
+  const handleSearchClick = () => {
+    // Asumiendo que attendanceData es el JSON que proporcionaste
+    // const attendanceData = require('./busquedaUsuario.json');
+
+    // Filtrar taskControlList por el mes de enero
+    const januaryAttendance = attendanceData.taskControlList.filter(
+      (data) => new Date(data.controlDate).getMonth() === 0 // 0 es enero en JavaScript
+    );
+
+    // Guardar los resultados en filteredData
+    setFilteredData(januaryAttendance);
+    console.log(januaryAttendance)
+  };
 
   // Funcion para que el input actualice el estado del dni
   const handleSearchChange = (e) => {
@@ -113,6 +116,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
 
       <div className="form-group row mb-5">
         <div className="col-sm-4">
+
           <input
             type="text"
             className="form-control"
@@ -120,8 +124,10 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
             value={ searchDNI }
             onChange={ handleSearchChange }
           />
+
         </div>
         <div className="col-sm-4">
+
           <select
             className="form-control"
             value={ selectedYear }
@@ -131,6 +137,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
             <option value="2024">2024</option>
             {/* Agrega más opciones según sea necesario */ }
           </select>
+
         </div>
         <div className="col-sm-4">
           <button className="btn btn-outline-secondary" type="button" onClick={ handleSearchClick }>
@@ -214,11 +221,14 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                       { filteredData.map((data) => {
                         const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
+
+
                         if (dayWorked === dayIndex + 1) {
                           return (
                             <div
                               key={ dayWorked }
                               className="attendance-day bg-green"
+                              // style={ { backgroundColor: `${}` } }
                               title="Asistencia confirmada"
                             />
                           );
@@ -599,7 +609,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
 
                       { filteredData.map((data) => {
                         const dayWorked = parseInt(data.controlDate.split('-')[2]);
-                        console.log(dayWorked)
+
 
                         if (dayWorked === dayIndex + 1) {
                           return (
@@ -650,7 +660,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                     <div className="attendance-info mt-2">
                       { filteredData.map((data) => {
                         const dayWorked = parseInt(data.controlDate.split('-')[2]);
-                        console.log(dayWorked)
+
 
                         if (dayWorked === dayIndex + 1) {
                           return (
@@ -701,7 +711,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                     <div className="attendance-info mt-2">
                       { filteredData.map((data) => {
                         const dayWorked = parseInt(data.controlDate.split('-')[2]);
-                        console.log(dayWorked)
+
 
                         if (dayWorked === dayIndex + 1) {
                           return (
@@ -752,7 +762,6 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                     <div className="attendance-info mt-2">
                       { filteredData.map((data) => {
                         const dayWorked = parseInt(data.controlDate.split('-')[2]);
-                        console.log(dayWorked)
 
                         if (dayWorked === dayIndex + 1) {
                           return (
