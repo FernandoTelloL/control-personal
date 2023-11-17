@@ -8,7 +8,8 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   const [selectedTab, setSelectedTab] = useState(controlTypes[0].type);
   const [daysWorked, setDaysWorked] = useState(0);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-
+  // Estado para el mes actual
+  const [currentMonth, setCurrentMonth] = useState(1); // Enero
 
   console.log(attendanceData)
 
@@ -93,16 +94,24 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   //   setSelectedTab(type);
   // };
 
+  // Función para manejar el cambio de mes
+  const handleMonthChange = (month) => {
+    setCurrentMonth(month);
+  };
+
   // Funcion para que el TAB tenga la funcionalidad de buscar por tipo de control
+  // Filtrar taskControlList por el tipo de control y el mes actual
+  // Función para manejar el clic en una pestaña
   const handleTabClick = (controlTypeId) => {
-    // Filtrar taskControlList por el tipo de control
-    const filteredTasks = attendanceData.taskControlList.filter(
-      (task) => task.controlType.id === controlTypeId
-    );
+    // Filtrar taskControlList por el tipo de control y el mes actual
+    const filteredTasks = attendanceData.taskControlList.filter((task) => {
+      const taskMonth = parseInt(task.controlDate.split('-')[1]);
+      console.log(taskMonth)
+      return task.controlType.id === controlTypeId && taskMonth === currentMonth;
+    });
 
     // Guardar los resultados en filteredData
     setFilteredData(filteredTasks);
-    console.log(filteredData)
   };
 
 
@@ -202,6 +211,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
       </div> */}
 
       <div className="accordion accordion-flush" id="accordionFlushExample">
+
         <div className="accordion-item">
           <h2 className="accordion-header" id="flush-headingOne">
             <button
@@ -211,6 +221,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
               data-bs-target="#flush-collapseOne"
               aria-expanded="false"
               aria-controls="flush-collapseOne"
+              onClick={ () => handleMonthChange(1) }
             >
               Enero
             </button>
@@ -261,6 +272,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
               data-bs-target="#flush-collapseTwo"
               aria-expanded="false"
               aria-controls="flush-collapseTwo"
+              onClick={ () => handleMonthChange(2) }
             >
               Febrero
             </button>
@@ -308,6 +320,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
               data-bs-target="#flush-collapseThree"
               aria-expanded="false"
               aria-controls="flush-collapseThree"
+              onClick={ () => handleMonthChange(3) }
             >
               Marzo
             </button>
@@ -355,6 +368,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
               data-bs-target="#flush-collapseFour"
               aria-expanded="false"
               aria-controls="flush-collapseFour"
+              onClick={ () => handleMonthChange(4) }
             >
               Abril
             </button>
@@ -406,6 +420,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
               data-bs-target="#flush-collapseFive"
               aria-expanded="false"
               aria-controls="flush-collapseFive"
+              onClick={ () => handleMonthChange(5) }
             >
               Mayo
             </button>
@@ -453,6 +468,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
               data-bs-target="#flush-collapseSix"
               aria-expanded="false"
               aria-controls="flush-collapseSix"
+              onClick={ () => handleMonthChange(6) }
             >
               Junio
             </button>
@@ -500,6 +516,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
               data-bs-target="#flush-collapseSeven"
               aria-expanded="false"
               aria-controls="flush-collapseSeven"
+              onClick={ () => handleMonthChange(7) }
             >
               Julio
             </button>
@@ -551,6 +568,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
               data-bs-target="#flush-collapseEight"
               aria-expanded="false"
               aria-controls="flush-collapseEight"
+              onClick={ () => handleMonthChange(8) }
             >
               Agosto
             </button>
@@ -598,6 +616,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
               data-bs-target="#flush-collapseNine"
               aria-expanded="false"
               aria-controls="flush-collapseNine"
+              onClick={ () => handleMonthChange(9) }
             >
               Septiembre
             </button>
@@ -650,6 +669,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
               data-bs-target="#flush-collapseTen"
               aria-expanded="false"
               aria-controls="flush-collapseTen"
+              onClick={ () => handleMonthChange(10) }
             >
               Octubre
             </button>
@@ -701,6 +721,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
               data-bs-target="#flush-collapseEleven"
               aria-expanded="false"
               aria-controls="flush-collapseEleven"
+              onClick={ () => handleMonthChange(11) }
             >
               Noviembre
             </button>
@@ -752,6 +773,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
               data-bs-target="#flush-collapseTwelve"
               aria-expanded="false"
               aria-controls="flush-collapseTwelve"
+              onClick={ () => handleMonthChange(12) }
             >
               Diciembre
             </button>
