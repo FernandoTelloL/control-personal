@@ -66,17 +66,19 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
 
   // Funcion para que el boton buscar tenga la funcionalidad de buscar por dni 
   const handleSearchClick = () => {
-    // Asumiendo que attendanceData es el JSON que proporcionaste
-    // const attendanceData = require('./busquedaUsuario.json');
+
+    ///////////////////////////////////
+    // ACA TENGO QUE HACER EL LLAMADO DE LA INFORMACION COMPLETA DE MI TRABAJADOR
+    ///////////////////////////////////
 
     // Filtrar taskControlList por el mes de enero
-    const januaryAttendance = attendanceData.taskControlList.filter(
-      (data) => new Date(data.controlDate).getMonth() === 0 // 0 es enero en JavaScript
-    );
+    // const januaryAttendance = attendanceData.taskControlList.filter(
+    //   (data) => new Date(data.controlDate).getMonth() === 0 // 0 es enero en JavaScript
+    // );
 
     // Guardar los resultados en filteredData
-    setFilteredData(januaryAttendance);
-    console.log(januaryAttendance)
+    // setFilteredData(januaryAttendance);
+    // console.log(januaryAttendance)
   };
 
   // Funcion para que el input actualice el estado del dni
@@ -91,6 +93,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   //   setSelectedTab(type);
   // };
 
+  // Funcion para que el TAB tenga la funcionalidad de buscar por tipo de control
   const handleTabClick = (controlTypeId) => {
     // Filtrar taskControlList por el tipo de control
     const filteredTasks = attendanceData.taskControlList.filter(
@@ -110,6 +113,8 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
     setFilteredData(filterData);
   }
   console.log(filteredData)
+
+
 
   return (
     <div className="container mt-4">
@@ -140,22 +145,26 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
 
         </div>
         <div className="col-sm-4">
-          <button className="btn btn-outline-secondary" type="button" onClick={ handleSearchClick }>
+          {/* <button className="btn btn-outline-secondary" type="button" onClick={ handleSearchClick }> */ }
+          <button className="btn btn-outline-secondary" type="button" onClick={ {} }>
             Buscar
           </button>
         </div>
       </div>
 
+
       <ul className="nav nav-tabs mb-3 tabs-types-control">
         { controlTypes.map((type, index) => (
           <li key={ type.id } className="nav-item tab-item-types-control">
+
             <button
-              className={ `tab-link-types-control nav-link ${type.type === selectedTab ? 'active' : ''
+              className={ `tab-link-types-control nav-link ${type.description === selectedTab ? 'active' : ''
                 }` }
               onClick={ () => handleTabClick(index + 1) }
             >
-              { type.description }
+              { type.description.toUpperCase() }
             </button>
+
           </li>
         )) }
       </ul>

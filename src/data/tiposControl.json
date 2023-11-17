@@ -2,7 +2,7 @@
     {
         "id": 1,
         "description": "Asistencia",
-        "type": "X",
+        "type": "A",
         "color": "#008000"
     },
     {
@@ -86,7 +86,7 @@
     {
         "id": 15,
         "description": "PERSONAL NO APTO PARA LABORAR, CON ENFERMEDAD DE RIESGO O MAYOR DE 65 AÑOS, OTORGADO POR EL CENTRO MEDICO MUNICIPAL",
-        "type": "NO APTO PARA LABORAR",
+        "type": "NAPL",
         "color": "#FFFF00"
     },
     {
@@ -104,13 +104,13 @@
     {
         "id": 18,
         "description": "DESCANSO FISICO VACACIONAL",
-        "type": "VACACIONES",
+        "type": "DFV",
         "color": "#FFC000"
     },
     {
         "id": 19,
         "description": "DESCANSO FISICO VACACIONAL, QUE SE HAN REPROGRAMADO Y LO ESTAN TOMANDO A LA FECHA PROGRAMADA",
-        "type": "VACACIONES",
+        "type": "DFVR",
         "color": "#00FFFF"
     }
 ]
