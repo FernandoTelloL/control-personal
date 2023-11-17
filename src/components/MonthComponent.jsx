@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 // MonthComponent.js
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const MonthComponent = ({ attendanceData, controlTypes }) => {
   const [searchDNI, setSearchDNI] = useState('');
@@ -10,8 +11,16 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   // Estado para el mes actual
   const [currentMonth, setCurrentMonth] = useState(1); // Enero
+  // Estado para el tipo de control actual
+  const [currentControlTypeId, setCurrentControlTypeId] = useState(null);
 
-  console.log(attendanceData)
+
+
+  useEffect(() => {
+    handleTabClick(currentControlTypeId);
+  }, [currentMonth, currentControlTypeId]);
+
+
 
   // Funcion para obtener los dias trabajados con el tipo de control 1
   const controlDates = attendanceData.taskControlList
@@ -21,7 +30,6 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
       return new Date(year, month - 1, day).getDate();
     });
 
-  console.log(controlDates);
 
   // Funcion para obtener los meses trabajados con el tipo de control 1
   const controlMonths = attendanceData.taskControlList
@@ -31,7 +39,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
       return new Date(year, month - 1, day).getMonth() + 1;
     });
 
-  console.log(controlMonths);
+
 
   // Función para obtener los años trabajados con el tipo de control 1
   const controlYears = attendanceData.taskControlList
@@ -41,7 +49,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
       return new Date(year, month - 1, day).getFullYear();
     });
 
-  console.log(controlYears);
+
 
 
 
@@ -103,6 +111,10 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   // Filtrar taskControlList por el tipo de control y el mes actual
   // Función para manejar el clic en una pestaña
   const handleTabClick = (controlTypeId) => {
+
+    // Actualizar currentControlTypeId
+    setCurrentControlTypeId(controlTypeId);
+
     // Filtrar taskControlList por el tipo de control y el mes actual
     const filteredTasks = attendanceData.taskControlList.filter((task) => {
       const taskMonth = parseInt(task.controlDate.split('-')[1]);
