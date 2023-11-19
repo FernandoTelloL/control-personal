@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 // MonthComponent.js
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const MonthComponent = ({ attendanceData, controlTypes }) => {
   const [searchDNI, setSearchDNI] = useState('');
@@ -13,7 +12,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   const [currentMonth, setCurrentMonth] = useState(1); // Enero
   // Estado para el tipo de control actual
   const [currentControlTypeId, setCurrentControlTypeId] = useState(null);
-
+  console.log(currentControlTypeId)
 
 
   useEffect(() => {
@@ -95,7 +94,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
     const inputDNI = e.target.value.trim();
     setSearchDNI(inputDNI);
   };
-  console.log(searchDNI)
+
 
 
   // const handleTabSelect = (type) => {
@@ -179,8 +178,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
           <li key={ type.id } className="nav-item tab-item-types-control">
 
             <button
-              className={ `tab-link-types-control nav-link ${type.description === selectedTab ? 'active' : ''
-                }` }
+              className={ `tab-link-types-control nav-link ${type.id === currentControlTypeId ? 'active' : ''} ${type.id === currentControlTypeId ? 'bg-tab-active' : ''}` }
               onClick={ () => handleTabClick(index + 1) }
             >
               { type.description.toUpperCase() }
@@ -246,30 +244,30 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
           >
             <div className="accordion-body">
               <div className="row">
-                { Array.from({ length: 31 }, (_, dayIndex) => (
-                  <div key={ dayIndex } className="col p-2">
-                    <span>{ dayIndex + 1 }</span>
-                    <div className="attendance-info mt-2">
-                      { filteredData.map((data) => {
-                        const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                {
+                  Array.from({ length: 31 }, (_, dayIndex) => (
+                    <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
+                      <span className=''>{ dayIndex + 1 }</span>
+                      <div className="attendance-info mt-2">
+                        { filteredData.map((data) => {
+                          const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
-
-
-                        if (dayWorked === dayIndex + 1) {
-                          return (
-                            <div
-                              key={ dayWorked }
-                              className="attendance-day bg-green"
-                              // style={ { backgroundColor: `${}` } }
-                              title="Asistencia confirmada"
-                            />
-                          );
-                        }
-                        return null;
-                      }) }
+                          if (dayWorked === dayIndex + 1) {
+                            return (
+                              <div
+                                key={ dayWorked }
+                                className="attendance-day"
+                                style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                title="Asistencia confirmada"
+                              />
+                            );
+                          }
+                          return null;
+                        }) }
+                      </div>
                     </div>
-                  </div>
-                )) }
+                  )) }
+                { console.log(attendanceData.taskControlList[0].controlType.color) }
               </div>
             </div>
           </div>
@@ -857,7 +855,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
 
       </div>
 
-    </div>
+    </div >
 
   );
 };

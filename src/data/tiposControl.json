@@ -3,67 +3,67 @@
         "id": 1,
         "description": "Asistencia",
         "type": "A",
-        "color": "#008000"
+        "color": "#006000"
     },
     {
         "id": 2,
         "description": "Descanso",
         "type": "DESC",
-        "color": "#ffffff"
+        "color": "#D8CC2B"
     },
     {
         "id": 3,
         "description": "Dias Laborados",
         "type": "DL",
-        "color": "#ffffff"
+        "color": "#1EBED3"
     },
     {
         "id": 4,
         "description": "Inasistencia",
         "type": "F",
-        "color": "#FF0000"
+        "color": "#B10303"
     },
     {
         "id": 5,
         "description": "Feriado Laborado",
         "type": "X",
-        "color": "#FF0000"
+        "color": "#BA2BF3"
     },
     {
         "id": 6,
         "description": "Feriado No Laborado",
         "type": "FNL ",
-        "color": "#FF0000"
+        "color": "#6200FF"
     },
     {
         "id": 7,
         "description": "DESCANSO MEDICO PARTICULAR",
         "type": "DMP",
-        "color": "#D9E1F2"
+        "color": "#E74C3C"
     },
     {
         "id": 8,
         "description": "DESCANSO MEDICO, OTORGADO POR ESSALUD\r\n",
         "type": "DM",
-        "color": "#00B0F0"
+        "color": "#F5B041"
     },
     {
         "id": 9,
         "description": "DESCANSO MEDICO, OTORGADO POR EL CENTRO MEDICO MUNICIPAL",
         "type": "DMCM",
-        "color": "#21EFEA"
+        "color": "#424949"
     },
     {
         "id": 10,
         "description": "ONOMÁSTICO",
         "type": "OM",
-        "color": "#C9C9C9"
+        "color": "#E91E63"
     },
     {
         "id": 11,
         "description": "LICENCIA SIN GOCE DE HABER",
         "type": "LSGH",
-        "color": "#FFC000"
+        "color": "#3B71A1"
     },
     {
         "id": 12,
@@ -75,19 +75,19 @@
         "id": 13,
         "description": "A CUENTA DE VACACIONES",
         "type": "ACV",
-        "color": "#92D050"
+        "color": "#AFB42B"
     },
     {
         "id": 14,
         "description": "COMPENSACIÓN",
         "type": "COMP",
-        "color": "#00B050"
+        "color": "#880E4F"
     },
     {
         "id": 15,
         "description": "PERSONAL NO APTO PARA LABORAR, CON ENFERMEDAD DE RIESGO O MAYOR DE 65 AÑOS, OTORGADO POR EL CENTRO MEDICO MUNICIPAL",
         "type": "NAPL",
-        "color": "#FFFF00"
+        "color": "#D7BDE2"
     },
     {
         "id": 16,
@@ -99,18 +99,18 @@
         "id": 17,
         "description": "AISLAMIENTO OTORGADO POR EL CENTRO MEDICO MUNICIPAL.",
         "type": "AISLAMIENTO",
-        "color": "#FFFF00"
+        "color": "#E2BDC8"
     },
     {
         "id": 18,
         "description": "DESCANSO FISICO VACACIONAL",
         "type": "DFV",
-        "color": "#FFC000"
+        "color": "#690404"
     },
     {
         "id": 19,
         "description": "DESCANSO FISICO VACACIONAL, QUE SE HAN REPROGRAMADO Y LO ESTAN TOMANDO A LA FECHA PROGRAMADA",
         "type": "DFVR",
-        "color": "#00FFFF"
+        "color": "#A19E3B "
     }
 ]

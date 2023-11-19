@@ -31,252 +31,287 @@
             "controlDate": "2023-01-01",
             "controlType": {
                 "id": 1,
-                "color": "#008000"
+                "color": "#006000"
             }
         },
         {
             "id": 2,
             "controlDate": "2023-01-02",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 3,
             "controlDate": "2023-01-03",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 4,
             "controlDate": "2023-01-04",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 5,
             "controlDate": "2023-01-05",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 6,
             "controlDate": "2023-01-06",
             "controlType": {
-                "id": 2
+                "id": 2,
+                "color": "#D8CC2B"
             }
         },
         {
             "id": 7,
             "controlDate": "2023-01-07",
             "controlType": {
-                "id": 2
+                "id": 2,
+                "color": "#D8CC2B"
             }
         },
         {
             "id": 8,
             "controlDate": "2023-01-08",
             "controlType": {
-                "id": 2
+                "id": 2,
+                "color": "#D8CC2B"
             }
         },
         {
             "id": 9,
             "controlDate": "2023-01-09",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 10,
             "controlDate": "2023-01-10",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 11,
             "controlDate": "2023-01-11",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 12,
             "controlDate": "2023-01-12",
             "controlType": {
-                "id": 4
+                "id": 4,
+                "color": "#B10303"
             }
         },
         {
             "id": 13,
             "controlDate": "2023-01-13",
             "controlType": {
-                "id": 4
+                "id": 4,
+                "color": "#B10303"
             }
         },
         {
             "id": 14,
             "controlDate": "2023-01-14",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 15,
             "controlDate": "2023-01-15",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 16,
             "controlDate": "2023-01-16",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 17,
             "controlDate": "2023-01-17",
             "controlType": {
-                "id": 2
+                "id": 2,
+                "color": "#D8CC2B"
             }
         },
         {
             "id": 18,
             "controlDate": "2023-01-18",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 19,
             "controlDate": "2023-01-19",
             "controlType": {
-                "id": 10
+                "id": 10,
+                "color": "#E91E63"
             }
         },
         {
             "id": 20,
             "controlDate": "2023-01-20",
             "controlType": {
-                "id": 11
+                "id": 11,
+                "color": "#3B71A1"
             }
         },
         {
             "id": 21,
             "controlDate": "2023-01-21",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 22,
             "controlDate": "2023-01-22",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 23,
             "controlDate": "2023-01-23",
             "controlType": {
-                "id": 2
+                "id": 2,
+                "color": "#D8CC2B"
             }
         },
         {
             "id": 24,
             "controlDate": "2023-01-24",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 25,
             "controlDate": "2023-01-25",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 26,
             "controlDate": "2023-01-26",
             "controlType": {
-                "id": 4
+                "id": 4,
+                "color": "#B10303"
             }
         },
         {
             "id": 27,
             "controlDate": "2023-01-27",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 28,
             "controlDate": "2023-01-28",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 29,
             "controlDate": "2023-01-29",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 30,
             "controlDate": "2023-01-30",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 31,
             "controlDate": "2023-01-31",
             "controlType": {
-                "id": 2
+                "id": 2,
+                "color": "#D8CC2B"
             }
         },
        {
             "id": 32,
             "controlDate": "2023-02-01",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 33,
             "controlDate": "2023-02-05",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 34,
             "controlDate": "2023-02-03",
             "controlType": {
-                "id": 2
+                "id": 2,
+                "color": "#D8CC2B"
             }
         },
         {
             "id": 35,
             "controlDate": "2023-03-03",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         },
         {
             "id": 36,
             "controlDate": "2023-03-04",
             "controlType": {
-                "id": 1
+                "id": 1,
+                "color": "#006000"
             }
         }
     ]

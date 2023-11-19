@@ -13257,4 +13257,13 @@ button.tab-link-types-control.nav-link {
 .bg-green {
   background-color: green;
 }
+
+.bg-tab-active {
+  background-color: rgba(173, 5, 6, 0.2) !important;
+
+  box-sizing: border-box;
+}
+
+
+
 /* fin probando codigo */
