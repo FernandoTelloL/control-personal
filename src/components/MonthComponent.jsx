@@ -216,7 +216,10 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
 
       <hr />
 
-      <ul className="nav nav-tabs mb-3 tabs-types-control mt-5">
+      <ul
+        className="nav nav-tabs mb-3 tabs-types-control mt-5"
+        style={ { position: 'sticky', paddingTop: '15px', top: '65px', zIndex: '100', backgroundColor: 'white' } }
+      >
         { controlTypes.map((type, index) => (
           <li key={ type.id } className="nav-item tab-item-types-control">
 
