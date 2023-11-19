@@ -31,7 +31,9 @@
             "controlDate": "2023-01-01",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "description": "Asistencia",
+                "type": "X",
+                "color": "#ffffff"
             }
         },
         {
@@ -39,7 +41,7 @@
             "controlDate": "2023-01-02",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -47,7 +49,7 @@
             "controlDate": "2023-01-03",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -55,7 +57,7 @@
             "controlDate": "2023-01-04",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -63,7 +65,7 @@
             "controlDate": "2023-01-05",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -71,7 +73,7 @@
             "controlDate": "2023-01-06",
             "controlType": {
                 "id": 2,
-                "color": "#D8CC2B"
+                "color": "#ffffff"
             }
         },
         {
@@ -79,7 +81,7 @@
             "controlDate": "2023-01-07",
             "controlType": {
                 "id": 2,
-                "color": "#D8CC2B"
+                "color": "#ffffff"
             }
         },
         {
@@ -87,7 +89,7 @@
             "controlDate": "2023-01-08",
             "controlType": {
                 "id": 2,
-                "color": "#D8CC2B"
+                "color": "#ffffff"
             }
         },
         {
@@ -95,7 +97,7 @@
             "controlDate": "2023-01-09",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -103,7 +105,7 @@
             "controlDate": "2023-01-10",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -111,7 +113,7 @@
             "controlDate": "2023-01-11",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -119,7 +121,7 @@
             "controlDate": "2023-01-12",
             "controlType": {
                 "id": 4,
-                "color": "#B10303"
+                "color": "#FF0000"
             }
         },
         {
@@ -127,7 +129,7 @@
             "controlDate": "2023-01-13",
             "controlType": {
                 "id": 4,
-                "color": "#B10303"
+                "color": "#FF0000"
             }
         },
         {
@@ -135,7 +137,7 @@
             "controlDate": "2023-01-14",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -143,7 +145,7 @@
             "controlDate": "2023-01-15",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -151,7 +153,7 @@
             "controlDate": "2023-01-16",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -159,7 +161,7 @@
             "controlDate": "2023-01-17",
             "controlType": {
                 "id": 2,
-                "color": "#D8CC2B"
+                "color": "#ffffff"
             }
         },
         {
@@ -167,7 +169,7 @@
             "controlDate": "2023-01-18",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -175,7 +177,7 @@
             "controlDate": "2023-01-19",
             "controlType": {
                 "id": 10,
-                "color": "#E91E63"
+                "color": "#C9C9C9"
             }
         },
         {
@@ -183,7 +185,7 @@
             "controlDate": "2023-01-20",
             "controlType": {
                 "id": 11,
-                "color": "#3B71A1"
+                "color": "#FFC000"
             }
         },
         {
@@ -191,7 +193,7 @@
             "controlDate": "2023-01-21",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -199,7 +201,7 @@
             "controlDate": "2023-01-22",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -207,7 +209,7 @@
             "controlDate": "2023-01-23",
             "controlType": {
                 "id": 2,
-                "color": "#D8CC2B"
+                "color": "#ffffff"
             }
         },
         {
@@ -215,7 +217,7 @@
             "controlDate": "2023-01-24",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -223,7 +225,7 @@
             "controlDate": "2023-01-25",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -231,7 +233,7 @@
             "controlDate": "2023-01-26",
             "controlType": {
                 "id": 4,
-                "color": "#B10303"
+                "color": "#FF0000"
             }
         },
         {
@@ -239,7 +241,7 @@
             "controlDate": "2023-01-27",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -247,7 +249,7 @@
             "controlDate": "2023-01-28",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -255,7 +257,7 @@
             "controlDate": "2023-01-29",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -263,7 +265,7 @@
             "controlDate": "2023-01-30",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -271,7 +273,7 @@
             "controlDate": "2023-01-31",
             "controlType": {
                 "id": 2,
-                "color": "#D8CC2B"
+                "color": "#ffffff"
             }
         },
        {
@@ -279,7 +281,7 @@
             "controlDate": "2023-02-01",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -287,7 +289,7 @@
             "controlDate": "2023-02-05",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -295,7 +297,7 @@
             "controlDate": "2023-02-03",
             "controlType": {
                 "id": 2,
-                "color": "#D8CC2B"
+                "color": "#ffffff"
             }
         },
         {
@@ -303,7 +305,7 @@
             "controlDate": "2023-03-03",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         },
         {
@@ -311,7 +313,7 @@
             "controlDate": "2023-03-04",
             "controlType": {
                 "id": 1,
-                "color": "#006000"
+                "color": "#ffffff"
             }
         }
     ]

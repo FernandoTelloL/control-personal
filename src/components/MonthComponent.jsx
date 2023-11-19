@@ -136,6 +136,13 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
 
   // Funcion para expandir todos los meses y poder imprimir la asistencia de todos los meses 
   function expandAllMonthsAndPrint() {
+    window.onafterprint = () => {
+      accordions.forEach(accordion => {
+        accordion.classList.remove('show');
+        accordion.setAttribute('aria-expanded', 'false');
+      });
+    }
+
     // Aquí, reemplaza 'accordion' con la clase o el ID que estás usando para los acordeones
     const accordions = document.querySelectorAll('.accordion-collapse');
     console.log(accordions)
@@ -190,7 +197,14 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
           </button>
         </div>
 
-        <button className="btn btn-primary col-sm-3" onClick={ expandAllMonthsAndPrint }>Imprimir</button>
+        <button
+          className="btn btn-primary col-sm-3 border border-0"
+          style={ { background: '#AD0506' } }
+          onClick={ expandAllMonthsAndPrint }
+        >
+          Imprimir
+        </button>
+
       </div>
 
 
@@ -280,7 +294,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                               <div
                                 key={ dayWorked }
                                 className="attendance-day border border-secondary"
-                                style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                style={ { backgroundColor: data.controlType ? data.controlType.color : 'defaultColor' } }
                                 title="Asistencia confirmada"
                               />
                             );
