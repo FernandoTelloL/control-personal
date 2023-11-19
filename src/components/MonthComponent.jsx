@@ -243,15 +243,16 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
 
       <div className="accordion accordion-flush" id="accordionFlushExample">
 
-        <div className="accordion-item">
+        <div className="accordion-item pb-4">
           <h2 className="accordion-header" id="flush-headingOne">
             <button
-              className="accordion-button collapsed"
+              className="accordion-button collapsed fw-semibold"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#flush-collapseOne"
               aria-expanded="false"
               aria-controls="flush-collapseOne"
+              style={ { borderRadius: '10px 10px 0 0' } }
               onClick={ () => handleMonthChange(1) }
             >
               Enero
@@ -262,6 +263,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
             className="accordion-collapse collapse"
             aria-labelledby="flush-headingOne"
             data-bs-parent="#accordionFlushExample"
+            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
           >
             <div className="accordion-body">
               <div className="row">
@@ -277,7 +279,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                             return (
                               <div
                                 key={ dayWorked }
-                                className="attendance-day"
+                                className="attendance-day border border-secondary"
                                 style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
                                 title="Asistencia confirmada"
                               />
@@ -294,15 +296,16 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
           </div>
         </div>
 
-        <div className="accordion-item">
+        <div className="accordion-item pb-4 pt-4">
           <h2 className="accordion-header" id="flush-headingTwo">
             <button
-              className="accordion-button collapsed"
+              className="accordion-button collapsed fw-semibold"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#flush-collapseTwo"
               aria-expanded="false"
               aria-controls="flush-collapseTwo"
+              style={ { borderRadius: '10px 10px 0 0' } }
               onClick={ () => handleMonthChange(2) }
             >
               Febrero
@@ -313,6 +316,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
             className="accordion-collapse collapse"
             aria-labelledby="flush-headingTwo"
             data-bs-parent="#accordionFlushExample"
+            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
           >
             <div className="accordion-body">
               <div className="row">
@@ -327,7 +331,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                           return (
                             <div
                               key={ dayWorked }
-                              className="attendance-day"
+                              className="attendance-day border border-secondary"
                               style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
                               title="Asistencia confirmada"
                             />
@@ -343,15 +347,16 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
           </div>
         </div>
 
-        <div className="accordion-item">
+        <div className="accordion-item pb-4 pt-4">
           <h2 className="accordion-header" id="flush-headingThree">
             <button
-              className="accordion-button collapsed"
+              className="accordion-button collapsed fw-semibold"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#flush-collapseThree"
               aria-expanded="false"
               aria-controls="flush-collapseThree"
+              style={ { borderRadius: '10px 10px 0 0' } }
               onClick={ () => handleMonthChange(3) }
             >
               Marzo
@@ -362,6 +367,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
             className="accordion-collapse collapse"
             aria-labelledby="flush-headingThree"
             data-bs-parent="#accordionFlushExample"
+            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
           >
             <div className="accordion-body">
               <div className="row">
@@ -376,7 +382,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                           return (
                             <div
                               key={ dayWorked }
-                              className="attendance-day"
+                              className="attendance-day border border-secondary"
                               style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
                               title="Asistencia confirmada"
                             />
@@ -392,15 +398,16 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
           </div>
         </div>
 
-        <div className="accordion-item">
+        <div className="accordion-item pb-4 pt-4">
           <h2 className="accordion-header" id="flush-headingFour">
             <button
-              className="accordion-button collapsed"
+              className="accordion-button collapsed fw-semibold"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#flush-collapseFour"
               aria-expanded="false"
               aria-controls="flush-collapseFour"
+              style={ { borderRadius: '10px 10px 0 0' } }
               onClick={ () => handleMonthChange(4) }
             >
               Abril
@@ -411,6 +418,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
             className="accordion-collapse collapse"
             aria-labelledby="flush-headingFour"
             data-bs-parent="#accordionFlushExample"
+            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
           >
             <div className="accordion-body">
               <div className="row">
@@ -425,7 +433,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                           return (
                             <div
                               key={ dayWorked }
-                              className="attendance-day"
+                              className="attendance-day border border-secondary"
                               style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
                               title="Asistencia confirmada"
                             />
@@ -445,15 +453,16 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
 
         </div>
 
-        <div className="accordion-item">
+        <div className="accordion-item pb-4 pt-4">
           <h2 className="accordion-header" id="flush-headingFive">
             <button
-              className="accordion-button collapsed"
+              className="accordion-button collapsed fw-semibold"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#flush-collapseFive"
               aria-expanded="false"
               aria-controls="flush-collapseFive"
+              style={ { borderRadius: '10px 10px 0 0' } }
               onClick={ () => handleMonthChange(5) }
             >
               Mayo
@@ -464,6 +473,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
             className="accordion-collapse collapse"
             aria-labelledby="flush-headingFive"
             data-bs-parent="#accordionFlushExample"
+            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
           >
             <div className="accordion-body">
               <div className="row">
@@ -478,7 +488,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                           return (
                             <div
                               key={ dayWorked }
-                              className="attendance-day"
+                              className="attendance-day border border-secondary"
                               style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
                               title="Asistencia confirmada"
                             />
@@ -494,15 +504,16 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
           </div>
         </div>
 
-        <div className="accordion-item">
+        <div className="accordion-item pb-4 pt-4">
           <h2 className="accordion-header" id="flush-headingSix">
             <button
-              className="accordion-button collapsed"
+              className="accordion-button collapsed fw-semibold"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#flush-collapseSix"
               aria-expanded="false"
               aria-controls="flush-collapseSix"
+              style={ { borderRadius: '10px 10px 0 0' } }
               onClick={ () => handleMonthChange(6) }
             >
               Junio
@@ -513,6 +524,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
             className="accordion-collapse collapse"
             aria-labelledby="flush-headingSix"
             data-bs-parent="#accordionFlushExample"
+            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
           >
             <div className="accordion-body">
               <div className="row">
@@ -527,7 +539,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                           return (
                             <div
                               key={ dayWorked }
-                              className="attendance-day"
+                              className="attendance-day border border-secondary"
                               style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
                               title="Asistencia confirmada"
                             />
@@ -543,15 +555,16 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
           </div>
         </div>
 
-        <div className="accordion-item">
+        <div className="accordion-item pb-4 pt-4">
           <h2 className="accordion-header" id="flush-headingSeven">
             <button
-              className="accordion-button collapsed"
+              className="accordion-button collapsed fw-semibold"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#flush-collapseSeven"
               aria-expanded="false"
               aria-controls="flush-collapseSeven"
+              style={ { borderRadius: '10px 10px 0 0' } }
               onClick={ () => handleMonthChange(7) }
             >
               Julio
@@ -562,6 +575,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
             className="accordion-collapse collapse"
             aria-labelledby="flush-headingSeven"
             data-bs-parent="#accordionFlushExample"
+            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
           >
             <div className="accordion-body">
               <div className="row">
@@ -576,7 +590,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                           return (
                             <div
                               key={ dayWorked }
-                              className="attendance-day bg-green"
+                              className="attendance-day border border-secondary"
                               style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
                               title="Asistencia confirmada"
                             />
@@ -589,22 +603,20 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                 )) }
               </div>
             </div>
-
-
-
-
           </div>
         </div>
 
-        <div className="accordion-item">
+
+        <div className="accordion-item pb-4 pt-4">
           <h2 className="accordion-header" id="flush-headingEight">
             <button
-              className="accordion-button collapsed"
+              className="accordion-button collapsed fw-semibold"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#flush-collapseEight"
               aria-expanded="false"
               aria-controls="flush-collapseEight"
+              style={ { borderRadius: '10px 10px 0 0' } }
               onClick={ () => handleMonthChange(8) }
             >
               Agosto
@@ -615,6 +627,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
             className="accordion-collapse collapse"
             aria-labelledby="flush-headingEight"
             data-bs-parent="#accordionFlushExample"
+            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
           >
             <div className="accordion-body">
               <div className="row">
@@ -629,7 +642,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                           return (
                             <div
                               key={ dayWorked }
-                              className="attendance-day"
+                              className="attendance-day border border-secondary"
                               style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
                               title="Asistencia confirmada"
                             />
@@ -645,26 +658,28 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
           </div>
         </div>
 
-        <div className="accordion-item">
+
+        <div className="accordion-item pb-4 pt-4">
           <h2 className="accordion-header" id="flush-headingNine">
             <button
-              className="accordion-button collapsed"
+              className="accordion-button collapsed fw-semibold"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#flush-collapseNine"
               aria-expanded="false"
               aria-controls="flush-collapseNine"
+              style={ { borderRadius: '10px 10px 0 0' } }
               onClick={ () => handleMonthChange(9) }
             >
               Septiembre
             </button>
           </h2>
           <div
-
             id="flush-collapseNine"
             className="accordion-collapse collapse"
             aria-labelledby="flush-headingNine"
             data-bs-parent="#accordionFlushExample"
+            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
           >
             <div className="accordion-body">
               <div className="row">
@@ -681,7 +696,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                           return (
                             <div
                               key={ dayWorked }
-                              className="attendance-day"
+                              className="attendance-day border border-secondary"
                               style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
                               title="Asistencia confirmada"
 
@@ -699,15 +714,16 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
         </div>
 
 
-        <div className="accordion-item">
+        <div className="accordion-item pb-4 pt-4">
           <h2 className="accordion-header" id="flush-headingTen">
             <button
-              className="accordion-button collapsed"
+              className="accordion-button collapsed fw-semibold"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#flush-collapseTen"
               aria-expanded="false"
               aria-controls="flush-collapseTen"
+              style={ { borderRadius: '10px 10px 0 0' } }
               onClick={ () => handleMonthChange(10) }
             >
               Octubre
@@ -718,6 +734,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
             className="accordion-collapse collapse"
             aria-labelledby="flush-headingTen"
             data-bs-parent="#accordionFlushExample"
+            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
           >
             <div className="accordion-body">
               <div className="row">
@@ -734,7 +751,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                           return (
                             <div
                               key={ dayWorked }
-                              className="attendance-day"
+                              className="attendance-day border border-secondary"
                               style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
                               title="Asistencia confirmada"
 
@@ -752,15 +769,16 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
         </div>
 
 
-        <div className="accordion-item">
+        <div className="accordion-item pb-4 pt-4">
           <h2 className="accordion-header" id="flush-headingEleven">
             <button
-              className="accordion-button collapsed"
+              className="accordion-button collapsed fw-semibold"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#flush-collapseEleven"
               aria-expanded="false"
               aria-controls="flush-collapseEleven"
+              style={ { borderRadius: '10px 10px 0 0' } }
               onClick={ () => handleMonthChange(11) }
             >
               Noviembre
@@ -771,6 +789,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
             className="accordion-collapse collapse"
             aria-labelledby="flush-headingEleven"
             data-bs-parent="#accordionFlushExample"
+            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
           >
             <div className="accordion-body">
               <div className="row">
@@ -787,7 +806,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                           return (
                             <div
                               key={ dayWorked }
-                              className="attendance-day"
+                              className="attendance-day border border-secondary"
                               style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
                               title="Asistencia confirmada"
 
@@ -805,15 +824,16 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
         </div>
 
 
-        <div className="accordion-item">
+        <div className="accordion-item pb-4 pt-4">
           <h2 className="accordion-header" id="flush-headingTwelve">
             <button
-              className="accordion-button collapsed"
+              className="accordion-button collapsed fw-semibold"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#flush-collapseTwelve"
               aria-expanded="false"
               aria-controls="flush-collapseTwelve"
+              style={ { borderRadius: '10px 10px 0 0' } }
               onClick={ () => handleMonthChange(12) }
             >
               Diciembre
@@ -824,6 +844,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
             className="accordion-collapse collapse"
             aria-labelledby="flush-headingTwelve"
             data-bs-parent="#accordionFlushExample"
+            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
           >
             <div className="accordion-body">
               <div className="row">
@@ -839,7 +860,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                           return (
                             <div
                               key={ dayWorked }
-                              className="attendance-day"
+                              className="attendance-day border border-secondary"
                               style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
                               title="Asistencia confirmada"
 
