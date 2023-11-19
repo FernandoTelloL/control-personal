@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 // MonthComponent.js
 import { useState, useEffect } from 'react';
+import { WorkerInfo } from './WorkerInfo';
+
 
 const MonthComponent = ({ attendanceData, controlTypes }) => {
   const [searchDNI, setSearchDNI] = useState('');
@@ -207,8 +209,14 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
 
       </div>
 
+      <hr />
 
-      <ul className="nav nav-tabs mb-3 tabs-types-control">
+      {/* componente que contiene informacion del usuario */ }
+      <WorkerInfo worker={ attendanceData } />
+
+      <hr />
+
+      <ul className="nav nav-tabs mb-3 tabs-types-control mt-5">
         { controlTypes.map((type, index) => (
           <li key={ type.id } className="nav-item tab-item-types-control">
 
