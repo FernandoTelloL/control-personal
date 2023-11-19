@@ -13264,6 +13264,13 @@ button.tab-link-types-control.nav-link {
   box-sizing: border-box;
 }
 
+@media print {
+  .attendance-day {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
 
 
 /* fin probando codigo */
