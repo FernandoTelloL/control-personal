@@ -9,6 +9,8 @@ import MonthComponent from "../components/MonthComponent";
 // import attendanceData from '../components/asistencia.json';
 import attendanceData from '../data/busquedaUsuario.json';
 import controlTypes from '../data/tiposControl.json';
+import { TableBasic } from "../components/tables/TableBasic";
+import { TableJson } from "../components/tables/TableJson";
 
 
 export const DashboardPage = () => {
@@ -174,6 +176,12 @@ export const DashboardPage = () => {
           <main>
             <div className="container-fluid px-4">
               <h1 className="mt-4">Dashboard</h1>
+
+              {/* <TableBasic /> */ }
+              {/* <TableJson /> */ }
+
+
+
 
               <MonthComponent attendanceData={ attendanceData } controlTypes={ controlTypes } />
 

@@ -13271,6 +13271,32 @@ button.tab-link-types-control.nav-link {
   }
 }
 
+.custom-datatable button{
+  /* max-width: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; */
+  font-size: 12px !important;
+  min-width: 10px;
+  padding: 0;
+}
 
+.custom-datatable span.tss-178gktx-MUIDataTableHeadCell-contentWrapper{
+  display: block;
+  text-align: center;
+}
+.custom-datatable td
+{
+  padding: 0 5px;
+
+}
+
+.custom-datatable th {
+  padding: 7px;
+}
+
+.custom-datatable .tss-1qtl85h-MUIDataTableBodyCell-root {
+  padding-left: 5px;
+}
 
 /* fin probando codigo */
