@@ -2,7 +2,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { Layout, ProtectedRoute } from './components'
-import { Login, DashboardPage, GuiaPage, UpdateUser, ConsultaPersonal } from './pages'
+import { Login, DashboardPage, GuiaPage, UpdateUser, ConsultaPersonal, Inicio } from './pages'
 import { useState } from 'react'
 import { UserProvider, useUserContext } from './context/UserProvider'
 import { ShowUsers } from './components/ShowUsers'
@@ -65,6 +65,7 @@ function App() {
         } /> */}
         <Route path='/dashboard' element={ <DashboardPage /> }>
           <Route path='/dashboard/consulta-personal' element={ <ConsultaPersonal /> } />
+          <Route path='/dashboard/inicio' element={ <Inicio /> } />
         </Route>
 
         {/* // colocar !! este simbolo antes de user me dice que si existe user devuelve true de lo contrario false */ }

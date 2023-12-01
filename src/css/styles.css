@@ -13304,5 +13304,34 @@ button.tab-link-types-control.nav-link {
 }
 
 
+.image-inicio-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 30px auto;
+  flex-wrap: nowrap;
+}
 
+
+.inicio-left-image img {
+  width: 250px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.inicio-right-images img{ 
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+
+@media (max-width: 600px) {
+  .image-inicio-container {
+    flex-direction: column;
+  }
+}
 /* fin probando codigo */

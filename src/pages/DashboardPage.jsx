@@ -11,6 +11,7 @@ import attendanceData from '../data/busquedaUsuario.json';
 import controlTypes from '../data/tiposControl.json';
 import { TableBasic } from "../components/tables/TableBasic";
 import { TableJson } from "../components/tables/TableJson";
+import { Inicio } from "./Inicio";
 
 
 export const DashboardPage = () => {
@@ -94,7 +95,7 @@ export const DashboardPage = () => {
               <div className="nav">
                 <div className="sb-sidenav-menu-heading">Menu Principal</div>
 
-                <Link className="nav-link" to="/dashboard">
+                <Link className="nav-link" to="/dashboard/inicio">
                   <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                   Inicio
                 </Link>
@@ -169,7 +170,7 @@ export const DashboardPage = () => {
           {/* inicio contenido principal dashboard */ }
           <main>
             <div className="container-fluid px-4">
-              <h1 className="mt-4">Dashboard</h1>
+              {/* <h1 className="mt-4">Dashboard</h1> */ }
 
               {/* <TableBasic /> */ }
               {/* <TableJson /> */ }

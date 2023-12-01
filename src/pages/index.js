@@ -1,3 +1,5 @@
+export { Inicio } from "./Inicio";
+
 export { ConsultaPersonal } from "./ConsultaPersonal";
 
 export { UpdateUser } from "./UpdateUser";

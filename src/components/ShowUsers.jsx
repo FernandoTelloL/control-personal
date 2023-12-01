@@ -224,10 +224,10 @@ export const ShowUsers = () => {
     <>
 
       <div className="container-fluid">
-        <div className="row mt-3">
+        <div className="row mt-5">
           <div className="col-md-4 offset-md-4">
             <div className="d-grid mx-auto">
-              <button onClick={() => openModal(1)} className="btn btn-dark" data-bs-toggle='modal' data-bs-target='#modalUsers'>
+              <button onClick={ () => openModal(1) } className="btn btn-dark" data-bs-toggle='modal' data-bs-target='#modalUsers'>
                 <i className="fa-solid fa-circle-plus"></i> Añadir
               </button>
             </div>
@@ -244,16 +244,16 @@ export const ShowUsers = () => {
                 <tbody className="table-group-divider">
                   {
                     users.map((user, i) => (
-                      <tr key={user.userId}>
-                        <td>{(i + 1)}</td>
-                        <td>{user.firstName}</td>
-                        <td>{user.firstSurname}</td>
-                        <td>{user.secondSurname}</td>
-                        <td>{user.dni}</td>
-                        <td>{user.rol}</td>
+                      <tr key={ user.userId }>
+                        <td>{ (i + 1) }</td>
+                        <td>{ user.firstName }</td>
+                        <td>{ user.firstSurname }</td>
+                        <td>{ user.secondSurname }</td>
+                        <td>{ user.dni }</td>
+                        <td>{ user.rol }</td>
                         <td>
                           <button
-                            onClick={() => openModal(2, user.id, user.firstName, user.secondName, user.firstSurname, user.secondSurname, user.dni, user.rol)}
+                            onClick={ () => openModal(2, user.id, user.firstName, user.secondName, user.firstSurname, user.secondSurname, user.dni, user.rol) }
                             className="btn btn-warning"
                             data-bs-toggle='modal'
                             data-bs-target='#modalUsers'
@@ -261,7 +261,7 @@ export const ShowUsers = () => {
                             <i className="fa-solid fa-edit"></i>
                           </button>
                           &nbsp;
-                          <button onClick={() => deleteUser(user.id, user.firstName, user.firstSurname)} className="btn btn-danger">
+                          <button onClick={ () => deleteUser(user.id, user.firstName, user.firstSurname) } className="btn btn-danger">
                             <i className="fa-solid fa-trash"></i>
                           </button>
                         </td>
@@ -276,13 +276,13 @@ export const ShowUsers = () => {
 
       </div>
 
-      {/* creacion del modal */}
+      {/* creacion del modal */ }
       <div id="modalUsers" className="modal fade" aria-hidden='true'>
         <div className="modal-dialog">
           <div className="modal-content">
 
             <div className="modal-header">
-              <label htmlFor="" className="h5">{title}</label>
+              <label htmlFor="" className="h5">{ title }</label>
               <button type="button" className="btn-close" data-bs-dismiss='modal' aria-label="Close"></button>
             </div>
 
@@ -295,8 +295,8 @@ export const ShowUsers = () => {
                   id="userFirstName"
                   className="form-control"
                   placeholder="Primer Nombre"
-                  value={userFirstName}
-                  onChange={(e) => setUserFirstName(e.target.value)}
+                  value={ userFirstName }
+                  onChange={ (e) => setUserFirstName(e.target.value) }
                 />
               </div>
 
@@ -307,8 +307,8 @@ export const ShowUsers = () => {
                   id="userSecondName"
                   className="form-control"
                   placeholder="Segundo Nombre"
-                  value={userSecondName}
-                  onChange={(e) => setUserSecondName(e.target.value)}
+                  value={ userSecondName }
+                  onChange={ (e) => setUserSecondName(e.target.value) }
                 />
               </div>
 
@@ -319,8 +319,8 @@ export const ShowUsers = () => {
                   id="userFirstSurname"
                   className="form-control"
                   placeholder="Primer apellido"
-                  value={userFirstSurname}
-                  onChange={(e) => setUserFirstSurname(e.target.value)}
+                  value={ userFirstSurname }
+                  onChange={ (e) => setUserFirstSurname(e.target.value) }
                 />
               </div>
 
@@ -331,8 +331,8 @@ export const ShowUsers = () => {
                   id="userSecondSurname"
                   className="form-control"
                   placeholder="Segundo apellido"
-                  value={userSecondSurname}
-                  onChange={(e) => setUserSecondSurname(e.target.value)}
+                  value={ userSecondSurname }
+                  onChange={ (e) => setUserSecondSurname(e.target.value) }
                 />
               </div>
 
@@ -343,8 +343,8 @@ export const ShowUsers = () => {
                   id="userDni"
                   className="form-control"
                   placeholder="DNI"
-                  value={userDni}
-                  onChange={(e) => setUserDni(e.target.value)}
+                  value={ userDni }
+                  onChange={ (e) => setUserDni(e.target.value) }
                 />
               </div>
 
@@ -355,13 +355,13 @@ export const ShowUsers = () => {
                   id="userRoles"
                   className="form-control"
                   placeholder="Roles"
-                  value={userRoles}
-                  onChange={(e) => setUserRoles(e.target.value)}
+                  value={ userRoles }
+                  onChange={ (e) => setUserRoles(e.target.value) }
                 />
               </div>
 
               <div className="d-grid col-6 mx-auto mb-3">
-                <button onClick={() => validar()} className="btn btn-success">
+                <button onClick={ () => validar() } className="btn btn-success">
                   <i className="fa-solid fa-floppy-disk"></i>Guardar
                 </button>
               </div>
