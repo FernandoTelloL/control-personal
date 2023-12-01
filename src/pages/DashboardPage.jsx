@@ -2,10 +2,10 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
-import { RegisterUser } from "./RegisterUser";
 import { Outlet } from "react-router-dom";
 import { useUserContext } from "../context/UserProvider";
 import MonthComponent from "../components/MonthComponent";
+import logo from '../assets/logo.png'
 // import attendanceData from '../components/asistencia.json';
 import attendanceData from '../data/busquedaUsuario.json';
 import controlTypes from '../data/tiposControl.json';
@@ -54,7 +54,7 @@ export const DashboardPage = () => {
         {/* <a className="navbar-brand ps-3" href="index.html">Seguridad Ciudadana</a> */ }
         <nav className="navbar navbar-light bg-light p-">
           <a className="navbar-brand bg-white" href="#">
-            <img className="pl-2" width='197px' src="./logo.png" alt="Brand Logo" />
+            <img className="pl-2" width='197px' src={ logo } alt="Brand Logo" />
           </a>
         </nav>
 
@@ -96,68 +96,62 @@ export const DashboardPage = () => {
 
                 <Link className="nav-link" to="/dashboard">
                   <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
-                  Dashboard
+                  Inicio
                 </Link>
 
                 <hr />
 
-                {
-                  user.roles.includes('admin')
-                    ? (
-                      <>
-
-                        <Link className="nav-link" to="/dashboard/register-user">
-                          <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
-                          Usuarios
-                        </Link>
-                        <hr />
-                      </>
-                    )
-                    : null
-                }
 
 
-                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                <NavLink className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                   <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
-                  Item 3
+                  Principal
                   <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                </a>
+                </NavLink>
                 <div className="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                   <nav className="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                    <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                      Sub Item 3
-                      <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+                    <Link className="nav-link fs-7" to="/dashboard/consulta-personal" >
+                      Consulta de Personal
+                    </Link>
+
+                    <a className="nav-link fs-7" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                      Carga de Excel
                     </a>
-                    <div className="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                      <nav className="sb-sidenav-menu-nested nav">
-                        <a className="nav-link" href="login.html">sub subItem 1</a>
-                        <a className="nav-link" href="register.html">sub subItem 2</a>
-                        <a className="nav-link" href="password.html">sub subItem 3</a>
-                      </nav>
-                    </div>
-                    <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                      Sub Item 4
-                      <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+
+                  </nav>
+                </div>
+                <hr />
+                <a className="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages2" aria-expanded="false" aria-controls="collapsePages">
+                  <div className="sb-nav-link-icon"><i className="fas fa-book-open"></i></div>
+                  Tablas Maestras
+                  <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
+                </a>
+                <div className="collapse" id="collapsePages2" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                  <nav className="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+
+                    {
+                      user.roles.includes('admin')
+                        ? (
+                          <Link className="nav-link fs-7" to="/dashboard/register-user">
+                            Personal
+                          </Link>
+                        )
+                        : null
+                    }
+
+                    <a className="nav-link fs-7" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                      Funciones
                     </a>
-                    <div className="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                      <nav className="sb-sidenav-menu-nested nav">
-                        <a className="nav-link" href="401.html">sub subItem 4</a>
-                        <a className="nav-link" href="404.html">sub subItem 5</a>
-                        <a className="nav-link" href="500.html">sub subItem 6</a>
-                      </nav>
-                    </div>
+
+                    <a className="nav-link fs-7" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                      Tipos de Control
+                    </a>
+
                   </nav>
                 </div>
                 <hr />
                 {/* <div className="sb-sidenav-menu-heading">Subtitulo 3</div> */ }
-                <a className="nav-link" href="charts.html">
-                  <div className="sb-nav-link-icon"><i className="fas fa-chart-area"></i></div>
-                  Item 4
-                </a>
-                <a className="nav-link" href="tables.html">
-                  <div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>
-                  Item 5
-                </a>
+
               </div>
             </div>
             <div className="sb-sidenav-footer sidenav-main-footer">
@@ -183,7 +177,6 @@ export const DashboardPage = () => {
 
 
 
-              <MonthComponent attendanceData={ attendanceData } controlTypes={ controlTypes } />
 
               {/* <ol className="breadcrumb mb-4">
                 <li className="breadcrumb-item active">Dashboard</li>

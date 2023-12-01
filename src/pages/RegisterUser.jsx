@@ -5,7 +5,7 @@ export const RegisterUser = () => {
     <>
 
 
-      <div class="container mt-5 mb-5">
+      {/* <div class="container mt-5 mb-5">
 
         <ol className="breadcrumb mb-4">
           <li className="breadcrumb-item">Dashboard</li>
@@ -49,7 +49,7 @@ export const RegisterUser = () => {
             <button type="submit" className="btn btn-warning w-50 pt-3 pb-3 ">Cancelar</button>
           </div>
         </form>
-      </div>
+      </div> */}
 
 
     </>

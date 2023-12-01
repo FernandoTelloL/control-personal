@@ -30,11 +30,11 @@ const userReducer = (state, action) => {
       const url = users
       console.log(url)
 
-      function getData() {
-        fetch(users)
-          .then = (res) => res.json()
-        console.log(res)
-      }
+      // function getData() {
+      //   fetch(users)
+      //     .then = (res) => res.json()
+      //   console.log(res)
+      // }
 
       return {
         ...state,
@@ -52,9 +52,9 @@ const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState)
 
   return (
-    <UserContext.Provider value={{ user: state.user, dispatch }}>
-      {console.log(state.user)}
-      {children}
+    <UserContext.Provider value={ { user: state.user, dispatch } }>
+      { console.log(state.user) }
+      { children }
     </UserContext.Provider>
   )
 }

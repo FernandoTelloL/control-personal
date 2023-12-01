@@ -2,7 +2,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { Layout, ProtectedRoute } from './components'
-import { Login, DashboardPage, GuiaPage, RegisterUser, UpdateUser } from './pages'
+import { Login, DashboardPage, GuiaPage, UpdateUser, ConsultaPersonal } from './pages'
 import { useState } from 'react'
 import { UserProvider, useUserContext } from './context/UserProvider'
 import { ShowUsers } from './components/ShowUsers'
@@ -56,13 +56,24 @@ function App() {
           </div>
         } />
 
-          // colocar !! este simbolo antes de user me dice que si existe user devuelve true de lo contrario false
-        <Route element={<ProtectedRoute />}>
-          <Route path='/dashboard' element={<DashboardPage />} >
-            <Route path='register-user' element={<ShowUsers />} />
-            <Route path='update-user' element={<UpdateUser />} />
+
+        {/* <Route path='/consulta-personal' element={
+          <DashboardPage >
+            <ConsultaPersonal />
+          </DashboardPage>
+
+        } /> */}
+        <Route path='/dashboard' element={ <DashboardPage /> }>
+          <Route path='/dashboard/consulta-personal' element={ <ConsultaPersonal /> } />
+        </Route>
+
+        {/* // colocar !! este simbolo antes de user me dice que si existe user devuelve true de lo contrario false */ }
+        <Route element={ <ProtectedRoute /> }>
+          <Route path='/dashboard' element={ <DashboardPage /> } >
+            <Route path='register-user' element={ <ShowUsers /> } />
+            <Route path='update-user' element={ <UpdateUser /> } />
           </Route>
-          <Route path='/guia' element={<GuiaPage />} />
+          <Route path='/guia' element={ <GuiaPage /> } />
         </Route>
 
       </Routes>

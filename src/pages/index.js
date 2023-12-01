@@ -1,3 +1,5 @@
+export { ConsultaPersonal } from "./ConsultaPersonal";
+
 export { UpdateUser } from "./UpdateUser";
 
 export { RegisterUser } from "./RegisterUser";
