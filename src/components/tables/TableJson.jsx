@@ -10,10 +10,10 @@ const eneroId1Dates = userAsistencia.taskControlList.filter(item => {
 console.log(eneroId1Dates);
 
 // Filtrar las fechas que tienen controlType id: 1
-const filteredData = eneroId1Dates.map(item => ({
-  id: item.id,
-  controlDate: item.controlDate,
-}));
+// const filteredData = eneroId1Dates.map(item => ({
+//   id: item.id,
+//   controlDate: item.controlDate,
+// }));
 
 
 // Crear un array con los nombres de las columnas (días del 1 al 31)
@@ -50,39 +50,18 @@ const data = [dataRow];
 
 
 
-
-// // Crea un array de objetos para cada día del mes
-// const data = Array.from({ length: 31 }, (_, index) => {
-//   const day = index + 1;
-//   const formattedDay = day < 10 ? `0${day}` : `${day}`;
-//   const date = `2023-01-${formattedDay}`;
-
-//   // Comprueba si la fecha está en el array filtrado
-//   const hasControl = eneroId1Dates.some(item => item.controlDate === date);
-
-//   return { id: index + 1, controlDate: date, hasControl };
-// });
-
 const options = {
   filter: false, // Puedes ajustar según tus necesidades
   selectableRows: 'none', // Opciones de selección
   responsive: 'standard', // Añade la opción responsive
 };
 
-// const data = [
-//   ['X', '', 'X', 'X'],
-// ]
-
-// const options = {
-//   filterTpe: 'checkbox'
-// }
-
 export const TableJson = () => {
   return (
     <div className="custom-datatable">
 
       <MUIDataTable
-        title={ 'Tabla de Datos' }
+        title={ 'Asistencia de Mes Enero' }
         data={ data }
         columns={ columns }
         options={ options }

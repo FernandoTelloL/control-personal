@@ -63,16 +63,18 @@ function App() {
           </DashboardPage>
 
         } /> */}
-        <Route path='/dashboard' element={ <DashboardPage /> }>
+        {/* <Route path='/dashboard' element={ <DashboardPage /> }>
           <Route path='/dashboard/consulta-personal' element={ <ConsultaPersonal /> } />
           <Route path='/dashboard/inicio' element={ <Inicio /> } />
-        </Route>
+        </Route> */}
 
         {/* // colocar !! este simbolo antes de user me dice que si existe user devuelve true de lo contrario false */ }
         <Route element={ <ProtectedRoute /> }>
           <Route path='/dashboard' element={ <DashboardPage /> } >
             <Route path='register-user' element={ <ShowUsers /> } />
             <Route path='update-user' element={ <UpdateUser /> } />
+            <Route path='/dashboard/consulta-personal' element={ <ConsultaPersonal /> } />
+            <Route path='/dashboard/inicio' element={ <Inicio /> } />
           </Route>
           <Route path='/guia' element={ <GuiaPage /> } />
         </Route>

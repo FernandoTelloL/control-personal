@@ -9,7 +9,8 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedTab, setSelectedTab] = useState(controlTypes[0].type);
   const [daysWorked, setDaysWorked] = useState(0);
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [selectedYear, setSelectedYear] = useState();
+  // const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   // Estado para el mes actual
   const [currentMonth, setCurrentMonth] = useState(1); // Enero
   // Estado para el tipo de control actual
@@ -167,42 +168,91 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   return (
     <div className="container mt-4">
 
-      <div className="form-group row mb-5">
-        <div className="col-sm-3">
+      <div className="form-group row mb-5 mt-5">
+
+        {/* input buscar por DNI */ }
+
+        <div className="col-sm-4 d-flex justify-content-between align-items-center">
 
           <input
             type="text"
-            className="form-control"
-            placeholder="Buscar por documento de identidad"
+            className="form-control fs-7 w-75 me-sm-1"
+            placeholder="Buscar por DNI"
             value={ searchDNI }
             onChange={ handleSearchChange }
           />
 
-        </div>
-        <div className="col-sm-3">
+          {/* boton buscar */ }
+          <div className="">
+            {/* <button className="btn btn-outline-secondary" type="button" onClick={ handleSearchClick }> */ }
+            <button
+              className="btn btn-outline-secondary text-white border border-0 fs-7"
+              type="button"
+              style={ { background: '#AD0506' } }
+              onClick={ {} }
+            >
 
+              Buscar
+            </button>
+          </div>
+
+        </div>
+
+
+
+        {/* combo mes */ }
+        <div className="col-sm-2 d-flex align-items-center mt-3 mt-sm-0">
+          <label htmlFor="selectMonth" className="form-label fs-7 me-2">Mes:</label>
+          <select className="form-select fs-7" id="selectMonth" onChange="handleMonthChange(this.value)">
+            <option value=""></option>
+            <option value="1">Enero</option>
+            <option value="2">Febrero</option>
+            <option value="3">Marzo</option>
+            <option value="4">Abril</option>
+            <option value="5">Mayo</option>
+            <option value="6">Junio</option>
+            <option value="7">Julio</option>
+            <option value="8">Agosto</option>
+            <option value="9">Setiembre</option>
+            <option value="10">Octubre</option>
+            <option value="11">Noviembre</option>
+            <option value="12">Diciembre</option>
+          </select>
+        </div>
+
+        {/* combo año */ }
+        <div className="col-sm-2 d-flex align-items-center mt-3 mt-sm-0">
+          <label htmlFor="selectMonth" className="form-label fs-7 me-2">Año:</label>
           <select
-            className="form-control"
+            className="form-control fs-7"
             value={ selectedYear }
             onChange={ e => setSelectedYear(e.target.value) }
           >
+            <option value=""></option>
             <option value="2023">2023</option>
             <option value="2024">2024</option>
-            {/* Agrega más opciones según sea necesario */ }
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
           </select>
 
         </div>
-        <div className="col-sm-3">
-          {/* <button className="btn btn-outline-secondary" type="button" onClick={ handleSearchClick }> */ }
-          <button className="btn btn-outline-secondary" type="button" onClick={ {} }>
-            Buscar
-          </button>
+
+        {/* combo tipo de control */ }
+        <div className="col-sm-2 d-flex align-items-center mt-3 mt-sm-0">
+          <label htmlFor="selectControlType" className="form-label fs-7 me-2">Tipo</label>
+          <select className="form-select fs-7" id="selectControlType" onChange="handleControlTypeChange(this.value)">
+            <option value=""></option>
+            <option value="asistencia">Asistencia</option>
+            <option value="otro_tipo">Otro Tipo</option>
+          </select>
         </div>
 
+        {/* Boton imprimir */ }
         <button
-          className="btn btn-primary col-sm-3 border border-0"
+          className="btn btn-primary col-sm-2 border border-0 fs-7 mt-3 mt-sm-0 text-white"
           style={ { background: '#AD0506' } }
-          onClick={ expandAllMonthsAndPrint }
+          onClick={ '' }
         >
           Imprimir
         </button>

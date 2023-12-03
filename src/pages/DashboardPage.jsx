@@ -173,7 +173,7 @@ export const DashboardPage = () => {
               {/* <h1 className="mt-4">Dashboard</h1> */ }
 
               {/* <TableBasic /> */ }
-              {/* <TableJson /> */ }
+              <TableJson />
 
 
 

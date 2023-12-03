@@ -3,8 +3,6 @@
 
 import { useState } from "react";
 import { useUserContext } from "../context/UserProvider";
-import { Navigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { users } from "../data/users";
 
@@ -47,13 +45,13 @@ export const Login = () => {
       value: user
     })
 
-    navigate('/dashboard')
+    navigate('/dashboard/inicio')
   }
 
   return (
     <div className="form__container d-flex justify-content-center align-items-center min-vh-100">
       <form
-        onSubmit={handleSubmit}
+        onSubmit={ handleSubmit }
         className="d-flex flex-column container-fluid col-md-12 col-lg-6 col-xl-6 col-xxl-6 bg-alert"
       >
         <h1 className="text-center mb-4 display-2">Login</h1>
@@ -63,7 +61,7 @@ export const Login = () => {
             type="text"
             className="form-control"
             id="exampleInputEmail1"
-            onChange={(e) => setUserName(e.target.value)}
+            onChange={ (e) => setUserName(e.target.value) }
           />
         </div>
         <div className="mb-3">
@@ -72,7 +70,7 @@ export const Login = () => {
             type="password"
             className="form-control"
             id="exampleInputPassword1"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={ (e) => setPassword(e.target.value) }
           />
         </div>
 
