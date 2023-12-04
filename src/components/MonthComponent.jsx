@@ -2,6 +2,7 @@
 // MonthComponent.js
 import { useState, useEffect } from 'react';
 import { WorkerInfo } from './WorkerInfo';
+import { Link } from 'react-router-dom';
 
 
 const MonthComponent = ({ attendanceData, controlTypes }) => {
@@ -242,20 +243,22 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
         <div className="col-sm-2 d-flex align-items-center mt-3 mt-sm-0">
           <label htmlFor="selectControlType" className="form-label fs-7 me-2">Tipo</label>
           <select className="form-select fs-7" id="selectControlType" onChange="handleControlTypeChange(this.value)">
-            <option value=""></option>
+            <option value="">Asistencia</option>
             <option value="asistencia">Asistencia</option>
             <option value="otro_tipo">Otro Tipo</option>
           </select>
         </div>
 
         {/* Boton imprimir */ }
-        <button
-          className="btn btn-primary col-sm-2 border border-0 fs-7 mt-3 mt-sm-0 text-white"
-          style={ { background: '#AD0506' } }
-          onClick={ '' }
-        >
-          Imprimir
-        </button>
+        <Link to='printall' className='col-sm-2'>
+          <button
+            className="btn btn-primary border border-0 fs-7 mt-3 mt-sm-0 text-white"
+            style={ { background: '#AD0506' } }
+          // onClick={ {} }
+          >
+            Imprimir
+          </button>
+        </Link>
 
       </div>
 

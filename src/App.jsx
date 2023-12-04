@@ -1,7 +1,7 @@
 
 import './App.css'
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import { Layout, ProtectedRoute } from './components'
+import { Layout, PrintAll, ProtectedRoute } from './components'
 import { Login, DashboardPage, GuiaPage, UpdateUser, ConsultaPersonal, Inicio } from './pages'
 import { useState } from 'react'
 import { UserProvider, useUserContext } from './context/UserProvider'
@@ -73,8 +73,9 @@ function App() {
           <Route path='/dashboard' element={ <DashboardPage /> } >
             <Route path='register-user' element={ <ShowUsers /> } />
             <Route path='update-user' element={ <UpdateUser /> } />
-            <Route path='/dashboard/consulta-personal' element={ <ConsultaPersonal /> } />
-            <Route path='/dashboard/inicio' element={ <Inicio /> } />
+            <Route path="consulta-personal/printall" element={ <PrintAll /> } />
+            <Route path='consulta-personal' element={ <ConsultaPersonal /> } />
+            <Route path='inicio' element={ <Inicio /> } />
           </Route>
           <Route path='/guia' element={ <GuiaPage /> } />
         </Route>

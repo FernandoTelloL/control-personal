@@ -10,7 +10,7 @@ import logo from '../assets/logo.png'
 import attendanceData from '../data/busquedaUsuario.json';
 import controlTypes from '../data/tiposControl.json';
 import { TableBasic } from "../components/tables/TableBasic";
-import { TableJson } from "../components/tables/TableJson";
+import { PrintAll } from "../components/tables/PrintAll";
 import { Inicio } from "./Inicio";
 
 
@@ -173,7 +173,7 @@ export const DashboardPage = () => {
               {/* <h1 className="mt-4">Dashboard</h1> */ }
 
               {/* <TableBasic /> */ }
-              <TableJson />
+              {/* <TableJson /> */ }
 
 
 

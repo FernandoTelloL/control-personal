@@ -315,6 +315,14 @@
                 "id": 1,
                 "color": "#ffffff"
             }
+        },
+        {
+            "id": 37,
+            "controlDate": "2023-04-25",
+            "controlType": {
+                "id": 1,
+                "color": "#ffffff"
+            }
         }
     ]
 }
