@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { WorkerInfo } from './WorkerInfo';
 import { Link } from 'react-router-dom';
+import data from '../data/busquedaUsuario.json'
 
 
 const MonthComponent = ({ attendanceData, controlTypes }) => {
@@ -11,6 +12,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   const [selectedTab, setSelectedTab] = useState(controlTypes[0].type);
   const [daysWorked, setDaysWorked] = useState(0);
   const [selectedYear, setSelectedYear] = useState();
+  const [dataEmployee, setDataEmployee] = useState(null)
   // const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   // Estado para el mes actual
   const [currentMonth, setCurrentMonth] = useState(1); // Enero
@@ -100,6 +102,37 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   };
 
 
+  // Funcion para ejecutar buscar informacion del trabajador
+  const handleFindEmployee = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`https://jsonplaceholder.typicode.com/users`);
+
+      if (!response.ok) {
+        throw new Error(`Error al cargar los datos: ${response.status} ${response.statusText}`);
+      }
+
+      const dataSearchEmployee = await response.json();
+
+      const userWithInputDni = dataSearchEmployee.find(user => user.id === parseInt(searchDNI, 10));
+
+      if (userWithInputDni) {
+        console.log('Usuario encontrado:', userWithInputDni);
+      } else {
+        console.log('Usuario no encontrado');
+      }
+
+      // asigno la informacion encontrada en el back del usuario a la variable setDataEmployee
+      setDataEmployee(userWithInputDni);
+
+      console.log(userWithInputDni);
+    } catch (error) {
+      console.error('Error al realizar la búsqueda:', error);
+    }
+  };
+
+
 
   // const handleTabSelect = (type) => {
   //   setSelectedTab(type);
@@ -139,36 +172,37 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   console.log(filteredData)
 
   // Funcion para expandir todos los meses y poder imprimir la asistencia de todos los meses 
-  function expandAllMonthsAndPrint() {
-    window.onafterprint = () => {
-      accordions.forEach(accordion => {
-        accordion.classList.remove('show');
-        accordion.setAttribute('aria-expanded', 'false');
-      });
-    }
+  // function expandAllMonthsAndPrint() {
+  //   window.onafterprint = () => {
+  //     accordions.forEach(accordion => {
+  //       accordion.classList.remove('show');
+  //       accordion.setAttribute('aria-expanded', 'false');
+  //     });
+  //   }
 
-    // Aquí, reemplaza 'accordion' con la clase o el ID que estás usando para los acordeones
-    const accordions = document.querySelectorAll('.accordion-collapse');
-    console.log(accordions)
+  //   // Aquí, reemplaza 'accordion' con la clase o el ID que estás usando para los acordeones
+  //   const accordions = document.querySelectorAll('.accordion-collapse');
+  //   console.log(accordions)
 
-    accordions.forEach(accordion => {
-      accordion.classList.add('show');
-    });
+  //   accordions.forEach(accordion => {
+  //     accordion.classList.add('show');
+  //   });
 
-    window.print();
+  //   window.print();
 
-    window.onafterprint = () => {
-      accordions.forEach(accordion => {
-        accordion.classList.remove('show');
-        accordion.setAttribute('aria-expanded', 'false');
-      });
-    }
-  }
+  //   window.onafterprint = () => {
+  //     accordions.forEach(accordion => {
+  //       accordion.classList.remove('show');
+  //       accordion.setAttribute('aria-expanded', 'false');
+  //     });
+  //   }
+  // }
 
 
   return (
     <div className="container mt-4">
 
+      {/* header con filtros de busqueda */ }
       <div className="form-group row mb-5 mt-5">
 
         {/* input buscar por DNI */ }
@@ -181,6 +215,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
             placeholder="Buscar por DNI"
             value={ searchDNI }
             onChange={ handleSearchChange }
+
           />
 
           {/* boton buscar */ }
@@ -190,7 +225,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
               className="btn btn-outline-secondary text-white border border-0 fs-7"
               type="button"
               style={ { background: '#AD0506' } }
-              onClick={ {} }
+              onClick={ handleFindEmployee }
             >
 
               Buscar
@@ -229,7 +264,6 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
             value={ selectedYear }
             onChange={ e => setSelectedYear(e.target.value) }
           >
-            <option value=""></option>
             <option value="2023">2023</option>
             <option value="2024">2024</option>
             <option value="2025">2025</option>
@@ -254,7 +288,6 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
           <button
             className="btn btn-primary border border-0 fs-7 mt-3 mt-sm-0 text-white"
             style={ { background: '#AD0506' } }
-          // onClick={ {} }
           >
             Imprimir
           </button>
@@ -264,702 +297,680 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
 
       <hr />
 
-      {/* componente que contiene informacion del usuario */ }
-      <WorkerInfo worker={ attendanceData } />
 
-      <hr />
+      {/* condicional  que muestra la informacion del usuario despues de que se hace click en buscar y se 
+      tiene informacion de un usuario*/}
+      {
+        dataEmployee
+          ? (
+            <>
+              {/* componente que contiene informacion del usuario */ }
+              < WorkerInfo worker={ attendanceData } />
 
-      <ul
-        className="nav nav-tabs mb-3 tabs-types-control mt-5"
-        style={ { position: 'sticky', paddingTop: '15px', top: '65px', zIndex: '100', backgroundColor: 'white' } }
-      >
-        { controlTypes.map((type, index) => (
-          <li key={ type.id } className="nav-item tab-item-types-control">
+              <hr />
 
-            <button
-              className={ `tab-link-types-control nav-link ${type.id === currentControlTypeId ? 'active' : ''} ${type.id === currentControlTypeId ? 'bg-tab-active' : ''}` }
-              onClick={ () => handleTabClick(index + 1) }
-            >
-              { type.description.toUpperCase() }
-            </button>
+              {/* tabs con los tipos de control */ }
+              <ul
+                className="nav nav-tabs mb-3 tabs-types-control mt-5"
+                style={ { position: 'sticky', paddingTop: '15px', top: '65px', zIndex: '100', backgroundColor: 'white' } }
+              >
+                { controlTypes.map((type, index) => (
+                  <li key={ type.id } className="nav-item tab-item-types-control">
 
-          </li>
-        )) }
-      </ul>
-      {/* 
-      
-      
-       */}
-      {/* <div className="row">
-        { Array.from({ length: 31 }, (_, dayIndex) => (
-          <div key={ dayIndex } className="col p-2">
-            <span>{ dayIndex + 1 }</span>
-            <div className="attendance-info mt-2">
-              { Object.keys(filteredData).map((dni) => {
-                const worker = filteredData[dni];
-                const controlType = controlTypes.find(
-                  (type) => type.id === worker.employee.taskControlList[0].controlType.id
-                );
+                    <button
+                      className={ `tab-link-types-control nav-link ${type.id === currentControlTypeId ? 'active' : ''} ${type.id === currentControlTypeId ? 'bg-tab-active' : ''}` }
+                      onClick={ () => handleTabClick(index + 1) }
+                    >
+                      { type.description.toUpperCase() }
+                    </button>
 
-                const colorClass =
-                  controlType && controlType.type === selectedTab
-                    ? `bg-${controlType.type}`
-                    : '';
+                  </li>
+                )) }
+              </ul>
 
-                return (
+
+              {/* Acordeones con los meses del año  */ }
+              <div className="accordion accordion-flush" id="accordionFlushExample">
+
+                <div className="accordion-item pb-4">
+                  <h2 className="accordion-header" id="flush-headingOne">
+                    <button
+                      className="accordion-button collapsed fw-semibold"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseOne"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseOne"
+                      style={ { borderRadius: '10px 10px 0 0' } }
+                      onClick={ () => handleMonthChange(1) }
+                    >
+                      Enero
+                    </button>
+                  </h2>
                   <div
-                    key={ dni }
-                    className={ `attendance-day ${colorClass}` }
-                    title={ controlType ? controlType.description : '' }
-                  />
-                );
-              }) }
-            </div>
-          </div>
-        )) }
-      </div> */}
+                    id="flush-collapseOne"
+                    className="accordion-collapse collapse"
+                    aria-labelledby="flush-headingOne"
+                    data-bs-parent="#accordionFlushExample"
+                    style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
+                  >
+                    <div className="accordion-body">
+                      <div className="row">
+                        {
+                          Array.from({ length: 31 }, (_, dayIndex) => (
+                            <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
+                              <span className=''>{ dayIndex + 1 }</span>
+                              <div className="attendance-info mt-2">
+                                { filteredData.map((data) => {
+                                  const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
-      <div className="accordion accordion-flush" id="accordionFlushExample">
+                                  if (dayWorked === dayIndex + 1) {
+                                    return (
+                                      <div
+                                        key={ dayWorked }
+                                        className="attendance-day border border-secondary"
+                                        style={ { backgroundColor: data.controlType ? data.controlType.color : 'defaultColor' } }
+                                        title="Asistencia confirmada"
+                                      />
+                                    );
+                                  }
+                                  return null;
+                                }) }
+                              </div>
+                            </div>
+                          )) }
 
-        <div className="accordion-item pb-4">
-          <h2 className="accordion-header" id="flush-headingOne">
-            <button
-              className="accordion-button collapsed fw-semibold"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseOne"
-              aria-expanded="false"
-              aria-controls="flush-collapseOne"
-              style={ { borderRadius: '10px 10px 0 0' } }
-              onClick={ () => handleMonthChange(1) }
-            >
-              Enero
-            </button>
-          </h2>
-          <div
-            id="flush-collapseOne"
-            className="accordion-collapse collapse"
-            aria-labelledby="flush-headingOne"
-            data-bs-parent="#accordionFlushExample"
-            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
-          >
-            <div className="accordion-body">
-              <div className="row">
-                {
-                  Array.from({ length: 31 }, (_, dayIndex) => (
-                    <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
-                      <span className=''>{ dayIndex + 1 }</span>
-                      <div className="attendance-info mt-2">
-                        { filteredData.map((data) => {
-                          const dayWorked = parseInt(data.controlDate.split('-')[2]);
-
-                          if (dayWorked === dayIndex + 1) {
-                            return (
-                              <div
-                                key={ dayWorked }
-                                className="attendance-day border border-secondary"
-                                style={ { backgroundColor: data.controlType ? data.controlType.color : 'defaultColor' } }
-                                title="Asistencia confirmada"
-                              />
-                            );
-                          }
-                          return null;
-                        }) }
                       </div>
                     </div>
-                  )) }
-                { console.log(attendanceData.taskControlList[0].controlType.color) }
-              </div>
-            </div>
-          </div>
-        </div>
+                  </div>
+                </div>
 
-        <div className="accordion-item pb-4 pt-4">
-          <h2 className="accordion-header" id="flush-headingTwo">
-            <button
-              className="accordion-button collapsed fw-semibold"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseTwo"
-              aria-expanded="false"
-              aria-controls="flush-collapseTwo"
-              style={ { borderRadius: '10px 10px 0 0' } }
-              onClick={ () => handleMonthChange(2) }
-            >
-              Febrero
-            </button>
-          </h2>
-          <div
-            id="flush-collapseTwo"
-            className="accordion-collapse collapse"
-            aria-labelledby="flush-headingTwo"
-            data-bs-parent="#accordionFlushExample"
-            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
-          >
-            <div className="accordion-body">
-              <div className="row">
-                { Array.from({ length: 28 }, (_, dayIndex) => (
-                  <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
-                    <span>{ dayIndex + 1 }</span>
-                    <div className="attendance-info mt-2">
-                      { filteredData.map((data) => {
-                        const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                <div className="accordion-item pb-4 pt-4">
+                  <h2 className="accordion-header" id="flush-headingTwo">
+                    <button
+                      className="accordion-button collapsed fw-semibold"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseTwo"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseTwo"
+                      style={ { borderRadius: '10px 10px 0 0' } }
+                      onClick={ () => handleMonthChange(2) }
+                    >
+                      Febrero
+                    </button>
+                  </h2>
+                  <div
+                    id="flush-collapseTwo"
+                    className="accordion-collapse collapse"
+                    aria-labelledby="flush-headingTwo"
+                    data-bs-parent="#accordionFlushExample"
+                    style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
+                  >
+                    <div className="accordion-body">
+                      <div className="row">
+                        { Array.from({ length: 28 }, (_, dayIndex) => (
+                          <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
+                            <span>{ dayIndex + 1 }</span>
+                            <div className="attendance-info mt-2">
+                              { filteredData.map((data) => {
+                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
-                        if (dayWorked === dayIndex + 1) {
-                          return (
-                            <div
-                              key={ dayWorked }
-                              className="attendance-day border border-secondary"
-                              style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                              title="Asistencia confirmada"
-                            />
-                          );
-                        }
-                        return null;
-                      }) }
+                                if (dayWorked === dayIndex + 1) {
+                                  return (
+                                    <div
+                                      key={ dayWorked }
+                                      className="attendance-day border border-secondary"
+                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                      title="Asistencia confirmada"
+                                    />
+                                  );
+                                }
+                                return null;
+                              }) }
+                            </div>
+                          </div>
+                        )) }
+                      </div>
                     </div>
                   </div>
-                )) }
-              </div>
-            </div>
-          </div>
-        </div>
+                </div>
 
-        <div className="accordion-item pb-4 pt-4">
-          <h2 className="accordion-header" id="flush-headingThree">
-            <button
-              className="accordion-button collapsed fw-semibold"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseThree"
-              aria-expanded="false"
-              aria-controls="flush-collapseThree"
-              style={ { borderRadius: '10px 10px 0 0' } }
-              onClick={ () => handleMonthChange(3) }
-            >
-              Marzo
-            </button>
-          </h2>
-          <div
-            id="flush-collapseThree"
-            className="accordion-collapse collapse"
-            aria-labelledby="flush-headingThree"
-            data-bs-parent="#accordionFlushExample"
-            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
-          >
-            <div className="accordion-body">
-              <div className="row">
-                { Array.from({ length: 31 }, (_, dayIndex) => (
-                  <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
-                    <span>{ dayIndex + 1 }</span>
-                    <div className="attendance-info mt-2">
-                      { filteredData.map((data) => {
-                        const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                <div className="accordion-item pb-4 pt-4">
+                  <h2 className="accordion-header" id="flush-headingThree">
+                    <button
+                      className="accordion-button collapsed fw-semibold"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseThree"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseThree"
+                      style={ { borderRadius: '10px 10px 0 0' } }
+                      onClick={ () => handleMonthChange(3) }
+                    >
+                      Marzo
+                    </button>
+                  </h2>
+                  <div
+                    id="flush-collapseThree"
+                    className="accordion-collapse collapse"
+                    aria-labelledby="flush-headingThree"
+                    data-bs-parent="#accordionFlushExample"
+                    style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
+                  >
+                    <div className="accordion-body">
+                      <div className="row">
+                        { Array.from({ length: 31 }, (_, dayIndex) => (
+                          <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
+                            <span>{ dayIndex + 1 }</span>
+                            <div className="attendance-info mt-2">
+                              { filteredData.map((data) => {
+                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
-                        if (dayWorked === dayIndex + 1) {
-                          return (
-                            <div
-                              key={ dayWorked }
-                              className="attendance-day border border-secondary"
-                              style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                              title="Asistencia confirmada"
-                            />
-                          );
-                        }
-                        return null;
-                      }) }
+                                if (dayWorked === dayIndex + 1) {
+                                  return (
+                                    <div
+                                      key={ dayWorked }
+                                      className="attendance-day border border-secondary"
+                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                      title="Asistencia confirmada"
+                                    />
+                                  );
+                                }
+                                return null;
+                              }) }
+                            </div>
+                          </div>
+                        )) }
+                      </div>
                     </div>
                   </div>
-                )) }
-              </div>
-            </div>
-          </div>
-        </div>
+                </div>
 
-        <div className="accordion-item pb-4 pt-4">
-          <h2 className="accordion-header" id="flush-headingFour">
-            <button
-              className="accordion-button collapsed fw-semibold"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseFour"
-              aria-expanded="false"
-              aria-controls="flush-collapseFour"
-              style={ { borderRadius: '10px 10px 0 0' } }
-              onClick={ () => handleMonthChange(4) }
-            >
-              Abril
-            </button>
-          </h2>
-          <div
-            id="flush-collapseFour"
-            className="accordion-collapse collapse"
-            aria-labelledby="flush-headingFour"
-            data-bs-parent="#accordionFlushExample"
-            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
-          >
-            <div className="accordion-body">
-              <div className="row">
-                { Array.from({ length: 30 }, (_, dayIndex) => (
-                  <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
-                    <span>{ dayIndex + 1 }</span>
-                    <div className="attendance-info mt-2">
-                      { filteredData.map((data) => {
-                        const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                <div className="accordion-item pb-4 pt-4">
+                  <h2 className="accordion-header" id="flush-headingFour">
+                    <button
+                      className="accordion-button collapsed fw-semibold"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseFour"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseFour"
+                      style={ { borderRadius: '10px 10px 0 0' } }
+                      onClick={ () => handleMonthChange(4) }
+                    >
+                      Abril
+                    </button>
+                  </h2>
+                  <div
+                    id="flush-collapseFour"
+                    className="accordion-collapse collapse"
+                    aria-labelledby="flush-headingFour"
+                    data-bs-parent="#accordionFlushExample"
+                    style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
+                  >
+                    <div className="accordion-body">
+                      <div className="row">
+                        { Array.from({ length: 30 }, (_, dayIndex) => (
+                          <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
+                            <span>{ dayIndex + 1 }</span>
+                            <div className="attendance-info mt-2">
+                              { filteredData.map((data) => {
+                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
-                        if (dayWorked === dayIndex + 1) {
-                          return (
-                            <div
-                              key={ dayWorked }
-                              className="attendance-day border border-secondary"
-                              style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                              title="Asistencia confirmada"
-                            />
-                          );
-                        }
-                        return null;
-                      }) }
+                                if (dayWorked === dayIndex + 1) {
+                                  return (
+                                    <div
+                                      key={ dayWorked }
+                                      className="attendance-day border border-secondary"
+                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                      title="Asistencia confirmada"
+                                    />
+                                  );
+                                }
+                                return null;
+                              }) }
+                            </div>
+                          </div>
+                        )) }
+                      </div>
                     </div>
                   </div>
-                )) }
-              </div>
-            </div>
-          </div>
 
 
 
 
-        </div>
+                </div>
 
-        <div className="accordion-item pb-4 pt-4">
-          <h2 className="accordion-header" id="flush-headingFive">
-            <button
-              className="accordion-button collapsed fw-semibold"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseFive"
-              aria-expanded="false"
-              aria-controls="flush-collapseFive"
-              style={ { borderRadius: '10px 10px 0 0' } }
-              onClick={ () => handleMonthChange(5) }
-            >
-              Mayo
-            </button>
-          </h2>
-          <div
-            id="flush-collapseFive"
-            className="accordion-collapse collapse"
-            aria-labelledby="flush-headingFive"
-            data-bs-parent="#accordionFlushExample"
-            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
-          >
-            <div className="accordion-body">
-              <div className="row">
-                { Array.from({ length: 31 }, (_, dayIndex) => (
-                  <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
-                    <span>{ dayIndex + 1 }</span>
-                    <div className="attendance-info mt-2">
-                      { filteredData.map((data) => {
-                        const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                <div className="accordion-item pb-4 pt-4">
+                  <h2 className="accordion-header" id="flush-headingFive">
+                    <button
+                      className="accordion-button collapsed fw-semibold"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseFive"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseFive"
+                      style={ { borderRadius: '10px 10px 0 0' } }
+                      onClick={ () => handleMonthChange(5) }
+                    >
+                      Mayo
+                    </button>
+                  </h2>
+                  <div
+                    id="flush-collapseFive"
+                    className="accordion-collapse collapse"
+                    aria-labelledby="flush-headingFive"
+                    data-bs-parent="#accordionFlushExample"
+                    style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
+                  >
+                    <div className="accordion-body">
+                      <div className="row">
+                        { Array.from({ length: 31 }, (_, dayIndex) => (
+                          <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
+                            <span>{ dayIndex + 1 }</span>
+                            <div className="attendance-info mt-2">
+                              { filteredData.map((data) => {
+                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
-                        if (dayWorked === dayIndex + 1) {
-                          return (
-                            <div
-                              key={ dayWorked }
-                              className="attendance-day border border-secondary"
-                              style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                              title="Asistencia confirmada"
-                            />
-                          );
-                        }
-                        return null;
-                      }) }
+                                if (dayWorked === dayIndex + 1) {
+                                  return (
+                                    <div
+                                      key={ dayWorked }
+                                      className="attendance-day border border-secondary"
+                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                      title="Asistencia confirmada"
+                                    />
+                                  );
+                                }
+                                return null;
+                              }) }
+                            </div>
+                          </div>
+                        )) }
+                      </div>
                     </div>
                   </div>
-                )) }
-              </div>
-            </div>
-          </div>
-        </div>
+                </div>
 
-        <div className="accordion-item pb-4 pt-4">
-          <h2 className="accordion-header" id="flush-headingSix">
-            <button
-              className="accordion-button collapsed fw-semibold"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseSix"
-              aria-expanded="false"
-              aria-controls="flush-collapseSix"
-              style={ { borderRadius: '10px 10px 0 0' } }
-              onClick={ () => handleMonthChange(6) }
-            >
-              Junio
-            </button>
-          </h2>
-          <div
-            id="flush-collapseSix"
-            className="accordion-collapse collapse"
-            aria-labelledby="flush-headingSix"
-            data-bs-parent="#accordionFlushExample"
-            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
-          >
-            <div className="accordion-body">
-              <div className="row">
-                { Array.from({ length: 30 }, (_, dayIndex) => (
-                  <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
-                    <span>{ dayIndex + 1 }</span>
-                    <div className="attendance-info mt-2">
-                      { filteredData.map((data) => {
-                        const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                <div className="accordion-item pb-4 pt-4">
+                  <h2 className="accordion-header" id="flush-headingSix">
+                    <button
+                      className="accordion-button collapsed fw-semibold"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseSix"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseSix"
+                      style={ { borderRadius: '10px 10px 0 0' } }
+                      onClick={ () => handleMonthChange(6) }
+                    >
+                      Junio
+                    </button>
+                  </h2>
+                  <div
+                    id="flush-collapseSix"
+                    className="accordion-collapse collapse"
+                    aria-labelledby="flush-headingSix"
+                    data-bs-parent="#accordionFlushExample"
+                    style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
+                  >
+                    <div className="accordion-body">
+                      <div className="row">
+                        { Array.from({ length: 30 }, (_, dayIndex) => (
+                          <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
+                            <span>{ dayIndex + 1 }</span>
+                            <div className="attendance-info mt-2">
+                              { filteredData.map((data) => {
+                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
-                        if (dayWorked === dayIndex + 1) {
-                          return (
-                            <div
-                              key={ dayWorked }
-                              className="attendance-day border border-secondary"
-                              style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                              title="Asistencia confirmada"
-                            />
-                          );
-                        }
-                        return null;
-                      }) }
+                                if (dayWorked === dayIndex + 1) {
+                                  return (
+                                    <div
+                                      key={ dayWorked }
+                                      className="attendance-day border border-secondary"
+                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                      title="Asistencia confirmada"
+                                    />
+                                  );
+                                }
+                                return null;
+                              }) }
+                            </div>
+                          </div>
+                        )) }
+                      </div>
                     </div>
                   </div>
-                )) }
-              </div>
-            </div>
-          </div>
-        </div>
+                </div>
 
-        <div className="accordion-item pb-4 pt-4">
-          <h2 className="accordion-header" id="flush-headingSeven">
-            <button
-              className="accordion-button collapsed fw-semibold"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseSeven"
-              aria-expanded="false"
-              aria-controls="flush-collapseSeven"
-              style={ { borderRadius: '10px 10px 0 0' } }
-              onClick={ () => handleMonthChange(7) }
-            >
-              Julio
-            </button>
-          </h2>
-          <div
-            id="flush-collapseSeven"
-            className="accordion-collapse collapse"
-            aria-labelledby="flush-headingSeven"
-            data-bs-parent="#accordionFlushExample"
-            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
-          >
-            <div className="accordion-body">
-              <div className="row">
-                { Array.from({ length: 31 }, (_, dayIndex) => (
-                  <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
-                    <span>{ dayIndex + 1 }</span>
-                    <div className="attendance-info mt-2">
-                      { filteredData.map((data) => {
-                        const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                <div className="accordion-item pb-4 pt-4">
+                  <h2 className="accordion-header" id="flush-headingSeven">
+                    <button
+                      className="accordion-button collapsed fw-semibold"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseSeven"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseSeven"
+                      style={ { borderRadius: '10px 10px 0 0' } }
+                      onClick={ () => handleMonthChange(7) }
+                    >
+                      Julio
+                    </button>
+                  </h2>
+                  <div
+                    id="flush-collapseSeven"
+                    className="accordion-collapse collapse"
+                    aria-labelledby="flush-headingSeven"
+                    data-bs-parent="#accordionFlushExample"
+                    style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
+                  >
+                    <div className="accordion-body">
+                      <div className="row">
+                        { Array.from({ length: 31 }, (_, dayIndex) => (
+                          <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
+                            <span>{ dayIndex + 1 }</span>
+                            <div className="attendance-info mt-2">
+                              { filteredData.map((data) => {
+                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
-                        if (dayWorked === dayIndex + 1) {
-                          return (
-                            <div
-                              key={ dayWorked }
-                              className="attendance-day border border-secondary"
-                              style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                              title="Asistencia confirmada"
-                            />
-                          );
-                        }
-                        return null;
-                      }) }
+                                if (dayWorked === dayIndex + 1) {
+                                  return (
+                                    <div
+                                      key={ dayWorked }
+                                      className="attendance-day border border-secondary"
+                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                      title="Asistencia confirmada"
+                                    />
+                                  );
+                                }
+                                return null;
+                              }) }
+                            </div>
+                          </div>
+                        )) }
+                      </div>
                     </div>
                   </div>
-                )) }
-              </div>
-            </div>
-          </div>
-        </div>
+                </div>
 
 
-        <div className="accordion-item pb-4 pt-4">
-          <h2 className="accordion-header" id="flush-headingEight">
-            <button
-              className="accordion-button collapsed fw-semibold"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseEight"
-              aria-expanded="false"
-              aria-controls="flush-collapseEight"
-              style={ { borderRadius: '10px 10px 0 0' } }
-              onClick={ () => handleMonthChange(8) }
-            >
-              Agosto
-            </button>
-          </h2>
-          <div
-            id="flush-collapseEight"
-            className="accordion-collapse collapse"
-            aria-labelledby="flush-headingEight"
-            data-bs-parent="#accordionFlushExample"
-            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
-          >
-            <div className="accordion-body">
-              <div className="row">
-                { Array.from({ length: 31 }, (_, dayIndex) => (
-                  <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
-                    <span>{ dayIndex + 1 }</span>
-                    <div className="attendance-info mt-2">
-                      { filteredData.map((data) => {
-                        const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                <div className="accordion-item pb-4 pt-4">
+                  <h2 className="accordion-header" id="flush-headingEight">
+                    <button
+                      className="accordion-button collapsed fw-semibold"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseEight"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseEight"
+                      style={ { borderRadius: '10px 10px 0 0' } }
+                      onClick={ () => handleMonthChange(8) }
+                    >
+                      Agosto
+                    </button>
+                  </h2>
+                  <div
+                    id="flush-collapseEight"
+                    className="accordion-collapse collapse"
+                    aria-labelledby="flush-headingEight"
+                    data-bs-parent="#accordionFlushExample"
+                    style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
+                  >
+                    <div className="accordion-body">
+                      <div className="row">
+                        { Array.from({ length: 31 }, (_, dayIndex) => (
+                          <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
+                            <span>{ dayIndex + 1 }</span>
+                            <div className="attendance-info mt-2">
+                              { filteredData.map((data) => {
+                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
-                        if (dayWorked === dayIndex + 1) {
-                          return (
-                            <div
-                              key={ dayWorked }
-                              className="attendance-day border border-secondary"
-                              style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                              title="Asistencia confirmada"
-                            />
-                          );
-                        }
-                        return null;
-                      }) }
+                                if (dayWorked === dayIndex + 1) {
+                                  return (
+                                    <div
+                                      key={ dayWorked }
+                                      className="attendance-day border border-secondary"
+                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                      title="Asistencia confirmada"
+                                    />
+                                  );
+                                }
+                                return null;
+                              }) }
+                            </div>
+                          </div>
+                        )) }
+                      </div>
                     </div>
                   </div>
-                )) }
-              </div>
-            </div>
-          </div>
-        </div>
+                </div>
 
 
-        <div className="accordion-item pb-4 pt-4">
-          <h2 className="accordion-header" id="flush-headingNine">
-            <button
-              className="accordion-button collapsed fw-semibold"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseNine"
-              aria-expanded="false"
-              aria-controls="flush-collapseNine"
-              style={ { borderRadius: '10px 10px 0 0' } }
-              onClick={ () => handleMonthChange(9) }
-            >
-              Septiembre
-            </button>
-          </h2>
-          <div
-            id="flush-collapseNine"
-            className="accordion-collapse collapse"
-            aria-labelledby="flush-headingNine"
-            data-bs-parent="#accordionFlushExample"
-            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
-          >
-            <div className="accordion-body">
-              <div className="row">
-                { Array.from({ length: 30 }, (_, dayIndex) => (
-                  <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
-                    <span>{ dayIndex + 1 }</span>
-                    <div className="attendance-info mt-2">
+                <div className="accordion-item pb-4 pt-4">
+                  <h2 className="accordion-header" id="flush-headingNine">
+                    <button
+                      className="accordion-button collapsed fw-semibold"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseNine"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseNine"
+                      style={ { borderRadius: '10px 10px 0 0' } }
+                      onClick={ () => handleMonthChange(9) }
+                    >
+                      Septiembre
+                    </button>
+                  </h2>
+                  <div
+                    id="flush-collapseNine"
+                    className="accordion-collapse collapse"
+                    aria-labelledby="flush-headingNine"
+                    data-bs-parent="#accordionFlushExample"
+                    style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
+                  >
+                    <div className="accordion-body">
+                      <div className="row">
+                        { Array.from({ length: 30 }, (_, dayIndex) => (
+                          <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
+                            <span>{ dayIndex + 1 }</span>
+                            <div className="attendance-info mt-2">
 
-                      { filteredData.map((data) => {
-                        const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                              { filteredData.map((data) => {
+                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
 
-                        if (dayWorked === dayIndex + 1) {
-                          return (
-                            <div
-                              key={ dayWorked }
-                              className="attendance-day border border-secondary"
-                              style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                              title="Asistencia confirmada"
+                                if (dayWorked === dayIndex + 1) {
+                                  return (
+                                    <div
+                                      key={ dayWorked }
+                                      className="attendance-day border border-secondary"
+                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                      title="Asistencia confirmada"
 
-                            />
-                          );
-                        }
-                        return null;
-                      }) }
+                                    />
+                                  );
+                                }
+                                return null;
+                              }) }
+                            </div>
+                          </div>
+                        )) }
+                      </div>
                     </div>
                   </div>
-                )) }
-              </div>
-            </div>
-          </div>
-        </div>
+                </div>
 
 
-        <div className="accordion-item pb-4 pt-4">
-          <h2 className="accordion-header" id="flush-headingTen">
-            <button
-              className="accordion-button collapsed fw-semibold"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseTen"
-              aria-expanded="false"
-              aria-controls="flush-collapseTen"
-              style={ { borderRadius: '10px 10px 0 0' } }
-              onClick={ () => handleMonthChange(10) }
-            >
-              Octubre
-            </button>
-          </h2>
-          <div
-            id="flush-collapseTen"
-            className="accordion-collapse collapse"
-            aria-labelledby="flush-headingTen"
-            data-bs-parent="#accordionFlushExample"
-            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
-          >
-            <div className="accordion-body">
-              <div className="row">
-                { Array.from({ length: 31 }, (_, dayIndex) => (
-                  <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
-                    <span>{ dayIndex + 1 }</span>
+                <div className="accordion-item pb-4 pt-4">
+                  <h2 className="accordion-header" id="flush-headingTen">
+                    <button
+                      className="accordion-button collapsed fw-semibold"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseTen"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseTen"
+                      style={ { borderRadius: '10px 10px 0 0' } }
+                      onClick={ () => handleMonthChange(10) }
+                    >
+                      Octubre
+                    </button>
+                  </h2>
+                  <div
+                    id="flush-collapseTen"
+                    className="accordion-collapse collapse"
+                    aria-labelledby="flush-headingTen"
+                    data-bs-parent="#accordionFlushExample"
+                    style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
+                  >
+                    <div className="accordion-body">
+                      <div className="row">
+                        { Array.from({ length: 31 }, (_, dayIndex) => (
+                          <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
+                            <span>{ dayIndex + 1 }</span>
 
-                    <div className="attendance-info mt-2">
-                      { filteredData.map((data) => {
-                        const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                            <div className="attendance-info mt-2">
+                              { filteredData.map((data) => {
+                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
 
-                        if (dayWorked === dayIndex + 1) {
-                          return (
-                            <div
-                              key={ dayWorked }
-                              className="attendance-day border border-secondary"
-                              style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                              title="Asistencia confirmada"
+                                if (dayWorked === dayIndex + 1) {
+                                  return (
+                                    <div
+                                      key={ dayWorked }
+                                      className="attendance-day border border-secondary"
+                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                      title="Asistencia confirmada"
 
-                            />
-                          );
-                        }
-                        return null;
-                      }) }
+                                    />
+                                  );
+                                }
+                                return null;
+                              }) }
+                            </div>
+                          </div>
+                        )) }
+                      </div>
                     </div>
                   </div>
-                )) }
-              </div>
-            </div>
-          </div>
-        </div>
+                </div>
 
 
-        <div className="accordion-item pb-4 pt-4">
-          <h2 className="accordion-header" id="flush-headingEleven">
-            <button
-              className="accordion-button collapsed fw-semibold"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseEleven"
-              aria-expanded="false"
-              aria-controls="flush-collapseEleven"
-              style={ { borderRadius: '10px 10px 0 0' } }
-              onClick={ () => handleMonthChange(11) }
-            >
-              Noviembre
-            </button>
-          </h2>
-          <div
-            id="flush-collapseEleven"
-            className="accordion-collapse collapse"
-            aria-labelledby="flush-headingEleven"
-            data-bs-parent="#accordionFlushExample"
-            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
-          >
-            <div className="accordion-body">
-              <div className="row">
-                { Array.from({ length: 30 }, (_, dayIndex) => (
-                  <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
-                    <span>{ dayIndex + 1 }</span>
+                <div className="accordion-item pb-4 pt-4">
+                  <h2 className="accordion-header" id="flush-headingEleven">
+                    <button
+                      className="accordion-button collapsed fw-semibold"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseEleven"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseEleven"
+                      style={ { borderRadius: '10px 10px 0 0' } }
+                      onClick={ () => handleMonthChange(11) }
+                    >
+                      Noviembre
+                    </button>
+                  </h2>
+                  <div
+                    id="flush-collapseEleven"
+                    className="accordion-collapse collapse"
+                    aria-labelledby="flush-headingEleven"
+                    data-bs-parent="#accordionFlushExample"
+                    style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
+                  >
+                    <div className="accordion-body">
+                      <div className="row">
+                        { Array.from({ length: 30 }, (_, dayIndex) => (
+                          <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
+                            <span>{ dayIndex + 1 }</span>
 
-                    <div className="attendance-info mt-2">
-                      { filteredData.map((data) => {
-                        const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                            <div className="attendance-info mt-2">
+                              { filteredData.map((data) => {
+                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
 
-                        if (dayWorked === dayIndex + 1) {
-                          return (
-                            <div
-                              key={ dayWorked }
-                              className="attendance-day border border-secondary"
-                              style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                              title="Asistencia confirmada"
+                                if (dayWorked === dayIndex + 1) {
+                                  return (
+                                    <div
+                                      key={ dayWorked }
+                                      className="attendance-day border border-secondary"
+                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                      title="Asistencia confirmada"
 
-                            />
-                          );
-                        }
-                        return null;
-                      }) }
+                                    />
+                                  );
+                                }
+                                return null;
+                              }) }
+                            </div>
+                          </div>
+                        )) }
+                      </div>
                     </div>
                   </div>
-                )) }
-              </div>
-            </div>
-          </div>
-        </div>
+                </div>
 
 
-        <div className="accordion-item pb-4 pt-4">
-          <h2 className="accordion-header" id="flush-headingTwelve">
-            <button
-              className="accordion-button collapsed fw-semibold"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#flush-collapseTwelve"
-              aria-expanded="false"
-              aria-controls="flush-collapseTwelve"
-              style={ { borderRadius: '10px 10px 0 0' } }
-              onClick={ () => handleMonthChange(12) }
-            >
-              Diciembre
-            </button>
-          </h2>
-          <div
-            id="flush-collapseTwelve"
-            className="accordion-collapse collapse"
-            aria-labelledby="flush-headingTwelve"
-            data-bs-parent="#accordionFlushExample"
-            style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
-          >
-            <div className="accordion-body">
-              <div className="row">
-                { Array.from({ length: 31 }, (_, dayIndex) => (
-                  <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
-                    <span>{ dayIndex + 1 }</span>
+                <div className="accordion-item pb-4 pt-4">
+                  <h2 className="accordion-header" id="flush-headingTwelve">
+                    <button
+                      className="accordion-button collapsed fw-semibold"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#flush-collapseTwelve"
+                      aria-expanded="false"
+                      aria-controls="flush-collapseTwelve"
+                      style={ { borderRadius: '10px 10px 0 0' } }
+                      onClick={ () => handleMonthChange(12) }
+                    >
+                      Diciembre
+                    </button>
+                  </h2>
+                  <div
+                    id="flush-collapseTwelve"
+                    className="accordion-collapse collapse"
+                    aria-labelledby="flush-headingTwelve"
+                    data-bs-parent="#accordionFlushExample"
+                    style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
+                  >
+                    <div className="accordion-body">
+                      <div className="row">
+                        { Array.from({ length: 31 }, (_, dayIndex) => (
+                          <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
+                            <span>{ dayIndex + 1 }</span>
 
-                    <div className="attendance-info mt-2">
-                      { filteredData.map((data) => {
-                        const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                            <div className="attendance-info mt-2">
+                              { filteredData.map((data) => {
+                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
-                        if (dayWorked === dayIndex + 1) {
-                          return (
-                            <div
-                              key={ dayWorked }
-                              className="attendance-day border border-secondary"
-                              style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                              title="Asistencia confirmada"
+                                if (dayWorked === dayIndex + 1) {
+                                  return (
+                                    <div
+                                      key={ dayWorked }
+                                      className="attendance-day border border-secondary"
+                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                      title="Asistencia confirmada"
 
-                            />
-                          );
-                        }
-                        return null;
-                      }) }
+                                    />
+                                  );
+                                }
+                                return null;
+                              }) }
+                            </div>
+                          </div>
+                        )) }
+                      </div>
                     </div>
                   </div>
-                )) }
-              </div>
-            </div>
-          </div>
-        </div>
+                </div>
 
 
 
 
 
-        {/* <div className="row">
+                {/* <div className="row">
                       { Array.from({ length: 31 }, (_, dayIndex) => (
                         <div key={ dayIndex } className="col p-2">
                           <span>{ dayIndex + 1 }</span>
@@ -984,7 +995,12 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                     </div> */}
 
 
-      </div>
+              </div>
+            </>
+          ) :
+          (<h1>Por favor introduzca los datos a buscar</h1>)
+
+      }
 
     </div >
 
