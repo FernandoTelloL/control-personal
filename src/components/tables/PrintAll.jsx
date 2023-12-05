@@ -3,105 +3,129 @@ import userAsistencia from '../../data/busquedaUsuario.json'
 import { WorkerInfo } from '../WorkerInfo';
 import attendanceData from '../../data/busquedaUsuario.json';
 
-const generateMonthTable = (year, month, controlTypeId, userDni) => {
-  // Filtrar las fechas que tienen controlType id: controlTypeId para el año y mes dados
-  const filteredDates = userAsistencia.taskControlList.filter(item => {
-    const itemYear = parseInt(item.controlDate.split('-')[0], 10);
-    const itemMonth = parseInt(item.controlDate.split('-')[1], 10);
-
-    return (
-      itemYear === year &&
-      itemMonth === month &&
-      item.controlType.id === controlTypeId &&
-      userAsistencia.employee.dni === userDni
-    );
-  })
-
-  // Crear un array con los nombres de las columnas (días del 1 al último día del mes)
-  const lastDayOfMonth = new Date(year, month, 0).getDate();
-  const columns = Array.from({ length: lastDayOfMonth }, (_, index) => ({
-    name: `Day${index + 1}`,
-    label: `${index + 1}`,
-    options: {
-      customBodyRender: (value, tableMeta) => {
-        const dayIndex = tableMeta.columnIndex + 1;
-        const formattedDay = dayIndex < 10 ? `0${dayIndex}` : `${dayIndex}`;
-        const date = `${year}-${month < 10 ? `0${month}` : month}-${formattedDay}`;
-        const control = filteredDates.find(item => item.controlDate === date);
-
-        // hago la comprobacion si tiene dia marcado se tiene que poner fondo y borde
-        const backgroundColor = control ? control.controlType.color : 'transparent';
-        const border = control ? '1px solid' : '1px';
-        return (
-          <div
-            style={ {
-              border,
-              width: '15px',
-              height: '15px',
-              borderRadius: '50%',
-              backgroundColor,
-              margin: '5px auto',
-            } }
-          />
-        );
-      },
-    },
-  }));
-
-  // Crear un array con los datos para la única fila de la tabla
-  const dataRow = {
-    id: 1,
-    controlDate: 'Fecha', // Puedes cambiar esto según tus necesidades
-  };
-
-  const data = [dataRow];
-
-  const options = {
-    filter: false, // Puedes ajustar según tus necesidades
-    selectableRows: 'none', // Opciones de selección
-    responsive: 'standard', // Añade la opción responsive
-    print: false,
-    search: false,
-    download: false,
-    viewColumns: false,
-    rowsPerPageOptions: [],
-    pagination: false,
-  };
-
-  // Array de nombres de meses
-  const monthNames = [
-    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-  ];
-
-  // Obtén el nombre del mes según el número del mes
-  const monthName = monthNames[month - 1];
-
-  // Estilo personalizado para el título
-  const titleStyle = {
-    fontSize: '15px',  // Puedes ajustar el tamaño del título según tus necesidades
-  };
-
-  return (
-    <MUIDataTable
-      className='mb-4 mt-4 pb-2'
-      key={ `table-${year}-${month}-${controlTypeId}-${userDni}` }
-      title={ <div style={ titleStyle }>{ `${monthName} ${year}` }</div> }
-      data={ data }
-      columns={ columns }
-      options={ options }
-    />
-  );
-};
 
 export const PrintAll = () => {
   const year = 2023; // Puedes ajustar el año según tus necesidades
   const controlTypeId = 1; // Puedes ajustar el controlTypeId según tus necesidades
   const userDni = 72661345; // Puedes ajustar el dni del usuario según tus necesidades
+  let contador = 0;
 
+  // Funcion para generar las tablas dependiendo del año, mes tipo de control, y dni
+  const generateMonthTable = (year, month, controlTypeId, userDni) => {
+    // Filtrar las fechas que tienen controlType id: controlTypeId para el año y mes dados
+    const filteredDates = userAsistencia.taskControlList.filter(item => {
+      const itemYear = parseInt(item.controlDate.split('-')[0], 10);
+      const itemMonth = parseInt(item.controlDate.split('-')[1], 10);
+
+      return (
+
+        itemYear === year &&
+        itemMonth === month &&
+        item.controlType.id === controlTypeId &&
+        userAsistencia.employee.dni === userDni
+      );
+    })
+
+    // Crear un array con los nombres de las columnas (días del 1 al último día del mes)
+    const lastDayOfMonth = new Date(year, month, 0).getDate();
+    const columns = Array.from({ length: lastDayOfMonth }, (_, index) => ({
+      name: `Day${index + 1}`,
+      label: `${index + 1}`,
+      options: {
+        customBodyRender: (value, tableMeta) => {
+          const dayIndex = tableMeta.columnIndex + 1;
+          const formattedDay = dayIndex < 10 ? `0${dayIndex}` : `${dayIndex}`;
+          const date = `${year}-${month < 10 ? `0${month}` : month}-${formattedDay}`;
+          const control = filteredDates.find(item => item.controlDate === date);
+
+          // hago la comprobacion si tiene dia marcado se tiene que poner fondo y borde
+          const backgroundColor = control ? control.controlType.color : 'transparent';
+          const border = control ? '1px solid' : '1px';
+          return (
+            <div
+              style={ {
+                border,
+                width: '15px',
+                height: '15px',
+                borderRadius: '50%',
+                backgroundColor,
+                margin: '5px auto',
+              } }
+            />
+          );
+        },
+      },
+    }));
+
+
+    // Crear un array con los datos para la única fila de la tabla
+    const dataRow = {
+      id: 1,
+      controlDate: 'Fecha', // Puedes cambiar esto según tus necesidades
+    };
+
+    const data = [dataRow];
+
+    const options = {
+      filter: false,
+      selectableRows: 'none',
+      responsive: 'standard',
+      print: false,
+      search: false,
+      download: false,
+      viewColumns: false,
+      rowsPerPageOptions: [],
+      pagination: false,
+    };
+
+
+    // Array de nombres de meses
+    const monthNames = [
+      'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+      'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ];
+
+
+    // Obtén el nombre del mes según el número del mes
+    const monthName = monthNames[month - 1];
+
+
+    // Estilo personalizado para el título
+    const titleStyle = {
+      fontSize: '15px',  // Puedes ajustar el tamaño del título según tus necesidades
+    };
+
+    return (
+      <MUIDataTable
+        className='mb-4 mt-4 pb-2'
+        key={ `table-${year}-${month}-${controlTypeId}-${userDni}` }
+        title={ <div style={ titleStyle }>{ `${monthName} ${year}` }</div> }
+        data={ data }
+        columns={ columns }
+        options={ options }
+      />
+    );
+  };
+
+
+  console.log(contador)
   return (
     <>
+      {/* datos personales del trabajador */ }
       <WorkerInfo worker={ attendanceData } />
+
+      {/* Boton imprimir */ }
+      <div className="row col-sm-2 d-flex m-auto btn-print-container">
+        <button
+          className="btn btn-primary border border-0 fs-7 mt-3 mt-sm-0 text-white"
+          style={ { background: '#AD0506' } }
+          onClick={ print }
+        >
+          Imprimir
+        </button>
+      </div>
+
+      {/* lista de tablas con todos los tipos de control */ }
       <div className="custom-datatable">
         <h1 className='mt-5'>ASISTENCIA</h1>
         { generateMonthTable(year, 1, controlTypeId, userDni) }
@@ -163,6 +187,42 @@ export const PrintAll = () => {
         { generateMonthTable(year, 10, 4, userDni) }
         { generateMonthTable(year, 11, 4, userDni) }
         { generateMonthTable(year, 12, 4, userDni) }
+
+
+
+        <h1 className='mt-5'>FERIADO LABORADO</h1>
+        { generateMonthTable(year, 1, 5, userDni) }
+        { generateMonthTable(year, 3, 5, userDni) }
+        { generateMonthTable(year, 2, 5, userDni) }
+        { generateMonthTable(year, 4, 5, userDni) }
+        { generateMonthTable(year, 5, 5, userDni) }
+        { generateMonthTable(year, 6, 5, userDni) }
+        { generateMonthTable(year, 7, 5, userDni) }
+        { generateMonthTable(year, 8, 5, userDni) }
+        { generateMonthTable(year, 9, 5, userDni) }
+        { generateMonthTable(year, 10, 5, userDni) }
+        { generateMonthTable(year, 11, 5, userDni) }
+        { generateMonthTable(year, 12, 5, userDni) }
+
+
+
+        <h1 className='mt-5'>FERIADO NO LABORADO</h1>
+        { generateMonthTable(year, 1, 6, userDni) }
+        { generateMonthTable(year, 3, 6, userDni) }
+        { generateMonthTable(year, 2, 6, userDni) }
+        { generateMonthTable(year, 4, 6, userDni) }
+        { generateMonthTable(year, 5, 6, userDni) }
+        { generateMonthTable(year, 6, 6, userDni) }
+        { generateMonthTable(year, 7, 6, userDni) }
+        { generateMonthTable(year, 8, 6, userDni) }
+        { generateMonthTable(year, 9, 6, userDni) }
+        { generateMonthTable(year, 10, 6, userDni) }
+        { generateMonthTable(year, 11, 6, userDni) }
+        { generateMonthTable(year, 12, 6, userDni) }
+
+
+
+
       </div>
 
     </>
