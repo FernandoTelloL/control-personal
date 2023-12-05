@@ -8,7 +8,7 @@ export const PrintAll = () => {
   const year = 2023; // Puedes ajustar el año según tus necesidades
   const controlTypeId = 1; // Puedes ajustar el controlTypeId según tus necesidades
   const userDni = 72661345; // Puedes ajustar el dni del usuario según tus necesidades
-  let contador = 0;
+
 
   // Funcion para generar las tablas dependiendo del año, mes tipo de control, y dni
   const generateMonthTable = (year, month, controlTypeId, userDni) => {
@@ -108,11 +108,60 @@ export const PrintAll = () => {
   };
 
 
-  console.log(contador)
+  // Función para obtener la cantidad de días para un mes y tipo de control específicos
+  const getDaysCountForMonth = (month, controlTypeId, userDni) => {
+    return userAsistencia.taskControlList.filter(item => {
+      const itemMonth = parseInt(item.controlDate.split('-')[1], 10);
+
+      return (
+        itemMonth === month &&
+        item.controlType.id === controlTypeId &&
+        userAsistencia.employee.dni === userDni
+      );
+    }).length;
+  };
+
+
+  // Función para generar el resumen y tablas para un tipo de control específico
+  const generateSummaryAndTable = (title, controlTypeId) => {
+    let totalDays = 0;
+
+    // Obtén el nombre del mes según el número del mes
+    const monthNames = [
+      'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+      'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ];
+    // Renderizar resumen de días por mes
+    console.log(`${title}:`);
+    for (let month = 1; month <= 12; month++) {
+      const monthName = monthNames[month - 1];
+      const daysCount = getDaysCountForMonth(month, controlTypeId, userDni);
+      totalDays += daysCount;
+      console.log(`${monthName}: ${daysCount}`);
+    }
+    console.log(`Total ${title}: ${totalDays}`);
+    console.log("----------------------");
+
+    return (
+      <></>
+    )
+  }
+
+
+
   return (
     <>
       {/* datos personales del trabajador */ }
       <WorkerInfo worker={ attendanceData } />
+
+
+      {/* Renderizar resumen y tablas para cada tipo de control */ }
+      { generateSummaryAndTable('ASISTENCIA', 1) }
+      { generateSummaryAndTable('DESCANSO', 2) }
+      { generateSummaryAndTable('DIAS LABORADOS', 3) }
+      { generateSummaryAndTable('INASISTENCIAS', 4) }
+      { generateSummaryAndTable('FERIADO LABORADO', 5) }
+      { generateSummaryAndTable('FERIADO NO LABORADO', 6) }
 
       {/* Boton imprimir */ }
       <div className="row col-sm-2 d-flex m-auto btn-print-container">
