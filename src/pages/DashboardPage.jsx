@@ -115,9 +115,9 @@ export const DashboardPage = () => {
                       Consulta de Personal
                     </Link>
 
-                    <a className="nav-link fs-7" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                    <Link className="nav-link fs-7" to='/dashboard/upload-excel' >
                       Carga de Excel
-                    </a>
+                    </Link>
 
                   </nav>
                 </div>

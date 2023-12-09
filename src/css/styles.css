@@ -13221,26 +13221,6 @@ body {
 }
 
 
-/* inicio probando codigo para componente MonthComponent */
-/* MonthComponent.css */
-/* .month-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-} */
-
-/* .day-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 5px;
-} */
-
-/* .attendance-info {
-  display: flex;
-  gap: 5px;
-} */
-
 .attendance-day {
   width: 20px;
   height: 20px;
@@ -13289,10 +13269,6 @@ button.tab-link-types-control.nav-link {
 }
 
 .custom-datatable button{
-  /* max-width: 30px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap; */
   font-size: 12px !important;
   min-width: 10px;
   padding: 0;
@@ -13353,4 +13329,28 @@ button.tab-link-types-control.nav-link {
     flex-direction: column;
   }
 }
-/* fin probando codigo */
+
+/*inicio Estilos de pagina cargar excel */
+.upload-container
+{
+  height: 37vh; 
+  border-radius: 10px; 
+  background: rgb(231, 241, 255); 
+}
+
+.btn-upload-excel {
+  background-color: rgb(173, 5, 6) 
+} 
+
+.btn-upload-excel:hover {
+  background-color: #990506;
+}
+input {
+  font-weight: 600;
+  /* background-color: yellow; */
+}
+
+input::before {
+  background-color: green !important;
+}
+/*fin Estilos de pagina cargar excel */

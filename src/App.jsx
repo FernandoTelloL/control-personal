@@ -1,10 +1,10 @@
 
 import './App.css'
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Layout, PrintAll, ProtectedRoute } from './components'
-import { Login, DashboardPage, GuiaPage, UpdateUser, ConsultaPersonal, Inicio } from './pages'
-import { useState } from 'react'
-import { UserProvider, useUserContext } from './context/UserProvider'
+import { Login, DashboardPage, GuiaPage, UpdateUser, ConsultaPersonal, Inicio, UploadExcel } from './pages'
+// import { useState } from 'react'
+import { useUserContext } from './context/UserProvider'
 import { ShowUsers } from './components/ShowUsers'
 
 
@@ -75,6 +75,7 @@ function App() {
             <Route path='update-user' element={ <UpdateUser /> } />
             <Route path="consulta-personal/printall" element={ <PrintAll /> } />
             <Route path='consulta-personal' element={ <ConsultaPersonal /> } />
+            <Route path='upload-excel' element={ <UploadExcel /> } />
             <Route path='inicio' element={ <Inicio /> } />
           </Route>
           <Route path='/guia' element={ <GuiaPage /> } />

@@ -149,6 +149,7 @@ export const PrintAll = () => {
 
 
 
+
   return (
     <>
       {/* datos personales del trabajador */ }
