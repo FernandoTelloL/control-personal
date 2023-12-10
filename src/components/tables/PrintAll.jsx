@@ -1,7 +1,5 @@
 import MUIDataTable from 'mui-datatables'
-import userAsistencia from '../../data/busquedaUsuario.json'
 import { WorkerInfo } from '../WorkerInfo';
-import attendanceData from '../../data/busquedaUsuario.json';
 import { useContext } from 'react';
 import { WorkerContext } from '../../context/WorkerContext';
 
@@ -12,10 +10,16 @@ export const PrintAll = () => {
   const userDni = 72661345; // Puedes ajustar el dni del usuario según tus necesidades
 
 
+  // uso la informacion de WorkerContext
+  const { worker } = useContext(WorkerContext)
+
+  // uso la informacion de 
+
+
   // Funcion para generar las tablas dependiendo del año, mes tipo de control, y dni
   const generateMonthTable = (year, month, controlTypeId, userDni) => {
     // Filtrar las fechas que tienen controlType id: controlTypeId para el año y mes dados
-    const filteredDates = userAsistencia.taskControlList.filter(item => {
+    const filteredDates = worker.taskControlList.filter(item => {
       const itemYear = parseInt(item.controlDate.split('-')[0], 10);
       const itemMonth = parseInt(item.controlDate.split('-')[1], 10);
 
@@ -24,7 +28,7 @@ export const PrintAll = () => {
         itemYear === year &&
         itemMonth === month &&
         item.controlType.id === controlTypeId &&
-        userAsistencia.employee.dni === userDni
+        worker.employee.dni === userDni
       );
     })
 
@@ -112,13 +116,13 @@ export const PrintAll = () => {
 
   // Función para obtener la cantidad de días para un mes y tipo de control específicos
   const getDaysCountForMonth = (month, controlTypeId, userDni) => {
-    return userAsistencia.taskControlList.filter(item => {
+    return worker.taskControlList.filter(item => {
       const itemMonth = parseInt(item.controlDate.split('-')[1], 10);
 
       return (
         itemMonth === month &&
         item.controlType.id === controlTypeId &&
-        userAsistencia.employee.dni === userDni
+        worker.employee.dni === userDni
       );
     }).length;
   };
@@ -148,11 +152,6 @@ export const PrintAll = () => {
       <></>
     )
   }
-
-
-  // uso la informacion de WorkerContext
-  const { worker } = useContext(WorkerContext)
-
 
   return (
     <>

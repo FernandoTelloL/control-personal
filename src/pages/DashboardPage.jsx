@@ -7,7 +7,7 @@ import { useUserContext } from "../context/UserProvider";
 import MonthComponent from "../components/MonthComponent";
 import logo from '../assets/logo.png'
 // import attendanceData from '../components/asistencia.json';
-import attendanceData from '../data/busquedaUsuario.json';
+// import attendanceData from '../data/busquedaUsuario.json';
 import { PrintAll } from "../components/tables/PrintAll";
 import { Inicio } from "./Inicio";
 import { useContext } from "react";
