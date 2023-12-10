@@ -3,16 +3,15 @@
 import { useState, useEffect } from 'react';
 import { WorkerInfo } from './WorkerInfo';
 import { Link } from 'react-router-dom';
-import tiposControl from '../data/tiposControl.json'
-import data from '../data/busquedaUsuario.json'
 import { useContext } from 'react';
 import { WorkerContext } from '../context/WorkerContext';
+import { TiposControlContext } from '../context/TiposControlContext';
 
 
-const MonthComponent = ({ attendanceData, controlTypes }) => {
+const MonthComponent = ({ controlTypes }) => {
   const [searchDNI, setSearchDNI] = useState('');
   const [filteredData, setFilteredData] = useState([]);
-  const [selectedTab, setSelectedTab] = useState(controlTypes[0].type);
+  // const [selectedTab, setSelectedTab] = useState(controlTypes[0].type);
   const [daysWorked, setDaysWorked] = useState(0);
   const [dataEmployee, setDataEmployee] = useState(null)
   // const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
@@ -33,41 +32,74 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   const [selectedControlTypes, setSelectedControlTypes] = useState([]);
   console.log(selectedControlTypes)
 
-  // probando en usar el WorkerContext
+
+  // uso la informacion de WorkerContext
   const { worker, setWorker } = useContext(WorkerContext)
 
+  // uso la informacion de TiposControlContext
+  const { setTiposControl, tiposControl } = useContext(TiposControlContext)
+
+
+  // useEffect(() => {
+  //   handleTabClick(currentControlTypeId);
+  // }, [currentMonth, currentControlTypeId]);
+
+
+  // useEffect para obtener los TIPOS de control del API al cargar la pagina
   useEffect(() => {
-    handleTabClick(currentControlTypeId);
-  }, [currentMonth, currentControlTypeId]);
+
+    const fetchData = async () => {
+
+      try {
+        // aqui la direccion del back con el ARRAY DE OBJETOS CON LOS TIPOS DE CONTROL
+        const response = await fetch(`https://run.mocky.io/v3/2416c7ea-439f-4818-ba2e-52bbb584e376`);
+
+        if (!response.ok) {
+          throw new Error(`Error al cargar los datos: ${response.status} ${response.statusText}`);
+        }
+
+        const dataTypesControl = await response.json();
+
+
+        setTiposControl(dataTypesControl)
+
+      } catch (error) {
+        console.error('Error al hacer el fetch:', error);
+      }
+
+    }
+
+    fetchData()
+  }, [setTiposControl])
 
 
 
   // Funcion para obtener los dias trabajados con el tipo de control 1
-  const controlDates = attendanceData.taskControlList
-    .filter(task => task.controlType.id === 1)
-    .map(task => {
-      const [year, month, day] = task.controlDate.split('-');
-      return new Date(year, month - 1, day).getDate();
-    });
+  // const controlDates = attendanceData.taskControlList
+  //   .filter(task => task.controlType.id === 1)
+  //   .map(task => {
+  //     const [year, month, day] = task.controlDate.split('-');
+  //     return new Date(year, month - 1, day).getDate();
+  //   });
 
 
   // Funcion para obtener los meses trabajados con el tipo de control 1
-  const controlMonths = attendanceData.taskControlList
-    .filter(task => task.controlType.id === 1)
-    .map(task => {
-      const [year, month, day] = task.controlDate.split('-');
-      return new Date(year, month - 1, day).getMonth() + 1;
-    });
+  // const controlMonths = attendanceData.taskControlList
+  //   .filter(task => task.controlType.id === 1)
+  //   .map(task => {
+  //     const [year, month, day] = task.controlDate.split('-');
+  //     return new Date(year, month - 1, day).getMonth() + 1;
+  //   });
 
 
 
   // Función para obtener los años trabajados con el tipo de control 1
-  const controlYears = attendanceData.taskControlList
-    .filter(task => task.controlType.id === 1)
-    .map(task => {
-      const [year, month, day] = task.controlDate.split('-');
-      return new Date(year, month - 1, day).getFullYear();
-    });
+  // const controlYears = attendanceData.taskControlList
+  //   .filter(task => task.controlType.id === 1)
+  //   .map(task => {
+  //     const [year, month, day] = task.controlDate.split('-');
+  //     return new Date(year, month - 1, day).getFullYear();
+  //   });
 
 
   // evento para la eleccion de tipos de control
@@ -205,24 +237,25 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
     setCurrentControlTypeId(controlTypeId);
 
     // Filtrar taskControlList por el tipo de control y el mes actual
-    const filteredTasks = attendanceData.taskControlList.filter((task) => {
+    // const filteredTasks = attendanceData.taskControlList.filter((task) => {
+    const filteredTasks = worker?.taskControlList.filter((task) => {
       const taskMonth = parseInt(task.controlDate.split('-')[1]);
       console.log(taskMonth)
       return task.controlType.id === controlTypeId && taskMonth === currentMonth;
     });
 
     // Guardar los resultados en filteredData
-    setFilteredData(filteredTasks);
+    { worker ? setFilteredData(filteredTasks) : setFilteredData([]) }
   };
 
 
 
   //  funcion para obtener los dias trabajados con el tipo de control al seleccionar el mes y año 
-  function handleTabSelect(type) {
-    const filterData = attendanceData.taskControlList.filter(task => task.controlType.id === type.id);
-    setFilteredData(filterData);
-  }
-  console.log(filteredData)
+  // function handleTabSelect(type) {
+  //   const filterData = attendanceData.taskControlList.filter(task => task.controlType.id === type.id);
+  //   setFilteredData(filterData);
+  // }
+
 
   // Funcion para expandir todos los meses y poder imprimir la asistencia de todos los meses 
   // function expandAllMonthsAndPrint() {
@@ -402,18 +435,20 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
                 className="nav nav-tabs mb-3 tabs-types-control mt-5"
                 style={ { position: 'sticky', paddingTop: '15px', top: '65px', zIndex: '100', backgroundColor: 'white' } }
               >
-                { controlTypes.map((type, index) => (
-                  <li key={ type.id } className="nav-item tab-item-types-control">
 
-                    <button
-                      className={ `tab-link-types-control nav-link ${type.id === currentControlTypeId ? 'active' : ''} ${type.id === currentControlTypeId ? 'bg-tab-active' : ''}` }
-                      onClick={ () => handleTabClick(index + 1) }
-                    >
-                      { type.description.toUpperCase() }
-                    </button>
+                {
+                  controlTypes.map((type, index) => (
+                    <li key={ type.id } className="nav-item tab-item-types-control">
 
-                  </li>
-                )) }
+                      <button
+                        className={ `tab-link-types-control nav-link ${type.id === currentControlTypeId ? 'active' : ''} ${type.id === currentControlTypeId ? 'bg-tab-active' : ''}` }
+                        onClick={ () => handleTabClick(index + 1) }
+                      >
+                        { type.description.toUpperCase() }
+                      </button>
+
+                    </li>
+                  )) }
               </ul>
 
 
@@ -1056,37 +1091,10 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
 
 
 
-
-
-                {/* <div className="row">
-                      { Array.from({ length: 31 }, (_, dayIndex) => (
-                        <div key={ dayIndex } className="col p-2">
-                          <span>{ dayIndex + 1 }</span>
-                          <div className="attendance-info mt-2">
-                            { filteredData.map((data) => {
-                              const dayWorked = parseInt(data.controlDate.split('-')[2]);
-
-                              if (dayWorked === dayIndex + 1) {
-                                return (
-                                  <div
-                                    key={ dayWorked }
-                                    className="attendance-day bg-green"
-                                    title="Asistencia confirmada"
-                                  />
-                                );
-                              }
-                              return null;
-                            }) }
-                          </div>
-                        </div>
-                      )) }
-                    </div> */}
-
-
               </div>
             </>
           ) :
-          (<h1>Por favor introduzca los datos a buscar</h1>)
+          (<h2>Por favor introduzca los datos a buscar</h2>)
 
       }
 

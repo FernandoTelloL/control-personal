@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 
-export const Layout = ({children}) => {
+export const Layout = ({ children }) => {
   return (
     <div className="container">
-   
-      {children}
+
+      { children }
     </div>
   )
 }

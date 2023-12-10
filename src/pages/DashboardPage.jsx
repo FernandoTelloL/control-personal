@@ -8,10 +8,11 @@ import MonthComponent from "../components/MonthComponent";
 import logo from '../assets/logo.png'
 // import attendanceData from '../components/asistencia.json';
 import attendanceData from '../data/busquedaUsuario.json';
-import controlTypes from '../data/tiposControl.json';
-import { TableBasic } from "../components/tables/TableBasic";
 import { PrintAll } from "../components/tables/PrintAll";
 import { Inicio } from "./Inicio";
+import { useContext } from "react";
+import { useEffect } from "react";
+import { TiposControlContext } from "../context/TiposControlContext";
 
 
 export const DashboardPage = () => {
@@ -26,6 +27,55 @@ export const DashboardPage = () => {
   }
 
   let toggleClassCheck = bntSidenav ? 'sb-sidenav-toggled' : null;
+
+  // uso la informacion de TiposControlContext
+  // const { setTiposControl } = useContext(TiposControlContext)
+
+  // // useEffect para obtener los tipos de control del API al cargar la pagina
+  // useEffect(() => {
+
+  //   const fetchData = async () => {
+
+  //     try {
+  //       // aqui la direccion del back con el ARRAY DE OBJETOS DE EMPLEADOS
+  //       const response = await fetch(`https://run.mocky.io/v3/2416c7ea-439f-4818-ba2e-52bbb584e376`);
+
+  //       if (!response.ok) {
+  //         throw new Error(`Error al cargar los datos: ${response.status} ${response.statusText}`);
+  //       }
+  //       console.log(dataTypesControl)
+
+  //       const dataTypesControl = await response.json();
+
+  //       // Encuentra el empleado con el DNI buscado
+  //       // const employeeWithInputDni = dataSearchEmployee.find(user => user.employee.dni === parseInt(searchDNI, 10));
+
+  //       // if (employeeWithInputDni) {
+  //       //   console.log('Empleado encontrado:', employeeWithInputDni);
+
+  //       //   // Aquí puedes acceder a la lista de tareas del empleado
+  //       //   const taskControlList = employeeWithInputDni.taskControlList;
+  //       //   console.log('Lista de tareas:', taskControlList);
+
+  //       //   // ... Resto de tu lógica ...
+
+  //       // } else {
+  //       //   console.log('Empleado no encontrado');
+  //       // }
+
+  //       // Asigna la información encontrada en el back del empleado a la variable setDataEmployee
+  //       // setDataEmployee(employeeWithInputDni);
+  //       setTiposControl(dataTypesControl)
+
+  //     } catch (error) {
+  //       console.error('Error al hacer el fetch:', error);
+  //     }
+
+  //   }
+
+  //   fetchData()
+  // }, [setTiposControl])
+
 
 
   return (
@@ -172,7 +222,6 @@ export const DashboardPage = () => {
             <div className="container-fluid px-4">
               {/* <h1 className="mt-4">Dashboard</h1> */ }
 
-              {/* <TableBasic /> */ }
               {/* <TableJson /> */ }
 
 

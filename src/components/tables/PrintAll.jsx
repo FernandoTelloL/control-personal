@@ -2,6 +2,8 @@ import MUIDataTable from 'mui-datatables'
 import userAsistencia from '../../data/busquedaUsuario.json'
 import { WorkerInfo } from '../WorkerInfo';
 import attendanceData from '../../data/busquedaUsuario.json';
+import { useContext } from 'react';
+import { WorkerContext } from '../../context/WorkerContext';
 
 
 export const PrintAll = () => {
@@ -148,12 +150,14 @@ export const PrintAll = () => {
   }
 
 
+  // uso la informacion de WorkerContext
+  const { worker } = useContext(WorkerContext)
 
 
   return (
     <>
       {/* datos personales del trabajador */ }
-      <WorkerInfo worker={ attendanceData } />
+      <WorkerInfo worker={ worker } />
 
 
       {/* Renderizar resumen y tablas para cada tipo de control */ }
@@ -163,6 +167,7 @@ export const PrintAll = () => {
       { generateSummaryAndTable('INASISTENCIAS', 4) }
       { generateSummaryAndTable('FERIADO LABORADO', 5) }
       { generateSummaryAndTable('FERIADO NO LABORADO', 6) }
+
 
       {/* Boton imprimir */ }
       <div className="row col-sm-2 d-flex m-auto btn-print-container">
@@ -174,6 +179,7 @@ export const PrintAll = () => {
           Imprimir
         </button>
       </div>
+
 
       {/* lista de tablas con todos los tipos de control */ }
       <div className="custom-datatable">
@@ -190,6 +196,7 @@ export const PrintAll = () => {
         { generateMonthTable(year, 10, controlTypeId, userDni) }
         { generateMonthTable(year, 11, controlTypeId, userDni) }
         { generateMonthTable(year, 12, controlTypeId, userDni) }
+
 
 
         <h1 className='mt-5'>DESCANSO</h1>
