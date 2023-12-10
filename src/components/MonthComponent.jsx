@@ -5,6 +5,8 @@ import { WorkerInfo } from './WorkerInfo';
 import { Link } from 'react-router-dom';
 import tiposControl from '../data/tiposControl.json'
 import data from '../data/busquedaUsuario.json'
+import { useContext } from 'react';
+import { WorkerContext } from '../context/WorkerContext';
 
 
 const MonthComponent = ({ attendanceData, controlTypes }) => {
@@ -29,6 +31,8 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   const [selectedControlTypes, setSelectedControlTypes] = useState([]);
   console.log(selectedControlTypes)
 
+  // probando en usar el WorkerContext
+  // const { user } = useContext(WorkerContext)
 
   useEffect(() => {
     handleTabClick(currentControlTypeId);
