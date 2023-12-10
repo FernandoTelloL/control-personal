@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { WorkerInfo } from './WorkerInfo';
 import { Link } from 'react-router-dom';
+import tiposControl from '../data/tiposControl.json'
 import data from '../data/busquedaUsuario.json'
 
 
@@ -11,14 +12,22 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedTab, setSelectedTab] = useState(controlTypes[0].type);
   const [daysWorked, setDaysWorked] = useState(0);
-  const [selectedYear, setSelectedYear] = useState();
   const [dataEmployee, setDataEmployee] = useState(null)
   // const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  // Estado para el mes actual
+  // Estado para el mes actual de los acordeones
   const [currentMonth, setCurrentMonth] = useState(1); // Enero
   // Estado para el tipo de control actual
   const [currentControlTypeId, setCurrentControlTypeId] = useState(null);
   console.log(currentControlTypeId)
+  // estado para seleccionar que meses se quiere imprimir
+  const [mesImprimir, setMesImprimir] = useState(0)
+  // estado para seleccionar que año se quiere imprimir
+  const [selectedYear, setSelectedYear] = useState(2023);
+  console.log(selectedYear)
+
+  const [showModal, setShowModal] = useState(false);
+  const [selectedControlTypes, setSelectedControlTypes] = useState([]);
+  console.log(selectedControlTypes)
 
 
   useEffect(() => {
@@ -55,8 +64,29 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
     });
 
 
+  // evento para la eleccion de tipos de control
+  const handleCheckboxChange = (event) => {
+    const value = event.target.value;
+    if (selectedControlTypes.includes(value)) {
+      setSelectedControlTypes(selectedControlTypes.filter(type => type !== value));
+    } else {
+      setSelectedControlTypes([...selectedControlTypes, value]);
+    }
+  };
 
+  // funciones para mostrar u ocultar modal de tipos de control
+  const handleModalOpen = () => {
+    setShowModal(true);
+  };
 
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+
+  // funcion para capitalizar la primera letra de un String
+  function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  }
 
 
   // funcion para obtener los dias trabajados con el tipo de control al ingresar el dni
@@ -240,7 +270,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
         <div className="col-sm-2 d-flex align-items-center mt-3 mt-sm-0">
           <label htmlFor="selectMonth" className="form-label fs-7 me-2">Mes:</label>
           <select className="form-select fs-7" id="selectMonth" onChange="handleMonthChange(this.value)">
-            <option value=""></option>
+            <option value="0">Todos</option>
             <option value="1">Enero</option>
             <option value="2">Febrero</option>
             <option value="3">Marzo</option>
@@ -274,14 +304,45 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
         </div>
 
         {/* combo tipo de control */ }
-        <div className="col-sm-2 d-flex align-items-center mt-3 mt-sm-0">
-          <label htmlFor="selectControlType" className="form-label fs-7 me-2">Tipo</label>
-          <select className="form-select fs-7" id="selectControlType" onChange="handleControlTypeChange(this.value)">
-            <option value="">Asistencia</option>
-            <option value="asistencia">Asistencia</option>
-            <option value="otro_tipo">Otro Tipo</option>
-          </select>
+        <div className="col-sm-12 col-lg-2 d-flex align-items-center mt-3 mt-sm-0">
+          <button type="button" className="btn btn-warning fs-7 border-3 w-100" onClick={ handleModalOpen }>
+            Tipo
+          </button>
+
+          <div className={ `modal fade ${showModal ? 'show' : ''}` } tabIndex="-1" role="dialog" style={ { display: showModal ? 'block' : 'none' } }>
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Seleccionar Tipos de Control</h5>
+                  <button type="button" className="btn-close" onClick={ handleModalClose } aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+                  { tiposControl.map((tipo) => (
+                    <div key={ tipo.id } className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id={ `checkbox_${tipo.id}` }
+                        value={ tipo.id }
+                        checked={ selectedControlTypes.includes(tipo.id.toString()) }
+                        onChange={ handleCheckboxChange }
+                      />
+                      <label className="form-check-label" htmlFor={ `checkbox_${tipo.id}` }>
+                        { capitalizeFirstLetter(tipo.description) }
+                      </label>
+                    </div>
+                  )) }
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-primary" onClick={ handleModalClose }>
+                    Aplicar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
 
         {/* Boton imprimir */ }
         <Link to='printall' className='col-sm-2'>
