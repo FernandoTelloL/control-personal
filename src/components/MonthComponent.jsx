@@ -401,7 +401,7 @@ const MonthComponent = ({ controlTypes }) => {
 
 
         {/* Boton imprimir */ }
-        <Link to='printall' className='col-sm-2'>
+        <Link to={ worker ? `printall` : `` } className='col-sm-2'>
           <button
             className="btn btn-primary border border-0 fs-7 mt-3 mt-sm-0 text-white"
             style={ { background: '#AD0506' } }
