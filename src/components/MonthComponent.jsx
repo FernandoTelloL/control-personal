@@ -18,6 +18,8 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   // const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   // Estado para el mes actual de los acordeones
   const [currentMonth, setCurrentMonth] = useState(1); // Enero
+  // Estado para cambiar el mes en el combo del header
+  const [currentComboMonth, setCurrentComboMonth] = useState(0)
   // Estado para el tipo de control actual
   const [currentControlTypeId, setCurrentControlTypeId] = useState(null);
   console.log(currentControlTypeId)
@@ -32,7 +34,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   console.log(selectedControlTypes)
 
   // probando en usar el WorkerContext
-  // const { user } = useContext(WorkerContext)
+  const { worker, setWorker } = useContext(WorkerContext)
 
   useEffect(() => {
     handleTabClick(currentControlTypeId);
@@ -141,7 +143,8 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`https://jsonplaceholder.typicode.com/users`);
+      // aqui la direccion del back con el ARRAY DE OBJETOS DE EMPLEADOS
+      const response = await fetch(`https://run.mocky.io/v3/facf3de6-5ab7-4bd4-8f75-3f3380b74c82`);
 
       if (!response.ok) {
         throw new Error(`Error al cargar los datos: ${response.status} ${response.statusText}`);
@@ -149,18 +152,26 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
 
       const dataSearchEmployee = await response.json();
 
-      const userWithInputDni = dataSearchEmployee.find(user => user.id === parseInt(searchDNI, 10));
+      // Encuentra el empleado con el DNI buscado
+      const employeeWithInputDni = dataSearchEmployee.find(user => user.employee.dni === parseInt(searchDNI, 10));
 
-      if (userWithInputDni) {
-        console.log('Usuario encontrado:', userWithInputDni);
+      if (employeeWithInputDni) {
+        console.log('Empleado encontrado:', employeeWithInputDni);
+
+        // Aquí puedes acceder a la lista de tareas del empleado
+        const taskControlList = employeeWithInputDni.taskControlList;
+        console.log('Lista de tareas:', taskControlList);
+
+        // ... Resto de tu lógica ...
+
       } else {
-        console.log('Usuario no encontrado');
+        console.log('Empleado no encontrado');
       }
 
-      // asigno la informacion encontrada en el back del usuario a la variable setDataEmployee
-      setDataEmployee(userWithInputDni);
+      // Asigna la información encontrada en el back del empleado a la variable setDataEmployee
+      // setDataEmployee(employeeWithInputDni);
+      setWorker(employeeWithInputDni)
 
-      console.log(userWithInputDni);
     } catch (error) {
       console.error('Error al realizar la búsqueda:', error);
     }
@@ -172,10 +183,18 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
   //   setSelectedTab(type);
   // };
 
-  // Función para manejar el cambio de mes
+  // Función para manejar el cambio de mes en tab
   const handleMonthChange = (month) => {
     setCurrentMonth(month);
   };
+  console.log(currentMonth)
+
+  // Función para manejar el cambio de mes en tab
+  const handleComboMonthChange = (month) => {
+    setCurrentComboMonth(month);
+  };
+  console.log(currentComboMonth)
+
 
   // Funcion para que el TAB tenga la funcionalidad de buscar por tipo de control
   // Filtrar taskControlList por el tipo de control y el mes actual
@@ -273,7 +292,7 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
         {/* combo mes */ }
         <div className="col-sm-2 d-flex align-items-center mt-3 mt-sm-0">
           <label htmlFor="selectMonth" className="form-label fs-7 me-2">Mes:</label>
-          <select className="form-select fs-7" id="selectMonth" onChange="handleMonthChange(this.value)">
+          <select className="form-select fs-7" id="selectMonth" onChange={ e => handleComboMonthChange(e.target.value) }>
             <option value="0">Todos</option>
             <option value="1">Enero</option>
             <option value="2">Febrero</option>
@@ -366,11 +385,15 @@ const MonthComponent = ({ attendanceData, controlTypes }) => {
       {/* condicional  que muestra la informacion del usuario despues de que se hace click en buscar y se 
       tiene informacion de un usuario*/}
       {
-        dataEmployee
+        worker
           ? (
             <>
               {/* componente que contiene informacion del usuario */ }
-              < WorkerInfo worker={ attendanceData } />
+              {/* < WorkerInfo worker={ attendanceData } /> */ }
+
+              < WorkerInfo worker={ worker } />
+
+
 
               <hr />
 
