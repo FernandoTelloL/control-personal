@@ -8,7 +8,7 @@ import { WorkerContext } from '../context/WorkerContext';
 import { TiposControlContext } from '../context/TiposControlContext';
 
 
-const MonthComponent = ({ controlTypes }) => {
+const MonthComponent = () => {
   const [searchDNI, setSearchDNI] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   // const [selectedTab, setSelectedTab] = useState(controlTypes[0].type);
@@ -437,7 +437,7 @@ const MonthComponent = ({ controlTypes }) => {
               >
 
                 {
-                  controlTypes.map((type, index) => (
+                  tiposControl.map((type, index) => (
                     <li key={ type.id } className="nav-item tab-item-types-control">
 
                       <button
