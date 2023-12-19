@@ -4,6 +4,7 @@ import userPhoto from '../assets/user-photo.png';
 
 export const WorkerInfo = ({ worker }) => {
 
+  console.log(worker)
   const birthdate = new Date(worker.employee.birthdate);
 
   const day = birthdate.getDate(); // Día del mes

@@ -176,18 +176,22 @@ const MonthComponent = () => {
 
     try {
       // aqui la direccion del back con el ARRAY DE OBJETOS DE EMPLEADOS
-      const response = await fetch(`https://run.mocky.io/v3/facf3de6-5ab7-4bd4-8f75-3f3380b74c82`);
-
+      // const response2 = await fetch(`https://run.mocky.io/v3/facf3de6-5ab7-4bd4-8f75-3f3380b74c82`);
+      // console.log(response2)
+      const response = await fetch(`https://ciudadania-production.up.railway.app/api/task-control-employee-search?dni=${searchDNI}&year=1&month=1&type-control=1`);
+      console.log(response)
       if (!response.ok) {
         throw new Error(`Error al cargar los datos: ${response.status} ${response.statusText}`);
       }
 
       const dataSearchEmployee = await response.json();
-
+      console.log(dataSearchEmployee)
+      console.log(dataSearchEmployee.employee.dni)
       // Encuentra el empleado con el DNI buscado
-      const employeeWithInputDni = dataSearchEmployee.find(user => user.employee.dni === parseInt(searchDNI, 10));
+      // const employeeWithInputDni = dataSearchEmployee.find(user => user.employee.dni === parseInt(searchDNI, 10));
 
-      if (employeeWithInputDni) {
+      if (dataSearchEmployee) {
+        const employeeWithInputDni = dataSearchEmployee;
         console.log('Empleado encontrado:', employeeWithInputDni);
 
         // Aquí puedes acceder a la lista de tareas del empleado
@@ -196,13 +200,13 @@ const MonthComponent = () => {
 
         // ... Resto de tu lógica ...
 
+        setWorker(employeeWithInputDni)
       } else {
         console.log('Empleado no encontrado');
       }
 
       // Asigna la información encontrada en el back del empleado a la variable setDataEmployee
       // setDataEmployee(employeeWithInputDni);
-      setWorker(employeeWithInputDni)
 
     } catch (error) {
       console.error('Error al realizar la búsqueda:', error);

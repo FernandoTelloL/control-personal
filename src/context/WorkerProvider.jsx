@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-// Este archivo trabaja de la mano con WorkerProvider
+// Este archivo trabaja de la mano con WorkerContext
 
 import { useState } from "react"
 import { WorkerContext } from "./WorkerContext"
