@@ -13,6 +13,7 @@ import { Inicio } from "./Inicio";
 import { useContext } from "react";
 import { useEffect } from "react";
 import { TiposControlContext } from "../context/TiposControlContext";
+import { WorkerContext } from "../context/WorkerContext";
 
 
 export const DashboardPage = () => {
@@ -27,6 +28,10 @@ export const DashboardPage = () => {
   }
 
   let toggleClassCheck = bntSidenav ? 'sb-sidenav-toggled' : null;
+
+
+  // uso la informacion de WorkerContext
+  const { setWorker } = useContext(WorkerContext)
 
   // uso la informacion de TiposControlContext
   // const { setTiposControl } = useContext(TiposControlContext)
@@ -145,7 +150,11 @@ export const DashboardPage = () => {
               <div className="nav">
                 <div className="sb-sidenav-menu-heading">Menu Principal</div>
 
-                <Link className="nav-link" to="/dashboard/inicio">
+                <Link
+                  className="nav-link"
+                  to="/dashboard/inicio"
+                  onClick={ () => setWorker(null) }
+                >
                   <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                   Inicio
                 </Link>
@@ -165,7 +174,11 @@ export const DashboardPage = () => {
                       Consulta de Personal
                     </Link>
 
-                    <Link className="nav-link fs-7" to='/dashboard/upload-excel' >
+                    <Link
+                      className="nav-link fs-7"
+                      to='/dashboard/upload-excel'
+                      onClick={ () => setWorker(null) }
+                    >
                       Carga de Excel
                     </Link>
 
@@ -183,7 +196,11 @@ export const DashboardPage = () => {
                     {
                       user.roles.includes('admin')
                         ? (
-                          <Link className="nav-link fs-7" to="/dashboard/register-user">
+                          <Link
+                            className="nav-link fs-7"
+                            to="/dashboard/register-user"
+                            onClick={ () => setWorker(null) }
+                          >
                             Personal
                           </Link>
                         )

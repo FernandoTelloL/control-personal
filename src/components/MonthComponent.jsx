@@ -12,8 +12,8 @@ const MonthComponent = () => {
   const [searchDNI, setSearchDNI] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   // const [selectedTab, setSelectedTab] = useState(controlTypes[0].type);
-  const [daysWorked, setDaysWorked] = useState(0);
-  const [dataEmployee, setDataEmployee] = useState(null)
+  // const [daysWorked, setDaysWorked] = useState(0);
+  // const [dataEmployee, setDataEmployee] = useState(null)
   // const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   // Estado para el mes actual de los acordeones
   const [currentMonth, setCurrentMonth] = useState(1); // Enero
@@ -103,6 +103,9 @@ const MonthComponent = () => {
 
 
   // evento para la eleccion de tipos de control
+
+
+  // funcion que llama al hacer click en los checkbox del modal de los tipos de control para imprimir
   const handleCheckboxChange = (event) => {
     const value = event.target.value;
     if (selectedControlTypes.includes(value)) {
@@ -112,6 +115,7 @@ const MonthComponent = () => {
     }
   };
 
+
   // funciones para mostrar u ocultar modal de tipos de control
   const handleModalOpen = () => {
     setShowModal(true);
@@ -120,6 +124,7 @@ const MonthComponent = () => {
   const handleModalClose = () => {
     setShowModal(false);
   };
+
 
   // funcion para capitalizar la primera letra de un String
   function capitalizeFirstLetter(str) {
@@ -163,6 +168,7 @@ const MonthComponent = () => {
     // console.log(januaryAttendance)
   };
 
+
   // Funcion para que el input actualice el estado del dni
   const handleSearchChange = (e) => {
     const inputDNI = e.target.value.trim();
@@ -174,10 +180,13 @@ const MonthComponent = () => {
   const handleFindEmployee = async (e) => {
     e.preventDefault();
 
+    if (searchDNI === '') {
+      setWorker(null)
+      return
+    }
+
     try {
       // aqui la direccion del back con el ARRAY DE OBJETOS DE EMPLEADOS
-      // const response2 = await fetch(`https://run.mocky.io/v3/facf3de6-5ab7-4bd4-8f75-3f3380b74c82`);
-      // console.log(response2)
       const response = await fetch(`https://ciudadania-production.up.railway.app/api/task-control-employee-search?dni=${searchDNI}&year=1&month=1&type-control=1`);
       console.log(response)
       if (!response.ok) {
@@ -251,42 +260,6 @@ const MonthComponent = () => {
     // Guardar los resultados en filteredData
     { worker ? setFilteredData(filteredTasks) : setFilteredData([]) }
   };
-
-
-
-  //  funcion para obtener los dias trabajados con el tipo de control al seleccionar el mes y año 
-  // function handleTabSelect(type) {
-  //   const filterData = attendanceData.taskControlList.filter(task => task.controlType.id === type.id);
-  //   setFilteredData(filterData);
-  // }
-
-
-  // Funcion para expandir todos los meses y poder imprimir la asistencia de todos los meses 
-  // function expandAllMonthsAndPrint() {
-  //   window.onafterprint = () => {
-  //     accordions.forEach(accordion => {
-  //       accordion.classList.remove('show');
-  //       accordion.setAttribute('aria-expanded', 'false');
-  //     });
-  //   }
-
-  //   // Aquí, reemplaza 'accordion' con la clase o el ID que estás usando para los acordeones
-  //   const accordions = document.querySelectorAll('.accordion-collapse');
-  //   console.log(accordions)
-
-  //   accordions.forEach(accordion => {
-  //     accordion.classList.add('show');
-  //   });
-
-  //   window.print();
-
-  //   window.onafterprint = () => {
-  //     accordions.forEach(accordion => {
-  //       accordion.classList.remove('show');
-  //       accordion.setAttribute('aria-expanded', 'false');
-  //     });
-  //   }
-  // }
 
 
   return (
