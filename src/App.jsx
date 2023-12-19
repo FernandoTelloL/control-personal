@@ -4,14 +4,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Layout, PrintAll, ProtectedRoute } from './components'
 import { Login, DashboardPage, GuiaPage, UpdateUser, ConsultaPersonal, Inicio, UploadExcel } from './pages'
 // import { useState } from 'react'
-import { useUserContext } from './context/UserProvider'
+// import { useUserContext } from './context/UserProvider'
 import { ShowUsers } from './components/ShowUsers'
 
 
 function App() {
 
-  const { user } = useUserContext();
-  console.log(user)
+  // const { user } = useUserContext();
+  // console.log(user)
 
   // Esta parte del user lo voy a hacer en contexto despues
   // const [user, setUser] = useState(null)

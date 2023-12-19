@@ -1,13 +1,21 @@
 // import { useForm } from "react-hook-form";
 // import { useNavigate } from "react-router-dom";
 
-import { useState } from "react";
-import { useUserContext } from "../context/UserProvider";
+// import { useUserContext } from "../context/UserProvider";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
+import { useState } from "react";
 // import { users } from "../data/users";
+
 
 export const Login = () => {
   const navigate = useNavigate()
+
+  const [userName, setUserName] = useState('')
+  const [password, setPassword] = useState('')
+  const { setUser } = useContext(UserContext)
+
 
   // navigate('/about')
 
@@ -24,26 +32,27 @@ export const Login = () => {
   // </form>
 
 
-  const [userName, setUserName] = useState('')
-  const [password, setPassword] = useState('')
+
 
   // traigo el dispatch de mi reducer de usuario
-  const { dispatch } = useUserContext()
+  // const { dispatch } = useUserContext()
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = {
+    const dataUser = {
       userName,
       password,
       roles: ['admin']
     }
 
+    setUser(dataUser)
+
 
     // uso el dispatch para poder mandar el usuario logueado
-    dispatch({
-      type: 'LOGIN_USER',
-      value: user
-    })
+    // dispatch({
+    //   type: 'LOGIN_USER',
+    //   value: user
+    // })
 
     navigate('/dashboard/inicio')
   }

@@ -3,25 +3,28 @@ import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import { useUserContext } from "../context/UserProvider";
+// import { useUserContext } from "../context/UserProvider";
 import MonthComponent from "../components/MonthComponent";
 import logo from '../assets/logo.png'
 // import attendanceData from '../components/asistencia.json';
 // import attendanceData from '../data/busquedaUsuario.json';
 import { PrintAll } from "../components/tables/PrintAll";
-import { Inicio } from "./Inicio";
+// import { Inicio } from "./Inicio";
 import { useContext } from "react";
 import { useEffect } from "react";
 import { TiposControlContext } from "../context/TiposControlContext";
 import { WorkerContext } from "../context/WorkerContext";
+import { UserContext } from "../context/UserContext";
 
 
 export const DashboardPage = () => {
 
+  const { user } = useContext(UserContext)
+
   const [bntSidenav, setBntSidenav] = useState(false)
 
-  const { user } = useUserContext();
-  console.log(user)
+  // const { user } = useUserContext();
+  // console.log(user)
 
   const handleClick = () => {
     setBntSidenav(bntSidenav => !bntSidenav)

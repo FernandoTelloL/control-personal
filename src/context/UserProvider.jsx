@@ -1,15 +1,13 @@
-import { useContext } from "react"
-import { useReducer } from "react"
-import { createContext } from "react"
-import { users } from "../data/users"
+
+import { useState } from "react"
+import { UserContext } from "./UserContext"
 
 
-const UserContext = createContext()
 
 // creo mi hook personalizado para usar el context desde cualquier archivo
-const useUserContext = () => {
-  return useContext(UserContext)
-}
+// const useUserContext = () => {
+//   return useContext(UserContext)
+// }
 
 // defino el estado inicial de mi useReducer
 const initialState = {
@@ -21,47 +19,50 @@ const initialState = {
 }
 
 // creo el reducer, cuando en otro archivo llaman al dispatch, el codigo pasa por aqui
-const userReducer = (state, action) => {
-  console.log(action)
+// const userReducer = (state, action) => {
+//   console.log(action)
 
-  switch (action.type) {
+//   switch (action.type) {
 
-    case 'LOGIN_USER': {
-      const url = users
-      console.log(url)
+//     case 'LOGIN_USER': {
+//       const url = users
+//       console.log(url)
 
-      // function getData() {
-      //   fetch(users)
-      //     .then = (res) => res.json()
-      //   console.log(res)
-      // }
+//       // function getData() {
+//       //   fetch(users)
+//       //     .then = (res) => res.json()
+//       //   console.log(res)
+//       // }
 
-      return {
-        ...state,
-        user: action.value
-      }
-    }
+//       return {
+//         ...state,
+//         user: action.value
+//       }
+//     }
 
-  }
+//   }
 
-  return state
-}
+//   return state
+// }
 
+// eslint-disable-next-line react/prop-types
 const UserProvider = ({ children }) => {
 
-  const [state, dispatch] = useReducer(userReducer, initialState)
+  // const [state, dispatch] = useReducer(initialState)
+  const [user, setUser] = useState(initialState)
+
 
   return (
-    <UserContext.Provider value={ { user: state.user, dispatch } }>
-      { console.log(state.user) }
+    <UserContext.Provider value={ { user, setUser } } >
+
+      { console.log(user) }
       { children }
-    </UserContext.Provider>
+    </UserContext.Provider >
   )
 }
 
 
-
 export {
   UserProvider,
-  useUserContext
+  // useUserContext
 }
