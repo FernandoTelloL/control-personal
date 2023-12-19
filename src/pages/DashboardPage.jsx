@@ -15,11 +15,12 @@ import { useEffect } from "react";
 import { TiposControlContext } from "../context/TiposControlContext";
 import { WorkerContext } from "../context/WorkerContext";
 import { UserContext } from "../context/UserContext";
+import { CleaningServices } from "@mui/icons-material";
 
 
 export const DashboardPage = () => {
 
-  const { user } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
 
   const [bntSidenav, setBntSidenav] = useState(false)
 
@@ -137,12 +138,19 @@ export const DashboardPage = () => {
               <li><hr className="dropdown-divider" /></li>
               <li><a className="dropdown-item" href="#!">Configuración</a></li>
               <li><hr className="dropdown-divider" /></li>
-              <li><a className="dropdown-item" href="#!">Logout</a></li>
+              <li>
+                <Link
+                  className="dropdown-item"
+                  to={ '/' }
+                  onClick={ () => setUser(null) }
+                >
+                  Logout
+                </Link>
+              </li>
             </ul>
           </li>
         </ul>
       </nav>
-
 
       <div id="layoutSidenav">
 
