@@ -173,7 +173,10 @@ const MonthComponent = () => {
   // Funcion para que el input actualice el estado del dni
   const handleSearchChange = (e) => {
     const inputDNI = e.target.value.trim();
-    setSearchDNI(inputDNI);
+    // Validar que solo contiene números y tiene una longitud máxima de 8
+    if (/^\d*$/.test(inputDNI) && inputDNI.length <= 8) {
+      setSearchDNI(inputDNI);
+    }
   };
 
 
@@ -190,8 +193,9 @@ const MonthComponent = () => {
       // aqui la direccion del back con el ARRAY DE OBJETOS DE EMPLEADOS
       const response = await fetch(`https://ciudadania-production.up.railway.app/api/task-control-employee-search?dni=${searchDNI}&year=1&month=1&type-control=1`);
       console.log(response)
+
       if (!response.ok) {
-        throw new Error(`Error al cargar los datos: ${response.status} ${response.statusText}`);
+        throw new Error(`DNI NO CORRESPONDE A NINGUN TRABAJADOR`);
       }
 
       const dataSearchEmployee = await response.json();
@@ -212,7 +216,8 @@ const MonthComponent = () => {
 
         setWorker(employeeWithInputDni)
       } else {
-        console.log('Empleado no encontrado');
+        setWorker(null)
+        return
       }
 
       // Asigna la información encontrada en el back del empleado a la variable setDataEmployee
@@ -281,8 +286,8 @@ const MonthComponent = () => {
             className="form-control fs-7 w-75 me-sm-1"
             placeholder="Buscar por DNI"
             value={ searchDNI }
-            onChange={ handleSearchChange }
-
+            onChange={ handleSearchChange }// Asegura que solo se ingresen números
+            maxLength="8"
           />
 
           {/* boton buscar */ }
