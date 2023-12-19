@@ -22,3 +22,11 @@ function onFocus(foco) {
     document.getElementById(foco).focus();
   }
 }
+
+// fin funcion para mostrar sweetalert
+
+
+// funcion para capitalizar la primera letra de un String
+export function capitalizeFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}

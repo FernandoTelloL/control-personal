@@ -1,17 +1,21 @@
 /* eslint-disable react/prop-types */
 
 import userPhoto from '../assets/user-photo.png';
+import { capitalizeFirstLetter } from '../helpers/functions';
 
 export const WorkerInfo = ({ worker }) => {
 
   console.log(worker)
   const birthdate = new Date(worker.employee.birthdate);
 
+
+  // inicio formateo de fecha de nacimiento
   const day = birthdate.getDate(); // Día del mes
   const month = birthdate.getMonth() + 1; // Los meses en JavaScript van de 0 a 11, por lo que se suma 1 para obtener el mes correcto
   const year = birthdate.getFullYear(); // Año
 
   const formattedDate = `${day}/${month}/${year}`;
+  // fin formateo de fecha de nacimiento
 
 
   return (
@@ -47,7 +51,7 @@ export const WorkerInfo = ({ worker }) => {
 
         <div className="worker-information d-flex justify-content-start">
           <p className='w-50'>Apellidos:</p>
-          <p>{ worker.employee.firstLastName + " " + worker.employee.secondLastName }</p>
+          <p>{ capitalizeFirstLetter(worker.employee.firstLastName) + " " + capitalizeFirstLetter(worker.employee.secondLastName) }</p>
         </div>
 
         <div className="worker-information d-flex justify-content-start">
@@ -62,12 +66,12 @@ export const WorkerInfo = ({ worker }) => {
 
         <div className="worker-information d-flex justify-content-start">
           <p className='w-50'>Email: </p>
-          <p>{ worker.employee.email }</p>
+          <p>{ worker.employee.email.toLowerCase() }</p>
         </div>
 
         <div className="worker-information d-flex justify-content-start">
           <p className='w-50'>Dirección:</p>
-          <p> { worker.employee.address }</p>
+          <p> { capitalizeFirstLetter(worker.employee.address) }</p>
         </div>
 
         <div className="worker-information d-flex justify-content-start">

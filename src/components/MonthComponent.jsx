@@ -193,7 +193,6 @@ const MonthComponent = () => {
     try {
       // aqui la direccion del back con el ARRAY DE OBJETOS DE EMPLEADOS
       const response = await fetch(`https://ciudadania-production.up.railway.app/api/task-control-employee-search?dni=${searchDNI}&year=1&month=1&type-control=1`);
-      console.log(response)
 
       if (response.ok == false) {
         show_alerta('Trabajador no encontrado', 'error')
@@ -202,7 +201,6 @@ const MonthComponent = () => {
       }
 
       const dataSearchEmployee = await response.json();
-      console.log(dataSearchEmployee)
       console.log(dataSearchEmployee.employee.dni)
       // Encuentra el empleado con el DNI buscado
       // const employeeWithInputDni = dataSearchEmployee.find(user => user.employee.dni === parseInt(searchDNI, 10));
@@ -1147,7 +1145,6 @@ const MonthComponent = () => {
                             <span>{ dayIndex + 1 }</span>
 
                             <div className="attendance-info mt-2">
-                              { console.log(filteredData) }
                               {
                                 filteredData.map((data) => {
                                   const dayWorked = parseInt(data.controlDate.split('-')[2]);
