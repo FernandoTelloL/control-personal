@@ -11,6 +11,7 @@ import { TiposControlContext } from '../context/TiposControlContext';
 const MonthComponent = () => {
   const [searchDNI, setSearchDNI] = useState('');
   const [filteredData, setFilteredData] = useState([]);
+  console.log(filteredData)
   // const [selectedTab, setSelectedTab] = useState(controlTypes[0].type);
   // const [daysWorked, setDaysWorked] = useState(0);
   // const [dataEmployee, setDataEmployee] = useState(null)
@@ -251,14 +252,17 @@ const MonthComponent = () => {
 
     // Filtrar taskControlList por el tipo de control y el mes actual
     // const filteredTasks = attendanceData.taskControlList.filter((task) => {
-    const filteredTasks = worker?.taskControlList.filter((task) => {
-      const taskMonth = parseInt(task.controlDate.split('-')[1]);
-      console.log(taskMonth)
-      return task.controlType.id === controlTypeId && taskMonth === currentMonth;
+    const filteredTasks = worker.taskControlList.filter((task) => {
+      // const taskMonth = parseInt(task.controlDate.split('-')[1]);
+      // return task.controlType.id === controlTypeId && taskMonth === currentMonth;
+      return task.controlType.id === controlTypeId;
     });
+    console.log(filteredTasks)
+
 
     // Guardar los resultados en filteredData
-    { worker ? setFilteredData(filteredTasks) : setFilteredData([]) }
+    // { worker ? setFilteredData(filteredTasks) : setFilteredData([]) }
+    setFilteredData(filteredTasks)
   };
 
 
@@ -444,7 +448,9 @@ const MonthComponent = () => {
                       style={ { borderRadius: '10px 10px 0 0' } }
                       onClick={ () => handleMonthChange(1) }
                     >
+
                       Enero
+
                     </button>
                   </h2>
                   <div
@@ -456,26 +462,32 @@ const MonthComponent = () => {
                   >
                     <div className="accordion-body">
                       <div className="row">
+
                         {
                           Array.from({ length: 31 }, (_, dayIndex) => (
                             <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
                               <span className=''>{ dayIndex + 1 }</span>
                               <div className="attendance-info mt-2">
+
                                 { filteredData.map((data) => {
                                   const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                                  const monthWorked = parseInt(data.controlDate.split('-')[1])
 
-                                  if (dayWorked === dayIndex + 1) {
-                                    return (
-                                      <div
-                                        key={ dayWorked }
-                                        className="attendance-day border border-secondary"
-                                        style={ { backgroundColor: data.controlType ? data.controlType.color : 'defaultColor' } }
-                                        title="Asistencia confirmada"
-                                      />
-                                    );
+                                  if (monthWorked == 1) {
+                                    if (dayWorked === dayIndex + 1) {
+                                      return (
+                                        <div
+                                          key={ dayWorked }
+                                          className="attendance-day border border-secondary"
+                                          style={ { backgroundColor: data.controlType ? data.controlType.color : 'defaultColor' } }
+                                          title="Asistencia confirmada"
+                                        />
+                                      );
+                                    }
                                   }
                                   return null;
                                 }) }
+
                               </div>
                             </div>
                           )) }
@@ -497,7 +509,9 @@ const MonthComponent = () => {
                       style={ { borderRadius: '10px 10px 0 0' } }
                       onClick={ () => handleMonthChange(2) }
                     >
+
                       Febrero
+
                     </button>
                   </h2>
                   <div
@@ -509,28 +523,35 @@ const MonthComponent = () => {
                   >
                     <div className="accordion-body">
                       <div className="row">
+
                         { Array.from({ length: 28 }, (_, dayIndex) => (
                           <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
                             <span>{ dayIndex + 1 }</span>
                             <div className="attendance-info mt-2">
+
                               { filteredData.map((data) => {
                                 const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                                const monthWorked = parseInt(data.controlDate.split('-')[1])
 
-                                if (dayWorked === dayIndex + 1) {
-                                  return (
-                                    <div
-                                      key={ dayWorked }
-                                      className="attendance-day border border-secondary"
-                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                                      title="Asistencia confirmada"
-                                    />
-                                  );
+                                if (monthWorked == 2) {
+                                  if (dayWorked === dayIndex + 1) {
+                                    return (
+                                      <div
+                                        key={ dayWorked }
+                                        className="attendance-day border border-secondary"
+                                        style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                        title="Asistencia confirmada"
+                                      />
+                                    );
+                                  }
                                 }
                                 return null;
                               }) }
+
                             </div>
                           </div>
                         )) }
+
                       </div>
                     </div>
                   </div>
@@ -548,7 +569,9 @@ const MonthComponent = () => {
                       style={ { borderRadius: '10px 10px 0 0' } }
                       onClick={ () => handleMonthChange(3) }
                     >
+
                       Marzo
+
                     </button>
                   </h2>
                   <div
@@ -560,28 +583,35 @@ const MonthComponent = () => {
                   >
                     <div className="accordion-body">
                       <div className="row">
+
                         { Array.from({ length: 31 }, (_, dayIndex) => (
                           <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
                             <span>{ dayIndex + 1 }</span>
                             <div className="attendance-info mt-2">
+
                               { filteredData.map((data) => {
                                 const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                                const monthWorked = parseInt(data.controlDate.split('-')[1])
 
-                                if (dayWorked === dayIndex + 1) {
-                                  return (
-                                    <div
-                                      key={ dayWorked }
-                                      className="attendance-day border border-secondary"
-                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                                      title="Asistencia confirmada"
-                                    />
-                                  );
+                                if (monthWorked == 3) {
+                                  if (dayWorked === dayIndex + 1) {
+                                    return (
+                                      <div
+                                        key={ dayWorked }
+                                        className="attendance-day border border-secondary"
+                                        style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                        title="Asistencia confirmada"
+                                      />
+                                    );
+                                  }
                                 }
                                 return null;
                               }) }
+
                             </div>
                           </div>
                         )) }
+
                       </div>
                     </div>
                   </div>
@@ -599,7 +629,9 @@ const MonthComponent = () => {
                       style={ { borderRadius: '10px 10px 0 0' } }
                       onClick={ () => handleMonthChange(4) }
                     >
+
                       Abril
+
                     </button>
                   </h2>
                   <div
@@ -611,28 +643,35 @@ const MonthComponent = () => {
                   >
                     <div className="accordion-body">
                       <div className="row">
+
                         { Array.from({ length: 30 }, (_, dayIndex) => (
                           <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
                             <span>{ dayIndex + 1 }</span>
                             <div className="attendance-info mt-2">
+
                               { filteredData.map((data) => {
                                 const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                                const monthWorked = parseInt(data.controlDate.split('-')[1])
 
-                                if (dayWorked === dayIndex + 1) {
-                                  return (
-                                    <div
-                                      key={ dayWorked }
-                                      className="attendance-day border border-secondary"
-                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                                      title="Asistencia confirmada"
-                                    />
-                                  );
+                                if (monthWorked == 4) {
+                                  if (dayWorked === dayIndex + 1) {
+                                    return (
+                                      <div
+                                        key={ dayWorked }
+                                        className="attendance-day border border-secondary"
+                                        style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                        title="Asistencia confirmada"
+                                      />
+                                    );
+                                  }
                                 }
                                 return null;
                               }) }
+
                             </div>
                           </div>
                         )) }
+
                       </div>
                     </div>
                   </div>
@@ -654,7 +693,9 @@ const MonthComponent = () => {
                       style={ { borderRadius: '10px 10px 0 0' } }
                       onClick={ () => handleMonthChange(5) }
                     >
+
                       Mayo
+
                     </button>
                   </h2>
                   <div
@@ -666,28 +707,35 @@ const MonthComponent = () => {
                   >
                     <div className="accordion-body">
                       <div className="row">
+
                         { Array.from({ length: 31 }, (_, dayIndex) => (
                           <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
                             <span>{ dayIndex + 1 }</span>
                             <div className="attendance-info mt-2">
+
                               { filteredData.map((data) => {
                                 const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                                const monthWorked = parseInt(data.controlDate.split('-')[1])
 
-                                if (dayWorked === dayIndex + 1) {
-                                  return (
-                                    <div
-                                      key={ dayWorked }
-                                      className="attendance-day border border-secondary"
-                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                                      title="Asistencia confirmada"
-                                    />
-                                  );
+                                if (monthWorked == 5) {
+                                  if (dayWorked === dayIndex + 1) {
+                                    return (
+                                      <div
+                                        key={ dayWorked }
+                                        className="attendance-day border border-secondary"
+                                        style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                        title="Asistencia confirmada"
+                                      />
+                                    );
+                                  }
                                 }
                                 return null;
                               }) }
+
                             </div>
                           </div>
                         )) }
+
                       </div>
                     </div>
                   </div>
@@ -705,7 +753,9 @@ const MonthComponent = () => {
                       style={ { borderRadius: '10px 10px 0 0' } }
                       onClick={ () => handleMonthChange(6) }
                     >
+
                       Junio
+
                     </button>
                   </h2>
                   <div
@@ -717,28 +767,34 @@ const MonthComponent = () => {
                   >
                     <div className="accordion-body">
                       <div className="row">
+
                         { Array.from({ length: 30 }, (_, dayIndex) => (
                           <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
                             <span>{ dayIndex + 1 }</span>
                             <div className="attendance-info mt-2">
                               { filteredData.map((data) => {
-                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
-                                if (dayWorked === dayIndex + 1) {
-                                  return (
-                                    <div
-                                      key={ dayWorked }
-                                      className="attendance-day border border-secondary"
-                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                                      title="Asistencia confirmada"
-                                    />
-                                  );
+                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                                const monthWorked = parseInt(data.controlDate.split('-')[1])
+
+                                if (monthWorked == 6) {
+                                  if (dayWorked === dayIndex + 1) {
+                                    return (
+                                      <div
+                                        key={ dayWorked }
+                                        className="attendance-day border border-secondary"
+                                        style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                        title="Asistencia confirmada"
+                                      />
+                                    );
+                                  }
                                 }
                                 return null;
                               }) }
                             </div>
                           </div>
                         )) }
+
                       </div>
                     </div>
                   </div>
@@ -756,7 +812,9 @@ const MonthComponent = () => {
                       style={ { borderRadius: '10px 10px 0 0' } }
                       onClick={ () => handleMonthChange(7) }
                     >
+
                       Julio
+
                     </button>
                   </h2>
                   <div
@@ -768,28 +826,34 @@ const MonthComponent = () => {
                   >
                     <div className="accordion-body">
                       <div className="row">
+
                         { Array.from({ length: 31 }, (_, dayIndex) => (
                           <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
                             <span>{ dayIndex + 1 }</span>
                             <div className="attendance-info mt-2">
                               { filteredData.map((data) => {
-                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
-                                if (dayWorked === dayIndex + 1) {
-                                  return (
-                                    <div
-                                      key={ dayWorked }
-                                      className="attendance-day border border-secondary"
-                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                                      title="Asistencia confirmada"
-                                    />
-                                  );
+                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                                const monthWorked = parseInt(data.controlDate.split('-')[1])
+
+                                if (monthWorked == 7) {
+                                  if (dayWorked === dayIndex + 1) {
+                                    return (
+                                      <div
+                                        key={ dayWorked }
+                                        className="attendance-day border border-secondary"
+                                        style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                        title="Asistencia confirmada"
+                                      />
+                                    );
+                                  }
                                 }
                                 return null;
                               }) }
                             </div>
                           </div>
                         )) }
+
                       </div>
                     </div>
                   </div>
@@ -808,7 +872,9 @@ const MonthComponent = () => {
                       style={ { borderRadius: '10px 10px 0 0' } }
                       onClick={ () => handleMonthChange(8) }
                     >
+
                       Agosto
+
                     </button>
                   </h2>
                   <div
@@ -820,28 +886,34 @@ const MonthComponent = () => {
                   >
                     <div className="accordion-body">
                       <div className="row">
+
                         { Array.from({ length: 31 }, (_, dayIndex) => (
                           <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
                             <span>{ dayIndex + 1 }</span>
                             <div className="attendance-info mt-2">
                               { filteredData.map((data) => {
-                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
 
-                                if (dayWorked === dayIndex + 1) {
-                                  return (
-                                    <div
-                                      key={ dayWorked }
-                                      className="attendance-day border border-secondary"
-                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                                      title="Asistencia confirmada"
-                                    />
-                                  );
+                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                                const monthWorked = parseInt(data.controlDate.split('-')[1])
+
+                                if (monthWorked == 8) {
+                                  if (dayWorked === dayIndex + 1) {
+                                    return (
+                                      <div
+                                        key={ dayWorked }
+                                        className="attendance-day border border-secondary"
+                                        style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                        title="Asistencia confirmada"
+                                      />
+                                    );
+                                  }
                                 }
                                 return null;
                               }) }
                             </div>
                           </div>
                         )) }
+
                       </div>
                     </div>
                   </div>
@@ -860,8 +932,11 @@ const MonthComponent = () => {
                       style={ { borderRadius: '10px 10px 0 0' } }
                       onClick={ () => handleMonthChange(9) }
                     >
+
                       Septiembre
+
                     </button>
+
                   </h2>
                   <div
                     id="flush-collapseNine"
@@ -879,18 +954,20 @@ const MonthComponent = () => {
 
                               { filteredData.map((data) => {
                                 const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                                const monthWorked = parseInt(data.controlDate.split('-')[1])
 
+                                if (monthWorked == 9) {
+                                  if (dayWorked === dayIndex + 1) {
+                                    return (
+                                      <div
+                                        key={ dayWorked }
+                                        className="attendance-day border border-secondary"
+                                        style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                        title="Asistencia confirmada"
 
-                                if (dayWorked === dayIndex + 1) {
-                                  return (
-                                    <div
-                                      key={ dayWorked }
-                                      className="attendance-day border border-secondary"
-                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                                      title="Asistencia confirmada"
-
-                                    />
-                                  );
+                                      />
+                                    );
+                                  }
                                 }
                                 return null;
                               }) }
@@ -915,7 +992,9 @@ const MonthComponent = () => {
                       style={ { borderRadius: '10px 10px 0 0' } }
                       onClick={ () => handleMonthChange(10) }
                     >
+
                       Octubre
+
                     </button>
                   </h2>
                   <div
@@ -926,6 +1005,7 @@ const MonthComponent = () => {
                     style={ { backgroundColor: 'rgb(231,241,255)', borderRadius: '0px 0px 10px 10px' } }
                   >
                     <div className="accordion-body">
+
                       <div className="row">
                         { Array.from({ length: 31 }, (_, dayIndex) => (
                           <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
@@ -934,18 +1014,20 @@ const MonthComponent = () => {
                             <div className="attendance-info mt-2">
                               { filteredData.map((data) => {
                                 const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                                const monthWorked = parseInt(data.controlDate.split('-')[1])
 
+                                if (monthWorked == 10) {
+                                  if (dayWorked === dayIndex + 1) {
+                                    return (
+                                      <div
+                                        key={ dayWorked }
+                                        className="attendance-day border border-secondary"
+                                        style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                        title="Asistencia confirmada"
 
-                                if (dayWorked === dayIndex + 1) {
-                                  return (
-                                    <div
-                                      key={ dayWorked }
-                                      className="attendance-day border border-secondary"
-                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                                      title="Asistencia confirmada"
-
-                                    />
-                                  );
+                                      />
+                                    );
+                                  }
                                 }
                                 return null;
                               }) }
@@ -970,9 +1052,12 @@ const MonthComponent = () => {
                       style={ { borderRadius: '10px 10px 0 0' } }
                       onClick={ () => handleMonthChange(11) }
                     >
+
                       Noviembre
+
                     </button>
                   </h2>
+
                   <div
                     id="flush-collapseEleven"
                     className="accordion-collapse collapse"
@@ -987,28 +1072,36 @@ const MonthComponent = () => {
                             <span>{ dayIndex + 1 }</span>
 
                             <div className="attendance-info mt-2">
-                              { filteredData.map((data) => {
-                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                              {
+
+                                filteredData.map((data) => {
+                                  const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                                  const monthWorked = parseInt(data.controlDate.split('-')[1])
 
 
-                                if (dayWorked === dayIndex + 1) {
-                                  return (
-                                    <div
-                                      key={ dayWorked }
-                                      className="attendance-day border border-secondary"
-                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                                      title="Asistencia confirmada"
+                                  if (monthWorked == 11) {
+                                    if (dayWorked === dayIndex + 1) {
+                                      return (
+                                        <div
+                                          key={ dayWorked }
+                                          className="attendance-day border border-secondary"
+                                          style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                          title="Asistencia confirmada"
 
-                                    />
-                                  );
-                                }
-                                return null;
-                              }) }
+                                        />
+                                      );
+                                    }
+                                  }
+
+
+                                  return null;
+                                }) }
                             </div>
                           </div>
                         )) }
                       </div>
                     </div>
+
                   </div>
                 </div>
 
@@ -1025,9 +1118,12 @@ const MonthComponent = () => {
                       style={ { borderRadius: '10px 10px 0 0' } }
                       onClick={ () => handleMonthChange(12) }
                     >
+
                       Diciembre
+
                     </button>
                   </h2>
+
                   <div
                     id="flush-collapseTwelve"
                     className="accordion-collapse collapse"
@@ -1039,26 +1135,35 @@ const MonthComponent = () => {
                       <div className="row">
                         { Array.from({ length: 31 }, (_, dayIndex) => (
                           <div key={ dayIndex } className="col p-2 d-flex flex-column align-items-center">
+
                             <span>{ dayIndex + 1 }</span>
 
                             <div className="attendance-info mt-2">
-                              { filteredData.map((data) => {
-                                const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                              { console.log(filteredData) }
+                              {
+                                filteredData.map((data) => {
+                                  const dayWorked = parseInt(data.controlDate.split('-')[2]);
+                                  const monthWorked = parseInt(data.controlDate.split('-')[1])
 
-                                if (dayWorked === dayIndex + 1) {
-                                  return (
-                                    <div
-                                      key={ dayWorked }
-                                      className="attendance-day border border-secondary"
-                                      style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
-                                      title="Asistencia confirmada"
 
-                                    />
-                                  );
-                                }
-                                return null;
-                              }) }
+                                  if (monthWorked == 12) {
+                                    if (dayWorked === dayIndex + 1) {
+                                      return (
+                                        <div
+                                          key={ dayWorked }
+                                          className="attendance-day border border-secondary"
+                                          style={ { backgroundColor: data.controlType && data.controlType.color ? data.controlType.color : 'defaultColor' } }
+                                          title="Asistencia confirmada"
+
+                                        />
+                                      );
+                                    }
+                                  }
+                                  return null;
+                                })
+                              }
                             </div>
+
                           </div>
                         )) }
                       </div>
