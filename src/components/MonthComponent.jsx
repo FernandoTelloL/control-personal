@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { WorkerContext } from '../context/WorkerContext';
 import { TiposControlContext } from '../context/TiposControlContext';
+import { show_alerta } from '../helpers/functions';
 
 
 const MonthComponent = () => {
@@ -194,8 +195,10 @@ const MonthComponent = () => {
       const response = await fetch(`https://ciudadania-production.up.railway.app/api/task-control-employee-search?dni=${searchDNI}&year=1&month=1&type-control=1`);
       console.log(response)
 
-      if (!response.ok) {
-        throw new Error(`DNI NO CORRESPONDE A NINGUN TRABAJADOR`);
+      if (response.ok == false) {
+        show_alerta('Trabajador no encontrado', 'error')
+        setWorker(null)
+        setSearchDNI('')
       }
 
       const dataSearchEmployee = await response.json();
@@ -224,7 +227,7 @@ const MonthComponent = () => {
       // setDataEmployee(employeeWithInputDni);
 
     } catch (error) {
-      console.error('Error al realizar la búsqueda:', error);
+      error
     }
   };
 
