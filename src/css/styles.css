@@ -13354,3 +13354,11 @@ input::before {
   background-color: green !important;
 }
 /*fin Estilos de pagina cargar excel */
+
+/* inicio estilos de tabla de resumen de dias del trabajador */
+.table-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+/* fin estilos de tabla de resumen de dias del trabajador */

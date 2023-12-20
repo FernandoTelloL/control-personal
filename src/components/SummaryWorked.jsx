@@ -60,35 +60,40 @@ export const SummaryWorked = () => {
 
     const totalDays = tableData.reduce((acc, { daysCount }) => acc + daysCount, 0);
 
-    const cellStyle = {
-      padding: '8px',
-      textAlign: 'center',
-      background: '#f2f2f2',
-    };
 
     return (
-      <div key={ controlTypeId } style={ { margin: '20px' } }>
-        <h2 style={ { color: '#333' } }>{ title }</h2>
-        <table border="1" style={ { width: '100%', borderCollapse: 'collapse' } }>
-          <thead>
-            <tr>
-              <th style={ cellStyle }>Mes</th>
-              { tableData.map(({ monthName, key }) => (
-                <th key={ key } style={ cellStyle }>{ monthName }</th>
-              )) }
-              <th style={ cellStyle }>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style={ cellStyle }>Días</td>
-              { tableData.map(({ daysCount, key }) => (
-                <td key={ key } style={ cellStyle }>{ daysCount }</td>
-              )) }
-              <td style={ cellStyle }>{ totalDays }</td>
-            </tr>
-          </tbody>
-        </table>
+      <div key={ controlTypeId } className="mt-4">
+        <h6 className="mb-3 fw-bold table-title">{ title }</h6>
+        <div className="table-responsive">
+          <table className="table table-bordered table-sm"> {/* Agregar la clase table-sm para reducir el tamaño de la tabla */ }
+            <thead>
+              <tr>
+                <th className="small">Mes</th>
+                { Array.from({ length: 12 }, (_, month) => (
+                  <th key={ month + 1 } className="bg-light text-center small">
+                    { new Date(2023, month, 1).toLocaleString('default', { month: 'short' }) }
+                  </th>
+                )) }
+                <th className="bg-light text-center small">
+                  Total
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="small">Días</td>
+                { Array.from({ length: 12 }, (_, month) => (
+                  <td key={ month + 1 } className="text-center small">
+                    { getDaysCountForMonthAndYear(year, month + 1, controlTypeId, userDni) }
+                  </td>
+                )) }
+                <td className="bg-light text-center small">
+                  { totalDays }
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   };
