@@ -35,6 +35,11 @@ const MonthComponent = () => {
 
   // estado para modal de opciones de impresion
   const [showModalOpciones, setShowModalOpciones] = useState(false);
+
+  // estado para modal de meses del año
+  const [showModalMonths, setShowModalMonths] = useState(false);
+
+
   const [selectedControlTypes, setSelectedControlTypes] = useState([]);
   console.log(selectedControlTypes)
 
@@ -139,6 +144,17 @@ const MonthComponent = () => {
 
   const handleModalOpcionesClose = () => {
     setShowModalOpciones(false);
+  };
+
+
+
+  // funciones para mostrar u ocultar modal de meses del año
+  const handleModalMonthsOpen = () => {
+    setShowModalMonths(true);
+  };
+
+  const handleModalMonthsClose = () => {
+    setShowModalMonths(false);
   };
 
 
@@ -366,7 +382,7 @@ const MonthComponent = () => {
                 <div className="modal-body">
 
                   {/* combo mes */ }
-                  <div className="form-group">
+                  {/* <div className="form-group">
                     <label htmlFor="selectMonth" className="form-label fs-7 me-2">Mes:</label>
                     <select className="form-select fs-7" id="selectMonth" onChange={ e => handleComboMonthChange(e.target.value) }>
                       <option value="0">Todos</option>
@@ -383,7 +399,150 @@ const MonthComponent = () => {
                       <option value="11">Noviembre</option>
                       <option value="12">Diciembre</option>
                     </select>
+                  </div> */}
+
+
+
+                  {/* // ... (tu código anterior) */ }
+
+                  <div className="col-sm-12 d-flex align-items-center mt-3 mt-sm-0">
+                    <button
+                      type="button"
+                      className="btn btn-warning fs-7 border-3 w-100"
+                      onClick={ handleModalMonthsOpen }
+                    >
+
+                      Meses
+
+                    </button>
+
+                    {/* Modal para seleccionar meses */ }
+                    <div className={ `modal fade ${showModalMonths ? 'show' : ''}` } tabIndex="-1" role="dialog" style={ { display: showModalMonths ? 'block' : 'none' } }>
+                      <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                          <div className="modal-header">
+                            <h5 className="modal-title">Seleccionar Meses</h5>
+                            <button type="button" className="btn-close" onClick={ handleModalMonthsClose } aria-label="Close"></button>
+                          </div>
+                          <div className="modal-body">
+
+                            {/* Lista de meses con checkboxes */ }
+                            <div className="form-check">
+                              <input className="form-check-input" type="checkbox" id="checkboxTodos" value="-1" />
+                              <label className="form-check-label" htmlFor="checkboxTodos">
+                                Todos los meses del año
+                              </label>
+                            </div>
+
+                            <div className="form-check">
+                              <input className="form-check-input" type="checkbox" id="checkboxEnero" value="1" />
+                              <label className="form-check-label" htmlFor="checkboxEnero">
+                                Enero
+                              </label>
+                            </div>
+
+                            <div className="form-check">
+                              <input className="form-check-input" type="checkbox" id="checkboxFebrero" value="2" />
+                              <label className="form-check-label" htmlFor="checkboxFebrero">
+                                Febrero
+                              </label>
+                            </div>
+
+
+                            <div className="form-check">
+                              <input className="form-check-input" type="checkbox" id="checkboxMarzo" value="3" />
+                              <label className="form-check-label" htmlFor="checkboxMarzo">
+                                Marzo
+                              </label>
+                            </div>
+
+
+                            <div className="form-check">
+                              <input className="form-check-input" type="checkbox" id="checkboxAbril" value="4" />
+                              <label className="form-check-label" htmlFor="checkboxAbril">
+                                Abril
+                              </label>
+                            </div>
+
+
+                            <div className="form-check">
+                              <input className="form-check-input" type="checkbox" id="checkboxMayo" value="5" />
+                              <label className="form-check-label" htmlFor="checkboxMayo">
+                                Mayo
+                              </label>
+                            </div>
+
+
+                            <div className="form-check">
+                              <input className="form-check-input" type="checkbox" id="checkboxJunio" value="6" />
+                              <label className="form-check-label" htmlFor="checkboxJunio">
+                                Junio
+                              </label>
+                            </div>
+
+
+                            <div className="form-check">
+                              <input className="form-check-input" type="checkbox" id="checkboxJulio" value="7" />
+                              <label className="form-check-label" htmlFor="checkboxJulio">
+                                Julio
+                              </label>
+                            </div>
+
+
+                            <div className="form-check">
+                              <input className="form-check-input" type="checkbox" id="checkboxAgosto" value="8" />
+                              <label className="form-check-label" htmlFor="checkboxAgosto">
+                                Agosto
+                              </label>
+                            </div>
+
+
+                            <div className="form-check">
+                              <input className="form-check-input" type="checkbox" id="checkboxSetiembre" value="9" />
+                              <label className="form-check-label" htmlFor="checkboxSetiembre">
+                                Setiembre
+                              </label>
+                            </div>
+
+
+                            <div className="form-check">
+                              <input className="form-check-input" type="checkbox" id="checkboxOctubre" value="10" />
+                              <label className="form-check-label" htmlFor="checkboxOctubre">
+                                Octubre
+                              </label>
+                            </div>
+
+
+                            <div className="form-check">
+                              <input className="form-check-input" type="checkbox" id="checkboxNoviembre" value="11" />
+                              <label className="form-check-label" htmlFor="checkboxNoviembre">
+                                Noviembre
+                              </label>
+                            </div>
+
+
+                            <div className="form-check">
+                              <input className="form-check-input" type="checkbox" id="checkboxDiciembre" value="12" />
+                              <label className="form-check-label" htmlFor="checkboxDiciembre">
+                                Diciembre
+                              </label>
+                            </div>
+
+
+                          </div>
+                          <div className="modal-footer">
+                            <button type="button" className="btn btn-primary" onClick={ handleModalMonthsClose }>
+                              Aplicar
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+
+                  {/* // ... (tu código posterior) */ }
+
+
 
                   {/* combo tipo de control */ }
                   <div className="col-sm-12 d-flex align-items-center mt-3">
