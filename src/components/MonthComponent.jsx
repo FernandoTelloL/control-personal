@@ -416,7 +416,9 @@ const MonthComponent = () => {
 
               < WorkerInfo worker={ worker } />
 
+              <hr />
 
+              <SummaryWorked />
 
               <hr />
 
@@ -1183,7 +1185,6 @@ const MonthComponent = () => {
 
               </div>
 
-              <SummaryWorked />
             </>
           ) :
           (<h2>Por favor introduzca los datos a buscar</h2>)

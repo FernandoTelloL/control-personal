@@ -52,18 +52,40 @@ export const SummaryWorked = () => {
 
   // Función para generar el resumen y tablas para un tipo de control específico
   const generateSummaryAndTable = (title, controlTypeId) => {
-    const totalDays = Array.from({ length: 12 }, (_, month) => {
+    const tableData = Array.from({ length: 12 }, (_, month) => {
       const monthName = new Date(2023, month, 1).toLocaleString('default', { month: 'long' });
       const daysCount = getDaysCountForMonthAndYear(year, month + 1, controlTypeId, userDni);
-      console.log(`${monthName}: ${daysCount}`);
-      return daysCount;
-    }).reduce((acc, daysCount) => acc + daysCount, 0);
+      return { monthName, daysCount, key: `${title}-${monthName}` };
+    });
 
-    console.log(`Total ${title}: ${totalDays}`);
-    console.log('----------------------');
+    const totalDays = tableData.reduce((acc, { daysCount }) => acc + daysCount, 0);
 
+    return (
+      <div key={ controlTypeId }>
+        <h2>{ title }</h2>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Mes</th>
+              { tableData.map(({ monthName, key }) => (
+                <th key={ key }>{ monthName }</th>
+              )) }
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Días</td>
+              { tableData.map(({ daysCount, key }) => (
+                <td key={ key }>{ daysCount }</td>
+              )) }
+              <td>{ totalDays }</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    );
   };
-
 
   return (
     <>
