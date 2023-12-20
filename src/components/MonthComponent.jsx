@@ -8,16 +8,14 @@ import { WorkerContext } from '../context/WorkerContext';
 import { TiposControlContext } from '../context/TiposControlContext';
 import { show_alerta } from '../helpers/functions';
 import { SummaryWorked } from './SummaryWorked';
+import { InfoPrintContext } from '../context/InfoPrintContext';
 
 
 const MonthComponent = () => {
   const [searchDNI, setSearchDNI] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   console.log(filteredData)
-  // const [selectedTab, setSelectedTab] = useState(controlTypes[0].type);
-  // const [daysWorked, setDaysWorked] = useState(0);
-  // const [dataEmployee, setDataEmployee] = useState(null)
-  // const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+
   // Estado para el mes actual de los acordeones
   const [currentMonth, setCurrentMonth] = useState(1); // Enero
   // Estado para cambiar el mes en el combo del header
@@ -27,9 +25,10 @@ const MonthComponent = () => {
   console.log(currentControlTypeId)
   // estado para seleccionar que meses se quiere imprimir
   const [mesImprimir, setMesImprimir] = useState(0)
-  // estado para seleccionar que año se quiere imprimir
-  const [selectedYear, setSelectedYear] = useState(2023);
-  console.log(selectedYear)
+
+  // obtengo el estado del año del contexto infoPrintProvider
+  const { anio, setAnio } = useContext(InfoPrintContext)
+  console.log(anio)
 
   const [showModal, setShowModal] = useState(false);
   const [selectedControlTypes, setSelectedControlTypes] = useState([]);
@@ -193,7 +192,7 @@ const MonthComponent = () => {
 
     try {
       // aqui la direccion del back con el ARRAY DE OBJETOS DE EMPLEADOS
-      const response = await fetch(`https://ciudadania-production.up.railway.app/api/task-control-employee-search?dni=${searchDNI}&year=1&month=1&type-control=1`);
+      const response = await fetch(`https://ciudadania-production.up.railway.app/api/task-control-employee-search?dni=${searchDNI}&year=-1&month=1&type-control=1`);
 
       if (response.ok == false) {
         show_alerta('Trabajador no encontrado', 'error')
@@ -202,10 +201,8 @@ const MonthComponent = () => {
       }
 
       const dataSearchEmployee = await response.json();
-      console.log(dataSearchEmployee.employee.dni)
-      // Encuentra el empleado con el DNI buscado
-      // const employeeWithInputDni = dataSearchEmployee.find(user => user.employee.dni === parseInt(searchDNI, 10));
 
+      // Encuentra el empleado con el DNI buscado
       if (dataSearchEmployee) {
         const employeeWithInputDni = dataSearchEmployee;
         console.log('Empleado encontrado:', employeeWithInputDni);
@@ -337,14 +334,15 @@ const MonthComponent = () => {
           <label htmlFor="selectMonth" className="form-label fs-7 me-2">Año:</label>
           <select
             className="form-control fs-7"
-            value={ selectedYear }
-            onChange={ e => setSelectedYear(e.target.value) }
+            value={ anio }
+            onChange={ e => setAnio(e.target.value) }
           >
             <option value="2023">2023</option>
             <option value="2024">2024</option>
             <option value="2025">2025</option>
             <option value="2026">2026</option>
             <option value="2027">2027</option>
+            <option value="2028">2027</option>
           </select>
 
         </div>
