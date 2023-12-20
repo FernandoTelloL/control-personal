@@ -30,7 +30,11 @@ const MonthComponent = () => {
   const { anio, setAnio } = useContext(InfoPrintContext)
   console.log(anio)
 
+  // estado para modal de tipos de control
   const [showModal, setShowModal] = useState(false);
+
+  // estado para modal de opciones de impresion
+  const [showModalOpciones, setShowModalOpciones] = useState(false);
   const [selectedControlTypes, setSelectedControlTypes] = useState([]);
   console.log(selectedControlTypes)
 
@@ -125,6 +129,16 @@ const MonthComponent = () => {
 
   const handleModalClose = () => {
     setShowModal(false);
+  };
+
+
+  // funciones para mostrar u ocultar modal de opciones de impresion
+  const handleModalOpcionesOpen = () => {
+    setShowModalOpciones(true);
+  };
+
+  const handleModalOpcionesClose = () => {
+    setShowModalOpciones(false);
   };
 
 
@@ -308,29 +322,8 @@ const MonthComponent = () => {
         </div>
 
 
-
-        {/* combo mes */ }
-        <div className="col-sm-2 d-flex align-items-center mt-3 mt-sm-0">
-          <label htmlFor="selectMonth" className="form-label fs-7 me-2">Mes:</label>
-          <select className="form-select fs-7" id="selectMonth" onChange={ e => handleComboMonthChange(e.target.value) }>
-            <option value="0">Todos</option>
-            <option value="1">Enero</option>
-            <option value="2">Febrero</option>
-            <option value="3">Marzo</option>
-            <option value="4">Abril</option>
-            <option value="5">Mayo</option>
-            <option value="6">Junio</option>
-            <option value="7">Julio</option>
-            <option value="8">Agosto</option>
-            <option value="9">Setiembre</option>
-            <option value="10">Octubre</option>
-            <option value="11">Noviembre</option>
-            <option value="12">Diciembre</option>
-          </select>
-        </div>
-
         {/* combo año */ }
-        <div className="col-sm-2 d-flex align-items-center mt-3 mt-sm-0">
+        <div className="col-sm-4 d-flex align-items-center mt-3 mt-sm-0">
           <label htmlFor="selectMonth" className="form-label fs-7 me-2">Año:</label>
           <select
             className="form-control fs-7"
@@ -347,13 +340,134 @@ const MonthComponent = () => {
 
         </div>
 
+        {/* Boton imprimir */ }
+        {/* <Link to={ worker ? `printall` : `` } className='col-sm-2'>
+          <button
+            className="btn btn-primary border border-0 fs-7 mt-3 mt-sm-0 text-white"
+            style={ { background: '#AD0506' } }
+          >
+            Imprimir
+          </button>
+        </Link> */}
+
+        {/* boton opciones de impresion */ }
+        <div className="col-sm-4 d-flex align-items-center mt-3 mt-sm-0">
+          <button type="button" className="btn btn-warning fs-7 border-3 w-100" onClick={ handleModalOpcionesOpen }>
+            Opciones impresion
+          </button>
+          {/* Modal para seleccionar opciones de IMPRESION */ }
+          <div className={ `modal fade ${showModalOpciones ? 'show' : ''}` } tabIndex="-1" role="dialog" style={ { display: showModalOpciones ? 'block' : 'none' } }>
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Opciones impresión</h5>
+                  <button type="button" className="btn-close" onClick={ handleModalOpcionesClose } aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+
+                  {/* combo mes */ }
+                  <div className="form-group">
+                    <label htmlFor="selectMonth" className="form-label fs-7 me-2">Mes:</label>
+                    <select className="form-select fs-7" id="selectMonth" onChange={ e => handleComboMonthChange(e.target.value) }>
+                      <option value="0">Todos</option>
+                      <option value="1">Enero</option>
+                      <option value="2">Febrero</option>
+                      <option value="3">Marzo</option>
+                      <option value="4">Abril</option>
+                      <option value="5">Mayo</option>
+                      <option value="6">Junio</option>
+                      <option value="7">Julio</option>
+                      <option value="8">Agosto</option>
+                      <option value="9">Setiembre</option>
+                      <option value="10">Octubre</option>
+                      <option value="11">Noviembre</option>
+                      <option value="12">Diciembre</option>
+                    </select>
+                  </div>
+
+                  {/* combo tipo de control */ }
+                  <div className="col-sm-12 d-flex align-items-center mt-3">
+                    <button type="button" className="btn btn-warning fs-7 border-3 w-100" onClick={ handleModalOpen }>
+
+                      Tipo de control
+
+                    </button>
+                  </div>
+
+                  <div className={ `modal fade ${showModal ? 'show' : ''} z-index-1` } tabIndex="-1" role="dialog" style={ { display: showModal ? 'block' : 'none' } }>
+                    <div className="modal-dialog" role="document">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h5 className="modal-title">Seleccionar Tipos de Control</h5>
+                          <button type="button" className="btn-close" onClick={ handleModalClose } aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                          { tiposControl.map((tipo) => (
+                            <div key={ tipo.id } className="form-check">
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id={ `checkbox_${tipo.id}` }
+                                value={ tipo.id }
+                                checked={ selectedControlTypes.includes(tipo.id.toString()) }
+                                onChange={ handleCheckboxChange }
+                              />
+                              <label className="form-check-label" htmlFor={ `checkbox_${tipo.id}` }>
+                                { capitalizeFirstLetter(tipo.description) }
+                              </label>
+                            </div>
+                          )) }
+                        </div>
+                        <div className="modal-footer">
+                          <button type="button" className="btn btn-primary" onClick={ handleModalClose }>
+                            Aplicar
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div className="modal-footer">
+
+                  {/* Boton imprimir */ }
+                  <Link to={ `` } className='col-sm-2'>
+                    <button
+                      className="btn btn-danger border border-0 fs-7 mt-3"
+                      onClick={ handleModalOpcionesClose }
+                    >
+
+                      Cancelar
+
+                    </button>
+                  </Link>
+
+                  {/* Boton imprimir */ }
+                  <Link to={ worker ? `printall` : `` } className='col-sm-2'>
+                    <button
+                      className="btn btn-primary border border-0 fs-7 mt-3 text-white mx-lg-3"
+                      onClick={ handleModalOpcionesClose }
+                    >
+
+                      Imprimir
+
+                    </button>
+                  </Link>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         {/* combo tipo de control */ }
-        <div className="col-sm-12 col-lg-2 d-flex align-items-center mt-3 mt-sm-0">
+        {/* <div className="col-sm-12 col-lg-2 d-flex align-items-center mt-3 mt-sm-0">
           <button type="button" className="btn btn-warning fs-7 border-3 w-100" onClick={ handleModalOpen }>
             Tipo
           </button>
 
-          <div className={ `modal fade ${showModal ? 'show' : ''}` } tabIndex="-1" role="dialog" style={ { display: showModal ? 'block' : 'none' } }>
+          <div className={ `modal fade ${showModal ? 'show' : ''} z-index-1` } tabIndex="-1" role="dialog" style={ { display: showModal ? 'block' : 'none' } }>
             <div className="modal-dialog" role="document">
               <div className="modal-content">
                 <div className="modal-header">
@@ -385,20 +499,10 @@ const MonthComponent = () => {
               </div>
             </div>
           </div>
-        </div>
-
-
-        {/* Boton imprimir */ }
-        <Link to={ worker ? `printall` : `` } className='col-sm-2'>
-          <button
-            className="btn btn-primary border border-0 fs-7 mt-3 mt-sm-0 text-white"
-            style={ { background: '#AD0506' } }
-          >
-            Imprimir
-          </button>
-        </Link>
+        </div> */}
 
       </div>
+
 
       <hr />
 
