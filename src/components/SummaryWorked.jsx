@@ -60,32 +60,39 @@ export const SummaryWorked = () => {
 
     const totalDays = tableData.reduce((acc, { daysCount }) => acc + daysCount, 0);
 
+    const cellStyle = {
+      padding: '8px',
+      textAlign: 'center',
+      background: '#f2f2f2',
+    };
+
     return (
-      <div key={ controlTypeId }>
-        <h2>{ title }</h2>
-        <table border="1">
+      <div key={ controlTypeId } style={ { margin: '20px' } }>
+        <h2 style={ { color: '#333' } }>{ title }</h2>
+        <table border="1" style={ { width: '100%', borderCollapse: 'collapse' } }>
           <thead>
             <tr>
-              <th>Mes</th>
+              <th style={ cellStyle }>Mes</th>
               { tableData.map(({ monthName, key }) => (
-                <th key={ key }>{ monthName }</th>
+                <th key={ key } style={ cellStyle }>{ monthName }</th>
               )) }
-              <th>Total</th>
+              <th style={ cellStyle }>Total</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Días</td>
+              <td style={ cellStyle }>Días</td>
               { tableData.map(({ daysCount, key }) => (
-                <td key={ key }>{ daysCount }</td>
+                <td key={ key } style={ cellStyle }>{ daysCount }</td>
               )) }
-              <td>{ totalDays }</td>
+              <td style={ cellStyle }>{ totalDays }</td>
             </tr>
           </tbody>
         </table>
       </div>
     );
   };
+
 
   return (
     <>
