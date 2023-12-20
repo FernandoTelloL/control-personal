@@ -10,7 +10,6 @@ export const WorkerProvider = ({ children }) => {
 
   const [worker, setWorker] = useState()
 
-
   return (
     <WorkerContext.Provider value={ { worker, setWorker } }>
       { children }

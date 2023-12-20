@@ -5,15 +5,12 @@ import { WorkerContext } from '../../context/WorkerContext';
 
 
 export const PrintAll = () => {
-  const year = 2023; // Puedes ajustar el año según tus necesidades
-  const controlTypeId = 1; // Puedes ajustar el controlTypeId según tus necesidades
-  const userDni = 72661345; // Puedes ajustar el dni del usuario según tus necesidades
-
-
   // uso la informacion de WorkerContext
   const { worker } = useContext(WorkerContext)
 
-  // uso la informacion de 
+  const year = 2023; // Puedes ajustar el año según tus necesidades
+  const controlTypeId = 1; // Puedes ajustar el controlTypeId según tus necesidades
+  const userDni = worker.employee.dni; // Puedes ajustar el dni del usuario según tus necesidades
 
 
   // Funcion para generar las tablas dependiendo del año, mes tipo de control, y dni
@@ -152,6 +149,7 @@ export const PrintAll = () => {
       <></>
     )
   }
+
 
   return (
     <>

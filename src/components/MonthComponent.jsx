@@ -7,6 +7,7 @@ import { useContext } from 'react';
 import { WorkerContext } from '../context/WorkerContext';
 import { TiposControlContext } from '../context/TiposControlContext';
 import { show_alerta } from '../helpers/functions';
+import { SummaryWorked } from './SummaryWorked';
 
 
 const MonthComponent = () => {
@@ -213,9 +214,10 @@ const MonthComponent = () => {
         const taskControlList = employeeWithInputDni.taskControlList;
         console.log('Lista de tareas:', taskControlList);
 
-        // ... Resto de tu lógica ...
-
         setWorker(employeeWithInputDni)
+
+        // limpio el input dni
+        setSearchDNI('')
       } else {
         setWorker(null)
         return
@@ -302,6 +304,7 @@ const MonthComponent = () => {
             >
 
               Buscar
+
             </button>
           </div>
 
@@ -1179,11 +1182,14 @@ const MonthComponent = () => {
 
 
               </div>
+
+              <SummaryWorked />
             </>
           ) :
           (<h2>Por favor introduzca los datos a buscar</h2>)
 
       }
+
 
     </div >
 
