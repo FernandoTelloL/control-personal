@@ -223,7 +223,7 @@ const MonthComponent = () => {
 
     try {
       // aqui la direccion del back con el ARRAY DE OBJETOS DE EMPLEADOS
-      const response = await fetch(`https://ciudadania-production.up.railway.app/api/task-control-employee-search?dni=${searchDNI}&year=-1&month=1&type-control=1`);
+      const response = await fetch(`https://ciudadania-production.up.railway.app/api/task-control-employee-search?dni=${searchDNI}&year=${anio}&month=1&type-control=1`);
 
       if (response.ok == false) {
         show_alerta('Trabajador no encontrado', 'error')
@@ -348,6 +348,7 @@ const MonthComponent = () => {
             value={ anio }
             onChange={ e => setAnio(e.target.value) }
           >
+            <option value="2023">2022</option>
             <option value="2023">2023</option>
             <option value="2024">2024</option>
             <option value="2025">2025</option>
