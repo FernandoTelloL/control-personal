@@ -8,7 +8,7 @@ import { WorkerContext } from "./WorkerContext"
 // Este es un high Order Component
 export const WorkerProvider = ({ children }) => {
 
-  const [worker, setWorker] = useState()
+  const [worker, setWorker] = useState(null)
 
   return (
     <WorkerContext.Provider value={ { worker, setWorker } }>
