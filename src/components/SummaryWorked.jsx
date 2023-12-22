@@ -3,12 +3,15 @@ import { useContext } from 'react';
 import { WorkerContext } from '../context/WorkerContext';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { InfoPrintContext } from '../context/InfoPrintContext';
 
 export const SummaryWorked = () => {
 
 
   // uso la informacion de WorkerContext
   const { worker } = useContext(WorkerContext)
+  const { anio } = useContext(InfoPrintContext)
+
   let userDni = 0
 
   // estado para guardar los tipos de control
@@ -33,8 +36,6 @@ export const SummaryWorked = () => {
 
 
 
-  const year = 2023; // Puedes ajustar el año según tus necesidades
-  const controlTypeId = 1; // Puedes ajustar el controlTypeId según tus necesidades
 
   if (worker !== null) {
     userDni = worker.employee.dni;
@@ -58,8 +59,8 @@ export const SummaryWorked = () => {
     // Función para generar el resumen y tablas para un tipo de control específico
     const generateSummaryAndTable = (title, controlTypeId) => {
       const tableData = Array.from({ length: 12 }, (_, month) => {
-        const monthName = new Date(2023, month, 1).toLocaleString('default', { month: 'long' });
-        const daysCount = getDaysCountForMonthAndYear(year, month + 1, controlTypeId, userDni);
+        const monthName = new Date(anio, month, 1).toLocaleString('default', { month: 'long' });
+        const daysCount = getDaysCountForMonthAndYear(anio, month, controlTypeId, userDni);
         return { monthName, daysCount, key: `${title}-${monthName}` };
       });
 
@@ -70,13 +71,13 @@ export const SummaryWorked = () => {
         <div key={ controlTypeId } className="mt-4">
           <h6 className="mb-3 fw-bold table-title">{ title }</h6>
           <div className="table-responsive">
-            <table className="table table-bordered table-sm"> {/* Agregar la clase table-sm para reducir el tamaño de la tabla */ }
+            <table className="table table-bordered table-sm">
               <thead>
                 <tr>
                   <th className="small">Mes</th>
                   { Array.from({ length: 12 }, (_, month) => (
                     <th key={ month + 1 } className="bg-light text-center small">
-                      { new Date(2023, month, 1).toLocaleString('default', { month: 'short' }) }
+                      { new Date(anio, month, 1).toLocaleString('default', { month: 'short' }) }
                     </th>
                   )) }
                   <th className="bg-light text-center small">
@@ -89,7 +90,7 @@ export const SummaryWorked = () => {
                   <td className="small">Días</td>
                   { Array.from({ length: 12 }, (_, month) => (
                     <td key={ month + 1 } className="text-center small">
-                      { getDaysCountForMonthAndYear(year, month + 1, controlTypeId, userDni) }
+                      { getDaysCountForMonthAndYear(anio, month + 1, controlTypeId, userDni) }
                     </td>
                   )) }
                   <td className="bg-light text-center small">

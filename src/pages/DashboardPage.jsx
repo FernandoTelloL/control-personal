@@ -247,7 +247,7 @@ export const DashboardPage = () => {
 
           {/* inicio contenido principal dashboard */ }
           <main>
-            <div className="container-fluid px-4">
+            <div className="container-fluid px-4 pb-5">
               {/* <h1 className="mt-4">Dashboard</h1> */ }
 
               {/* <TableJson /> */ }
