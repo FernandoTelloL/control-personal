@@ -26,7 +26,8 @@ const MonthComponent = () => {
   const [currentControlTypeId, setCurrentControlTypeId] = useState(null);
   console.log(currentControlTypeId)
   // estado para seleccionar que meses se quiere imprimir
-  const [mesImprimir, setMesImprimir] = useState(0)
+  const [mesImprimir, setMesImprimir] = useState([])
+  console.log('mes a imprimir: ' + mesImprimir)
 
   // obtengo el estado del año del contexto infoPrintProvider
   const { anio, setAnio } = useContext(InfoPrintContext)
@@ -308,6 +309,33 @@ const MonthComponent = () => {
   };
 
 
+  // funcion para manejar el checked de los meses para seleccionar que imprimir
+  const handleCheckboxChangeMonth = (event) => {
+    const mesSeleccionado = parseInt(event.target.value, 10);
+    const isChecked = event.target.checked;
+
+    if (mesSeleccionado === -1) {
+      // Manejar el caso de "Todos los meses"
+      if (isChecked) {
+        // Si se marca "Todos los meses", agregar todos los meses al array
+        setMesImprimir([...Array(12).keys()].map((mes) => mes + 1));
+      } else {
+        // Si se desmarca "Todos los meses", vaciar el array
+        setMesImprimir([]);
+      }
+    } else {
+      // Manejar otros meses individualmente
+      if (isChecked) {
+        // Si se marca un mes específico, agregarlo al array
+        setMesImprimir([...mesImprimir, mesSeleccionado]);
+      } else {
+        // Si se desmarca un mes específico, quitarlo del array
+        setMesImprimir(mesImprimir.filter((mes) => mes !== mesSeleccionado));
+      }
+    }
+  }
+
+
   return (
     <div className="container mt-4">
 
@@ -386,32 +414,8 @@ const MonthComponent = () => {
                   <h5 className="modal-title">Opciones impresión</h5>
                   <button type="button" className="btn-close" onClick={ handleModalOpcionesClose } aria-label="Close"></button>
                 </div>
+
                 <div className="modal-body">
-
-                  {/* combo mes */ }
-                  {/* <div className="form-group">
-                    <label htmlFor="selectMonth" className="form-label fs-7 me-2">Mes:</label>
-                    <select className="form-select fs-7" id="selectMonth" onChange={ e => handleComboMonthChange(e.target.value) }>
-                      <option value="0">Todos</option>
-                      <option value="1">Enero</option>
-                      <option value="2">Febrero</option>
-                      <option value="3">Marzo</option>
-                      <option value="4">Abril</option>
-                      <option value="5">Mayo</option>
-                      <option value="6">Junio</option>
-                      <option value="7">Julio</option>
-                      <option value="8">Agosto</option>
-                      <option value="9">Setiembre</option>
-                      <option value="10">Octubre</option>
-                      <option value="11">Noviembre</option>
-                      <option value="12">Diciembre</option>
-                    </select>
-                  </div> */}
-
-
-
-                  {/* // ... (tu código anterior) */ }
-
                   <div className="col-sm-12 d-flex align-items-center mt-3 mt-sm-0">
                     <button
                       type="button"
@@ -435,21 +439,39 @@ const MonthComponent = () => {
 
                             {/* Lista de meses con checkboxes */ }
                             <div className="form-check">
-                              <input className="form-check-input" type="checkbox" id="checkboxTodos" value="-1" />
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="checkboxTodos"
+                                value="-1"
+                                onChange={ handleCheckboxChangeMonth }
+                              />
                               <label className="form-check-label" htmlFor="checkboxTodos">
                                 Todos los meses del año
                               </label>
                             </div>
 
                             <div className="form-check">
-                              <input className="form-check-input" type="checkbox" id="checkboxEnero" value="1" />
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="checkboxEnero"
+                                value="1"
+                                onChange={ handleCheckboxChangeMonth }
+                              />
                               <label className="form-check-label" htmlFor="checkboxEnero">
                                 Enero
                               </label>
                             </div>
 
                             <div className="form-check">
-                              <input className="form-check-input" type="checkbox" id="checkboxFebrero" value="2" />
+                              <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="checkboxFebrero"
+                                value="2"
+                                onChange={ handleCheckboxChangeMonth }
+                              />
                               <label className="form-check-label" htmlFor="checkboxFebrero">
                                 Febrero
                               </label>
@@ -457,7 +479,7 @@ const MonthComponent = () => {
 
 
                             <div className="form-check">
-                              <input className="form-check-input" type="checkbox" id="checkboxMarzo" value="3" />
+                              <input className="form-check-input" type="checkbox" id="checkboxMarzo" value="3" onChange={ handleCheckboxChangeMonth } />
                               <label className="form-check-label" htmlFor="checkboxMarzo">
                                 Marzo
                               </label>
@@ -465,7 +487,7 @@ const MonthComponent = () => {
 
 
                             <div className="form-check">
-                              <input className="form-check-input" type="checkbox" id="checkboxAbril" value="4" />
+                              <input className="form-check-input" type="checkbox" id="checkboxAbril" value="4" onChange={ handleCheckboxChangeMonth } />
                               <label className="form-check-label" htmlFor="checkboxAbril">
                                 Abril
                               </label>
@@ -473,7 +495,7 @@ const MonthComponent = () => {
 
 
                             <div className="form-check">
-                              <input className="form-check-input" type="checkbox" id="checkboxMayo" value="5" />
+                              <input className="form-check-input" type="checkbox" id="checkboxMayo" value="5" onChange={ handleCheckboxChangeMonth } />
                               <label className="form-check-label" htmlFor="checkboxMayo">
                                 Mayo
                               </label>
@@ -481,7 +503,7 @@ const MonthComponent = () => {
 
 
                             <div className="form-check">
-                              <input className="form-check-input" type="checkbox" id="checkboxJunio" value="6" />
+                              <input className="form-check-input" type="checkbox" id="checkboxJunio" value="6" onChange={ handleCheckboxChangeMonth } />
                               <label className="form-check-label" htmlFor="checkboxJunio">
                                 Junio
                               </label>
@@ -489,7 +511,7 @@ const MonthComponent = () => {
 
 
                             <div className="form-check">
-                              <input className="form-check-input" type="checkbox" id="checkboxJulio" value="7" />
+                              <input className="form-check-input" type="checkbox" id="checkboxJulio" value="7" onChange={ handleCheckboxChangeMonth } />
                               <label className="form-check-label" htmlFor="checkboxJulio">
                                 Julio
                               </label>
@@ -497,7 +519,7 @@ const MonthComponent = () => {
 
 
                             <div className="form-check">
-                              <input className="form-check-input" type="checkbox" id="checkboxAgosto" value="8" />
+                              <input className="form-check-input" type="checkbox" id="checkboxAgosto" value="8" onChange={ handleCheckboxChangeMonth } />
                               <label className="form-check-label" htmlFor="checkboxAgosto">
                                 Agosto
                               </label>
@@ -505,7 +527,7 @@ const MonthComponent = () => {
 
 
                             <div className="form-check">
-                              <input className="form-check-input" type="checkbox" id="checkboxSetiembre" value="9" />
+                              <input className="form-check-input" type="checkbox" id="checkboxSetiembre" value="9" onChange={ handleCheckboxChangeMonth } />
                               <label className="form-check-label" htmlFor="checkboxSetiembre">
                                 Setiembre
                               </label>
@@ -513,7 +535,7 @@ const MonthComponent = () => {
 
 
                             <div className="form-check">
-                              <input className="form-check-input" type="checkbox" id="checkboxOctubre" value="10" />
+                              <input className="form-check-input" type="checkbox" id="checkboxOctubre" value="10" onChange={ handleCheckboxChangeMonth } />
                               <label className="form-check-label" htmlFor="checkboxOctubre">
                                 Octubre
                               </label>
@@ -521,7 +543,7 @@ const MonthComponent = () => {
 
 
                             <div className="form-check">
-                              <input className="form-check-input" type="checkbox" id="checkboxNoviembre" value="11" />
+                              <input className="form-check-input" type="checkbox" id="checkboxNoviembre" value="11" onChange={ handleCheckboxChangeMonth } />
                               <label className="form-check-label" htmlFor="checkboxNoviembre">
                                 Noviembre
                               </label>
@@ -529,7 +551,7 @@ const MonthComponent = () => {
 
 
                             <div className="form-check">
-                              <input className="form-check-input" type="checkbox" id="checkboxDiciembre" value="12" />
+                              <input className="form-check-input" type="checkbox" id="checkboxDiciembre" value="12" onChange={ handleCheckboxChangeMonth } />
                               <label className="form-check-label" htmlFor="checkboxDiciembre">
                                 Diciembre
                               </label>
