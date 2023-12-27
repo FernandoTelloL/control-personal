@@ -54,6 +54,9 @@ const MonthComponent = () => {
   // uso la informacion de TiposControlContext
   const { setTiposControl, tiposControl } = useContext(TiposControlContext)
 
+  // estado usado en funcion para imprimir
+  const [datosControl, setDatosControl] = useState()
+
 
   // useEffect(() => {
   //   handleTabClick(currentControlTypeId);
@@ -280,9 +283,9 @@ const MonthComponent = () => {
 
 
   // Función para manejar el cambio de mes en tab
-  const handleComboMonthChange = (month) => {
-    setCurrentComboMonth(month);
-  };
+  // const handleComboMonthChange = (month) => {
+  //   setCurrentComboMonth(month);
+  // };
 
 
   // Funcion para que el TAB tenga la funcionalidad de buscar por tipo de control
@@ -333,6 +336,23 @@ const MonthComponent = () => {
         setMesImprimir(mesImprimir.filter((mes) => mes !== mesSeleccionado));
       }
     }
+  }
+
+
+  // Funcion para imprimir despuesd de seleccionar segun los checkbox de mes y tipos de control
+  const handleImprimir = () => {
+    // Filtrar los registros de control
+    const registrosFiltrados = worker.taskControlList.filter((registro) => {
+      // Verificar si el mes está seleccionado
+      const mesSeleccionado = mesImprimir.includes(Number(registro.controlDate.substring(5, 7)));
+      console.log(mesSeleccionado)
+      // Verificar si el tipo de control está seleccionado
+      const tipoControlSeleccionado = selectedControlTypes.includes((registro.controlType.id).toString());
+      console.log(tipoControlSeleccionado)
+      // Devolver true si ambos criterios se cumplen
+      return mesSeleccionado && tipoControlSeleccionado;
+    });
+    console.log(registrosFiltrados);
   }
 
 
@@ -631,13 +651,15 @@ const MonthComponent = () => {
                   </Link>
 
                   {/* Boton imprimir */ }
-                  <Link to={ worker ? `printall` : `` } className='col-sm-2'>
+                  {/* <Link to={ worker ? `printall` : `` } className='col-sm-2'> */ }
+                  <Link to={ worker ? `` : `` } className='col-sm-2'>
                     <button
-                      className="btn btn-primary border border-0 fs-7 mt-3 text-white mx-lg-3"
-                      onClick={ handleModalOpcionesClose }
+                      className="btn btn-primary border border-0 fs-7 mt-3 text-white mx-lg-2"
+                      // onClick={ handleModalOpcionesClose handleImprimir }
+                      onClick={ handleImprimir }
                     >
 
-                      Imprimir
+                      Imprimirr
 
                     </button>
                   </Link>
