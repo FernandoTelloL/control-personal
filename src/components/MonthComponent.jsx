@@ -14,6 +14,7 @@ import { InfoPrintContext } from '../context/InfoPrintContext';
 
 const MonthComponent = () => {
   const [searchDNI, setSearchDNI] = useState('');
+  console.log(searchDNI)
   const [filteredData, setFilteredData] = useState([]);
   console.log(filteredData)
   let contadorDeDias = null;
@@ -351,8 +352,8 @@ const MonthComponent = () => {
 
         <div className="col-sm-3 d-flex align-items-center mt-3 mt-sm-0">
           {/* boton buscar */ }
-          {/* <button className="btn btn-outline-secondary" type="button" onClick={ handleSearchClick }> */ }
           <button
+            disabled={ searchDNI === '' }
             className="btn btn-outline-secondary w-100 text-white border border-0 fs-7"
             type="button"
             style={ { background: '#AD0506' } }
