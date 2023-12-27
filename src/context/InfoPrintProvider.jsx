@@ -16,9 +16,11 @@ export const InfoPrintProvider = ({ children }) => {
   const [meses, setMeses] = useState([])
   const [anio, setAnio] = useState(yearActual)
   const [tipoControl, setTipoControl] = useState([])
+  const [registrosFiltrados, setRegistrosFiltrados] = useState([])
+
 
   return (
-    <InfoPrintContext.Provider value={ { meses, setMeses, anio, setAnio, tipoControl, setTipoControl } }>
+    <InfoPrintContext.Provider value={ { meses, setMeses, anio, setAnio, tipoControl, setTipoControl, registrosFiltrados, setRegistrosFiltrados } }>
       { children }
     </InfoPrintContext.Provider>
   )

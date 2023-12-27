@@ -30,7 +30,7 @@ const MonthComponent = () => {
   console.log('mes a imprimir: ' + mesImprimir)
 
   // obtengo el estado del año del contexto infoPrintProvider
-  const { anio, setAnio } = useContext(InfoPrintContext)
+  const { anio, setAnio, registrosFiltrados, setRegistrosFiltrados } = useContext(InfoPrintContext)
   console.log(anio)
 
   // estado para modal de tipos de control
@@ -341,6 +341,7 @@ const MonthComponent = () => {
 
   // Funcion para imprimir despuesd de seleccionar segun los checkbox de mes y tipos de control
   const handleImprimir = () => {
+    handleModalOpcionesClose()
     // Filtrar los registros de control
     const registrosFiltrados = worker.taskControlList.filter((registro) => {
       // Verificar si el mes está seleccionado
@@ -353,8 +354,14 @@ const MonthComponent = () => {
       return mesSeleccionado && tipoControlSeleccionado;
     });
     console.log(registrosFiltrados);
-  }
+    registrosFiltrados.forEach((registro) => {
+      console.log(`Fecha: ${registro.controlDate}, Tipo de Control: ${registro.controlType.description}`);
+      // Agrega más información según tus necesidades
+    });
 
+    setRegistrosFiltrados(registrosFiltrados)
+  }
+  console.log(registrosFiltrados)
 
   return (
     <div className="container mt-4">
@@ -651,8 +658,8 @@ const MonthComponent = () => {
                   </Link>
 
                   {/* Boton imprimir */ }
-                  {/* <Link to={ worker ? `printall` : `` } className='col-sm-2'> */ }
-                  <Link to={ worker ? `` : `` } className='col-sm-2'>
+                  <Link to={ worker ? `printall` : `` } className='col-sm-2'>
+                    {/* <Link to={ worker ? `` : `` } className='col-sm-2'> */ }
                     <button
                       className="btn btn-primary border border-0 fs-7 mt-3 text-white mx-lg-2"
                       // onClick={ handleModalOpcionesClose handleImprimir }

@@ -12706,6 +12706,14 @@ fieldset:disabled .btn {
   .btn-print-container {
     display: none !important;
   }
+  
+  .filter-container {
+    pageBreakBefore: 'always'
+  }
+
+  #layoutSidenav_nav {
+    display: none !important
+  }
 
   nav.sb-topnav.navbar.navbar-expand {
     display: none !important;
@@ -12750,6 +12758,8 @@ fieldset:disabled .btn {
   .d-print-none {
     display: none !important;
   }
+
+
 }
 
 html,
@@ -13362,6 +13372,24 @@ input::before {
   text-overflow: ellipsis;
 }
 /* fin estilos de tabla de resumen de dias del trabajador */
+
+/* inicio fechas de imprimir */
+.filter-container {
+  display: flex;
+    gap: 20px;
+}
+
+.filter-item {
+  border: 1px solid gray;
+    padding: 20px;
+}
+
+.filter-title {
+  font-weight: 700;
+    margin-bottom: 20px;
+    border-bottom: 1px solid gray;
+}
+/* fin fechas de imprimir */
 
 .overflow-wrap-anywhere {
   overflow-wrap: anywhere;
