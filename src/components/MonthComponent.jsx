@@ -122,7 +122,7 @@ const MonthComponent = () => {
 
 
   // funcion que llama al hacer click en los checkbox del modal de los tipos de control para imprimir
-  const handleCheckboxChange = (event) => {
+  const handleCheckboxChangeType = (event) => {
     const value = event.target.value;
     if (selectedControlTypes.includes(value)) {
       setSelectedControlTypes(selectedControlTypes.filter(type => type !== value));
@@ -598,7 +598,7 @@ const MonthComponent = () => {
                                 id={ `checkbox_${tipo.id}` }
                                 value={ tipo.id }
                                 checked={ selectedControlTypes.includes(tipo.id.toString()) }
-                                onChange={ handleCheckboxChange }
+                                onChange={ handleCheckboxChangeType }
                               />
                               <label className="form-check-label" htmlFor={ `checkbox_${tipo.id}` }>
                                 { capitalizeFirstLetter(tipo.description) }
