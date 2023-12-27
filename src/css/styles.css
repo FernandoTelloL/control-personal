@@ -13362,3 +13362,7 @@ input::before {
   text-overflow: ellipsis;
 }
 /* fin estilos de tabla de resumen de dias del trabajador */
+
+.overflow-wrap-anywhere {
+  overflow-wrap: anywhere;
+}

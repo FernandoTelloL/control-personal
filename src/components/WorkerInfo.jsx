@@ -34,7 +34,7 @@ export const WorkerInfo = () => {
           { <img
             src={ worker.employee.photo ? worker.employee.photo : userPhoto }
             alt="Foto del trabajador" className="img-thumbnail"
-            style={ { width: '200px', height: 'auto', objectFit: 'cover', objectPosition: 'center', borderRadius: '50%' } }
+            style={ { width: '200px', height: '200px', objectFit: 'cover', objectPosition: 'center', borderRadius: '50%' } }
           /> }
         </div>
 
@@ -71,12 +71,12 @@ export const WorkerInfo = () => {
 
           <div className="worker-information d-flex justify-content-start">
             <p className='w-50'>Email: </p>
-            <p>{ worker.employee.email.toLowerCase() }</p>
+            <p className='w-50 overflow-wrap-anywhere'>{ worker.employee.email.toLowerCase() }</p>
           </div>
 
           <div className="worker-information d-flex justify-content-start">
             <p className='w-50'>Dirección:</p>
-            <p> { capitalizeFirstLetter(worker.employee.address) }</p>
+            <p className='w-50 overflow-wrap-anywhere'> { capitalizeFirstLetter(worker.employee.address) }</p>
           </div>
 
           <div className="worker-information d-flex justify-content-start">
@@ -137,7 +137,7 @@ export const WorkerInfo = () => {
           </div>
 
           <div className="worker-information d-flex justify-content-start">
-            <p className='w-50'>Borceguíes: { worker.employee.borceguies }</p>
+            <p className='w-50'>Borceguíes:</p>
             <p> { worker.employee.borceguies }</p>
           </div>
 
