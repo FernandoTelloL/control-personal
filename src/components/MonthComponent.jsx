@@ -368,8 +368,15 @@ const MonthComponent = () => {
 
         {/* boton opciones de impresion */ }
         <div className="col-sm-3 d-flex align-items-center mt-3 mt-sm-0">
-          <button type="button" className="btn btn-warning fs-7 border-3 w-100" onClick={ handleModalOpcionesOpen }>
+          <button
+            type="button"
+            disabled={ worker === null }
+            className="btn btn-warning fs-7 border-3 w-100"
+            onClick={ handleModalOpcionesOpen }
+          >
+
             Imprimir
+
           </button>
           {/* Modal para seleccionar opciones de IMPRESION */ }
           <div className={ `modal fade ${showModalOpciones ? 'show' : ''}` } tabIndex="-1" role="dialog" style={ { display: showModalOpciones ? 'block' : 'none' } }>
