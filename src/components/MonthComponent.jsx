@@ -313,42 +313,26 @@ const MonthComponent = () => {
       {/* header con filtros de busqueda */ }
       <div className="form-group row mb-5 mt-5">
 
-        {/* input buscar por DNI */ }
 
-        <div className="col-sm-4 d-flex justify-content-between align-items-center">
+        {/* input buscar por DNI */ }
+        <div className="col-sm-3 d-flex justify-content-between align-items-center">
 
           <input
             type="text"
-            className="form-control fs-7 w-75 me-sm-1"
+            className="form-control fs-7 me-sm-1"
             placeholder="Buscar por DNI"
             value={ searchDNI }
             onChange={ handleSearchChange }// Asegura que solo se ingresen números
             maxLength="8"
           />
 
-          {/* boton buscar */ }
-          <div className="">
-            {/* <button className="btn btn-outline-secondary" type="button" onClick={ handleSearchClick }> */ }
-            <button
-              className="btn btn-outline-secondary text-white border border-0 fs-7"
-              type="button"
-              style={ { background: '#AD0506' } }
-              onClick={ handleFindEmployee }
-            >
-
-              Buscar
-
-            </button>
-          </div>
-
         </div>
 
-
         {/* combo año */ }
-        <div className="col-sm-4 d-flex align-items-center mt-3 mt-sm-0">
+        <div className="col-sm-3 d-flex align-items-center mt-3 mt-sm-0">
           <label htmlFor="selectMonth" className="form-label fs-7 me-2">Año:</label>
           <select
-            className="form-control fs-7"
+            className="form-control fs-7 w-100"
             value={ anio }
             onChange={ e => setAnio(e.target.value) }
           >
@@ -361,22 +345,30 @@ const MonthComponent = () => {
             <option value="2028">2027</option>
           </select>
 
+
+
         </div>
 
-        {/* Boton imprimir */ }
-        {/* <Link to={ worker ? `printall` : `` } className='col-sm-2'>
+        <div className="col-sm-3 d-flex align-items-center mt-3 mt-sm-0">
+          {/* boton buscar */ }
+          {/* <button className="btn btn-outline-secondary" type="button" onClick={ handleSearchClick }> */ }
           <button
-            className="btn btn-primary border border-0 fs-7 mt-3 mt-sm-0 text-white"
+            className="btn btn-outline-secondary w-100 text-white border border-0 fs-7"
+            type="button"
             style={ { background: '#AD0506' } }
+            onClick={ handleFindEmployee }
           >
-            Imprimir
+
+            Buscar
+
           </button>
-        </Link> */}
+        </div>
+
 
         {/* boton opciones de impresion */ }
-        <div className="col-sm-4 d-flex align-items-center mt-3 mt-sm-0">
+        <div className="col-sm-3 d-flex align-items-center mt-3 mt-sm-0">
           <button type="button" className="btn btn-warning fs-7 border-3 w-100" onClick={ handleModalOpcionesOpen }>
-            Opciones impresion
+            Imprimir
           </button>
           {/* Modal para seleccionar opciones de IMPRESION */ }
           <div className={ `modal fade ${showModalOpciones ? 'show' : ''}` } tabIndex="-1" role="dialog" style={ { display: showModalOpciones ? 'block' : 'none' } }>
@@ -625,9 +617,6 @@ const MonthComponent = () => {
             </div>
           </div>
         </div>
-
-
-
 
       </div>
 
