@@ -270,6 +270,18 @@ const MonthComponent = () => {
     }
     groupedByMonth[month].push(registro)
   })
+  /*const groupedByMonth = {}
+  worker?.taskControlList.forEach((registro) => {
+    const day = new Date(registro.controlDate).getDate(); // Obtener el día correctamente
+    const month = new Date(registro.controlDate).getMonth() + 1
+    if (!groupedByMonth[month]) {
+      groupedByMonth[month] = []
+    }
+    if (!groupedByMonth[month][day]) {
+      groupedByMonth[month][day] = [];
+    }
+    groupedByMonth[month][day].push(registro);
+  })*/
 
   var type = "";
   var colorType = "";
@@ -731,15 +743,15 @@ const MonthComponent = () => {
                     {[...Array(30)].map((_, dayIndex) => (
                       <td key={dayIndex + 1}>
                         {groupedByMonth[monthIndex + 1]?.find((registro) => {
-                          type = registro.controlType.type
-                          colorType = registro.controlType.color
+                          type = registro?.controlType.type
+                          colorType = registro?.controlType.color
                           console.log("soy el color", colorType)
                           return (
-                            new Date(registro.controlDate).getDate() ===
+                            new Date(registro?.controlDate).getDate() ===
                             dayIndex + 1
                           )
                         }) ? (
-                          <span className="badge bg-primary" style={{backgroundColor: colorType }}>{type}</span>
+                          <span className="badge text-dark" style={{ backgroundColor: colorType }}>{type}</span>
                         ) : (
                           <span className="badge bg-secondary">-</span>
                         )}
